@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useMemo } from 'react';
 
 /**
  * Premium Particle Network
@@ -76,7 +76,7 @@ const ParticleNetwork = () => {
   const timeRef = useRef(0);
 
   // Premium configuration - Rich Starfield
-  const config = {
+  const config = useMemo(() => ({
     // Particle counts per layer (back to front) - 300 total stars
     layers: [
       { count: 120, speed: 0.05, size: [0.5, 1.2], opacity: 0.2, blur: 1 },   // Distant tiny stars
@@ -104,7 +104,7 @@ const ParticleNetwork = () => {
     // Effects
     glowSize: 2.2,
     pulseAmount: 0.25,
-  };
+  }), []);
 
   // Create pre-rendered particle sprite with glow
   const createParticleSprite = useCallback((
