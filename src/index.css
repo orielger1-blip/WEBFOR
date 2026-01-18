@@ -46,6 +46,25 @@
   --radius-xl: 32px;
 }
 
+/* Mobile-specific CSS variables */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --section-padding: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-padding: 40px;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -58,6 +77,14 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tighter line-height on mobile for better text density */
+@media (max-width: 600px) {
+  body {
+    line-height: 1.6;
+    font-size: 15px;
+  }
 }
 
 /* Selection */

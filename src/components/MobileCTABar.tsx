@@ -2,16 +2,25 @@ import { useState, useEffect } from 'react';
 
 /**
  * Mobile CTA Bar
- * Sticky call-to-action bar that appears at the bottom of the screen on mobile
- * Hides when user scrolls near the contact section or footer
+ * Sticky call-to-action bar at bottom of screen on mobile
+ * Shows primary CTA + WhatsApp quick action
+ * Hides when near contact section or footer
  */
 const MobileCTABar = () => {
   const [isHidden, setIsHidden] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Delay showing to prevent flash on load
+    const showTimeout = setTimeout(() => setIsVisible(true), 1000);
+
     const handleScroll = () => {
       const contactSection = document.getElementById('contact');
       const footer = document.querySelector('.footer');
+      const scrollY = window.scrollY;
+
+      // Only show after scrolling past hero
+      const showAfterScroll = scrollY > 400;
 
       if (contactSection && footer) {
         const contactRect = contactSection.getBoundingClientRect();
@@ -19,40 +28,45 @@ const MobileCTABar = () => {
         const windowHeight = window.innerHeight;
 
         // Hide when contact section or footer is visible
-        const isNearContact = contactRect.top < windowHeight * 0.8;
+        const isNearContact = contactRect.top < windowHeight * 0.7;
         const isNearFooter = footerRect.top < windowHeight;
 
-        setIsHidden(isNearContact || isNearFooter);
+        setIsHidden(!showAfterScroll || isNearContact || isNearFooter);
+      } else {
+        setIsHidden(!showAfterScroll);
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Check initial state
+    handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      clearTimeout(showTimeout);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+
+  if (!isVisible) return null;
 
   return (
     <div className={`mobile-cta-bar ${isHidden ? 'hidden' : ''}`} dir="rtl">
-      <div className="mobile-cta-bar-content">
-        <a href="#contact" className="btn-primary">
-          קבעו שיחת ייעוץ
-          <svg className="btn-icon" viewBox="0 0 24 24" fill="none" style={{ width: 18, height: 18 }}>
-            <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </a>
-        <a
-          href="https://wa.me/972501234567"
-          className="btn-secondary"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="WhatsApp"
-        >
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-          </svg>
-        </a>
-      </div>
+      <a href="#contact" className="mobile-cta-primary">
+        <span>קבעו שיחה</span>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </a>
+      <a
+        href="https://wa.me/972501234567"
+        className="mobile-cta-whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="WhatsApp"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        </svg>
+      </a>
     </div>
   );
 };
