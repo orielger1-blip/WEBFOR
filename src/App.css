@@ -289,8 +289,14 @@ section {
   display: none;
   background: none;
   border: none;
-  padding: 10px;
+  padding: 12px;
   cursor: pointer;
+  /* 44x44px minimum touch target */
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hamburger {
@@ -1826,7 +1832,7 @@ section {
 .whatsapp-float {
   position: fixed;
   bottom: 30px;
-  left: 30px;
+  right: 30px; /* RTL: positioned on right side */
   width: 60px;
   height: 60px;
   background: #25D366;
@@ -1838,6 +1844,7 @@ section {
   box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
   z-index: 1000;
   text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .whatsapp-float svg {
@@ -1847,12 +1854,12 @@ section {
 
 .whatsapp-float:hover .whatsapp-tooltip {
   opacity: 1;
-  transform: translateX(10px);
+  transform: translateX(-10px);
 }
 
 .whatsapp-tooltip {
   position: absolute;
-  right: 70px;
+  left: 70px; /* RTL: tooltip appears on left of button */
   background: var(--bg-card);
   color: var(--text-primary);
   padding: 8px 16px;
@@ -1869,7 +1876,7 @@ section {
 @media (max-width: 768px) {
   .whatsapp-float {
     bottom: 20px;
-    left: 20px;
+    right: 20px; /* RTL: right side on mobile too */
     width: 54px;
     height: 54px;
   }
@@ -2461,8 +2468,9 @@ section::before {
 /* ==================== ACCESSIBILITY WIDGET ==================== */
 .accessibility-btn {
   position: fixed;
-  bottom: 100px;
-  left: 30px;
+  bottom: 30px;
+  left: 30px; /* Accessibility on left, WhatsApp on right */
+  /* 44x44px minimum touch target - actual size 50px */
   width: 50px;
   height: 50px;
   background: var(--accent-gradient);
@@ -2475,6 +2483,7 @@ section::before {
   cursor: pointer;
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .accessibility-btn svg {
@@ -2519,8 +2528,9 @@ section::before {
 }
 
 .accessibility-close {
-  width: 36px;
-  height: 36px;
+  /* 44x44px minimum touch target */
+  width: 44px;
+  height: 44px;
   background: transparent;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
@@ -2571,13 +2581,15 @@ section::before {
 }
 
 .font-size-controls button {
-  width: 32px;
-  height: 32px;
+  /* 44x44px minimum touch target */
+  width: 44px;
+  height: 44px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-weight: 600;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -2602,13 +2614,17 @@ section::before {
 
 .toggle-btn {
   position: relative;
-  width: 48px;
-  height: 26px;
+  width: 52px;
+  height: 30px;
   background: var(--bg-tertiary);
   border: 1px solid var(--border-subtle);
-  border-radius: 13px;
+  border-radius: 15px;
   cursor: pointer;
   transition: all 0.3s;
+  /* 44x44px minimum touch target */
+  min-width: 44px;
+  min-height: 44px;
+  padding: 7px 0;
 }
 
 .toggle-btn.active {
@@ -2618,17 +2634,18 @@ section::before {
 
 .toggle-slider {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
   background: var(--text-secondary);
   border-radius: 50%;
   transition: all 0.3s;
 }
 
 .toggle-btn.active .toggle-slider {
-  left: 24px;
+  left: 26px;
   background: #000;
 }
 
@@ -3527,4 +3544,81 @@ html.high-contrast .agentive-robot circle[fill="none"] {
 
 .agentive-robot-wrapper.success .agentive-robot {
   filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.4));
+}
+
+/* ==================== STICKY MOBILE CTA BAR ==================== */
+.mobile-cta-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(5, 5, 8, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-gold);
+  padding: 12px 16px;
+  z-index: 999;
+  /* Safe area for notched devices */
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+}
+
+.mobile-cta-bar-content {
+  display: flex;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.mobile-cta-bar .btn-primary {
+  flex: 1;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  /* 44px minimum height for touch target */
+  min-height: 48px;
+}
+
+.mobile-cta-bar .btn-secondary {
+  flex: 0 0 auto;
+  padding: 14px 16px;
+  min-height: 48px;
+  border-color: var(--border-gold);
+}
+
+.mobile-cta-bar .btn-secondary svg {
+  width: 20px;
+  height: 20px;
+  color: #25D366;
+}
+
+/* Show on mobile only */
+@media (max-width: 768px) {
+  .mobile-cta-bar {
+    display: block;
+  }
+
+  /* Adjust floating buttons when CTA bar is visible */
+  .whatsapp-float {
+    bottom: 90px;
+  }
+
+  .accessibility-btn {
+    bottom: 90px;
+  }
+
+  /* Add padding to footer so content isn't hidden behind CTA bar */
+  .footer {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Hide CTA bar when near footer/contact section */
+.mobile-cta-bar.hidden {
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.mobile-cta-bar:not(.hidden) {
+  transform: translateY(0);
+  transition: transform 0.3s ease;
 }

@@ -139,6 +139,8 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="השם שלכם"
                     required
+                    autoComplete="name"
+                    autoCapitalize="words"
                   />
                 </div>
 
@@ -152,6 +154,7 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="שם החברה או העסק"
                     required
+                    autoComplete="organization"
                   />
                 </div>
 
@@ -165,6 +168,8 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="050-000-0000"
                     required
+                    autoComplete="tel"
+                    inputMode="tel"
                   />
                 </div>
 

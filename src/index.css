@@ -18,7 +18,7 @@
   /* Text Colors */
   --text-primary: #ffffff;
   --text-secondary: #a0a0b0;
-  --text-muted: #606070;
+  --text-muted: #8a8a9a; /* Improved contrast ratio: 4.5:1+ for WCAG AA */
 
   /* Premium Gold Accent */
   --accent-gold: #f59e0b;
@@ -82,4 +82,110 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-gold-light);
+}
+
+/* ==================== MOBILE OPTIMIZATIONS ==================== */
+
+/* Remove 300ms tap delay on touch devices */
+a,
+button,
+input,
+select,
+textarea,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* Safe area insets for notched devices (iPhone X+, etc.) */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .App {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Dynamic viewport height for mobile browsers */
+@supports (min-height: 100dvh) {
+  .hero,
+  .App {
+    min-height: 100dvh;
+  }
+}
+
+/* Small viewport height fallback for address bar consideration */
+@supports (min-height: 100svh) {
+  .hero {
+    min-height: 100svh;
+  }
+}
+
+/* ==================== PREFERS REDUCED MOTION ==================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ==================== TOUCH FEEDBACK STATES ==================== */
+@media (hover: none) and (pointer: coarse) {
+  /* Active states for touch feedback */
+  .btn-primary:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.97);
+    background: rgba(245, 158, 11, 0.1);
+  }
+
+  .card:active,
+  .industry-card:active,
+  .solution-card:active {
+    transform: scale(0.98);
+  }
+
+  .nav-link:active,
+  .mobile-nav-link:active {
+    color: var(--accent-gold);
+    background: rgba(245, 158, 11, 0.05);
+  }
+
+  .faq-question:active {
+    background: rgba(245, 158, 11, 0.05);
+  }
+
+  .contact-method:active {
+    transform: scale(0.98);
+    border-color: var(--accent-gold);
+  }
+
+  .whatsapp-float:active {
+    transform: scale(0.95);
+  }
+
+  .accessibility-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Disable hover effects on touch devices */
+  .card:hover,
+  .industry-card:hover,
+  .solution-card:hover,
+  .stat-card:hover {
+    transform: none;
+  }
 }
