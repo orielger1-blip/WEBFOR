@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import ParticleNetwork from './ParticleNetwork';
+import ChatPreviewCard from './ChatPreviewCard';
 
 const Hero = () => {
   const containerVariants = {
@@ -46,6 +47,11 @@ const Hero = () => {
             לא עוד בוט גנרי. אנחנו מפתחים סוכנים חכמים שמבינים את העסק שלכם,
             מדברים בשפה שלכם, ועובדים סביב השעון — כאילו הם חלק מהצוות.
           </motion.p>
+
+          {/* Mobile-only chat preview card */}
+          <motion.div className="hero-chat-preview" variants={itemVariants}>
+            <ChatPreviewCard />
+          </motion.div>
 
           <motion.div className="hero-cta" variants={itemVariants}>
             <motion.a

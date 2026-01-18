@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useCallback, useMemo, useState } from 'react';
 
 /**
  * Premium Particle Network
@@ -68,12 +68,21 @@ interface ParticleSprite {
 }
 
 const ParticleNetwork = () => {
+  const [isMobile, setIsMobile] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number | null>(null);
   const noiseRef = useRef<SimplexNoise>(new SimplexNoise());
   const spritesRef = useRef<Map<string, ParticleSprite>>(new Map());
   const timeRef = useRef(0);
+
+  // Disable animation on mobile for performance
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Premium configuration - Rich Starfield
   const config = useMemo(() => ({
@@ -382,6 +391,15 @@ const ParticleNetwork = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, [animate, handleResize]);
+
+  // Don't render heavy animation on mobile - show static gradient instead
+  if (isMobile) {
+    return (
+      <div className="particle-network particle-network-mobile">
+        <div className="particle-overlay" />
+      </div>
+    );
+  }
 
   return (
     <div className="particle-network">
