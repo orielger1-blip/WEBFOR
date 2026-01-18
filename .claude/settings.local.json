@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm start)",
+      "Bash(timeout /t 15 /nobreak)",
+      "Bash(set PORT=3001)",
+      "Bash(PORT=3001 npm start)",
+      "Bash(npm run build:*)",
+      "WebSearch",
+      "Bash(timeout 10 tail:*)",
+      "Bash(npm ls:*)",
+      "Bash(npx tsc:*)",
+      "Bash(cd:*)",
+      "Bash(if not exist \"C:\\\\Users\\\\User\\\\PycharmProjects\\\\untitled\\\\public\\\\images\" mkdir \"C:\\\\Users\\\\User\\\\PycharmProjects\\\\untitled\\\\public\\\\images\")",
+      "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:stemkoski.github.io)",
+      "WebFetch(domain:blog.maximeheckel.com)",
+      "WebFetch(domain:tympanus.net)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:blog.cjgammon.com)",
+      "Bash(npm run start:*)",
+      "mcp__ide__getDiagnostics",
+      "WebFetch(domain:sighack.com)",
+      "WebFetch(domain:varun.ca)",
+      "Bash(git add:*)"
+    ]
+  }
+}

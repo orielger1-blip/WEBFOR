@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Problem from './components/Problem';
+import Solutions from './components/Solutions';
+import Process from './components/Process';
+import Results from './components/Results';
+import Team from './components/Team';
+import Industries from './components/Industries';
+import FAQ from './components/FAQ';
+import Contact from './components/Contact';
+import AccessibilityStatement from './components/AccessibilityStatement';
+import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
+import AccessibilityWidget from './components/AccessibilityWidget';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <a href="#main-content" className="skip-link">דלג לתוכן הראשי</a>
+      <Navbar />
+      <main id="main-content">
+        <Hero />
+        <Problem />
+        <Solutions />
+        <Process />
+        <Results />
+        <Team />
+        <Industries />
+        <FAQ />
+        <Contact />
+        <AccessibilityStatement />
+      </main>
+      <Footer />
+      <WhatsAppButton />
+      <AccessibilityWidget />
     </div>
   );
 }

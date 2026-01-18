@@ -1,0 +1,560 @@
+/* ============================================================================
+   AGENTIVE ROBOT MASCOT - CSS ANIMATIONS & STYLES
+   Premium golden dashed-line wireframe style
+   Matches the NeuralBrainBackground aesthetic
+   ============================================================================ */
+
+/* ==================== BASE STYLES ==================== */
+
+.agentive-robot-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.agentive-robot {
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
+  transition: filter 0.3s ease;
+}
+
+.agentive-robot:hover {
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+}
+
+/* ==================== BREATHING ANIMATION ==================== */
+
+@keyframes robotBreathing {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.02);
+  }
+}
+
+.agentive-robot.animated .robot-body {
+  transform-origin: center bottom;
+  animation: robotBreathing 3s ease-in-out infinite;
+}
+
+/* Slower breathing for sleeping */
+.agentive-robot.pose-sleeping.animated .robot-body,
+.agentive-robot.pose-sleeping.animated .sleeping-body {
+  animation: robotBreathing 5s ease-in-out infinite;
+}
+
+/* ==================== EYE BLINK ANIMATION ==================== */
+
+@keyframes robotBlink {
+  0%, 45%, 55%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.1);
+  }
+}
+
+.agentive-robot.animated .robot-eye {
+  transform-origin: center;
+  animation: robotBlink 4s ease-in-out infinite;
+}
+
+/* Stagger blinks between eyes */
+.agentive-robot.animated .robot-eye-right {
+  animation-delay: 0.1s;
+}
+
+/* No blinking for closed/sleeping eyes */
+.agentive-robot.animated .eyes-closed .robot-eye,
+.agentive-robot.animated .eyes-sleepy .robot-eye,
+.agentive-robot.animated .eyes-happy path {
+  animation: none;
+}
+
+/* ==================== EYE GLOW ANIMATION ==================== */
+
+@keyframes eyeGlow {
+  0%, 100% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 1px rgba(255, 215, 0, 0.5));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.8));
+  }
+}
+
+.agentive-robot.animated .robot-eye {
+  animation: robotBlink 4s ease-in-out infinite, eyeGlow 2s ease-in-out infinite;
+}
+
+/* ==================== ANTENNA ANIMATIONS ==================== */
+
+@keyframes antennaPulse {
+  0%, 100% {
+    opacity: 0.8;
+    r: 0.6;
+  }
+  50% {
+    opacity: 1;
+    r: 0.8;
+  }
+}
+
+.agentive-robot.animated .antenna-tip {
+  animation: antennaPulse 2s ease-in-out infinite;
+}
+
+/* Faster pulse when thinking */
+.agentive-robot.pose-thinking.animated .antenna-tip {
+  animation: antennaPulse 1s ease-in-out infinite;
+}
+
+@keyframes antennaWiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+.agentive-robot.animated .robot-antenna {
+  transform-origin: 12px 4px;
+  animation: antennaWiggle 2.5s ease-in-out infinite;
+}
+
+/* More wiggle when excited/celebrating */
+.agentive-robot.pose-celebrating.animated .robot-antenna {
+  animation: antennaWiggle 0.5s ease-in-out infinite;
+}
+
+/* ==================== ARM WAVE ANIMATION ==================== */
+
+@keyframes armWave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(15deg);
+  }
+}
+
+.agentive-robot.animated .robot-arm-right.waving {
+  transform-origin: 17px 11px;
+  animation: armWave 0.5s ease-in-out infinite;
+}
+
+/* ==================== CELEBRATION ANIMATIONS ==================== */
+
+@keyframes robotBounce {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-1px) scaleY(1.02);
+  }
+}
+
+.agentive-robot.pose-celebrating.animated .robot-body {
+  animation: robotBounce 0.3s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.agentive-robot.animated .sparkle {
+  transform-origin: center;
+  animation: sparkle 0.8s ease-in-out infinite;
+}
+
+.agentive-robot.animated .sparkle.s1 { animation-delay: 0s; }
+.agentive-robot.animated .sparkle.s2 { animation-delay: 0.15s; }
+.agentive-robot.animated .sparkle.s3 { animation-delay: 0.3s; }
+.agentive-robot.animated .sparkle.s4 { animation-delay: 0.45s; }
+.agentive-robot.animated .sparkle.s5 { animation-delay: 0.6s; }
+.agentive-robot.animated .sparkle.s6 { animation-delay: 0.75s; }
+
+@keyframes armCelebrate {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+}
+
+.agentive-robot.animated .robot-arm-left.celebrating {
+  transform-origin: 7px 11px;
+  animation: armCelebrate 0.4s ease-in-out infinite;
+}
+
+.agentive-robot.animated .robot-arm-right.celebrating {
+  transform-origin: 17px 11px;
+  animation: armCelebrate 0.4s ease-in-out infinite reverse;
+}
+
+/* ==================== THINKING ANIMATIONS ==================== */
+
+@keyframes thoughtBubble {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(0);
+  }
+  30% {
+    opacity: 0.6;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-3px);
+  }
+}
+
+.agentive-robot.animated .thought-bubbles circle {
+  animation: thoughtBubble 2.5s ease-in-out infinite;
+}
+
+.agentive-robot.animated .thought-bubbles circle:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.agentive-robot.animated .thought-bubbles circle:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.agentive-robot.animated .thought-bubbles circle:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+@keyframes headThink {
+  0%, 100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(-6deg);
+  }
+}
+
+.agentive-robot.pose-thinking.animated .robot-head {
+  transform-origin: center bottom;
+  animation: headThink 3s ease-in-out infinite;
+}
+
+/* ==================== SLEEPING ANIMATIONS ==================== */
+
+@keyframes floatZzz {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.8);
+  }
+  30% {
+    opacity: 0.7;
+    transform: translateY(-2px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.6);
+  }
+}
+
+.agentive-robot.animated .sleep-zzz text {
+  animation: floatZzz 2.5s ease-in-out infinite;
+}
+
+.agentive-robot.animated .sleep-zzz text:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.agentive-robot.animated .sleep-zzz text:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.agentive-robot.animated .sleep-zzz text:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+/* ==================== PEEKING ANIMATION ==================== */
+
+@keyframes peekBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.agentive-robot.pose-peeking.animated .robot-head {
+  animation: peekBounce 2s ease-in-out infinite;
+}
+
+@keyframes curiousLook {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+.agentive-robot.pose-peeking.animated .robot-head {
+  animation: curiousLook 3s ease-in-out infinite;
+}
+
+/* ==================== HEAD TILT ANIMATION ==================== */
+
+@keyframes headTilt {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+}
+
+.agentive-robot.pose-idle.animated .robot-head {
+  transform-origin: center bottom;
+  animation: headTilt 5s ease-in-out infinite;
+}
+
+/* ==================== HOVER STATES ==================== */
+
+.agentive-robot-wrapper:hover .agentive-robot {
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
+}
+
+.agentive-robot-wrapper:hover .antenna-tip {
+  animation-duration: 1s !important;
+}
+
+/* ==================== INTERACTIVE STATES ==================== */
+
+.agentive-robot-wrapper.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.agentive-robot-wrapper.clickable:hover {
+  transform: scale(1.05);
+}
+
+.agentive-robot-wrapper.clickable:active {
+  transform: scale(0.98);
+}
+
+/* ==================== SIZE VARIANTS ==================== */
+
+.agentive-robot-wrapper.size-xs {
+  width: 32px;
+  height: 32px;
+}
+
+.agentive-robot-wrapper.size-sm {
+  width: 48px;
+  height: 48px;
+}
+
+.agentive-robot-wrapper.size-md {
+  width: 80px;
+  height: 80px;
+}
+
+.agentive-robot-wrapper.size-lg {
+  width: 120px;
+  height: 120px;
+}
+
+.agentive-robot-wrapper.size-xl {
+  width: 160px;
+  height: 160px;
+}
+
+/* ==================== PLACEMENT UTILITIES ==================== */
+
+.agentive-robot-wrapper.position-absolute {
+  position: absolute;
+}
+
+.agentive-robot-wrapper.position-fixed {
+  position: fixed;
+}
+
+.agentive-robot-wrapper.corner-top-right {
+  top: -20px;
+  right: -20px;
+}
+
+.agentive-robot-wrapper.corner-top-left {
+  top: -20px;
+  left: -20px;
+}
+
+.agentive-robot-wrapper.corner-bottom-right {
+  bottom: -20px;
+  right: -20px;
+}
+
+.agentive-robot-wrapper.corner-bottom-left {
+  bottom: -20px;
+  left: -20px;
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .agentive-robot *,
+  .agentive-robot-wrapper * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+html.reduced-motion .agentive-robot *,
+html.reduced-motion .agentive-robot-wrapper * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* High contrast mode adjustments */
+html.high-contrast .agentive-robot {
+  filter: drop-shadow(0 0 2px #FFFFFF);
+}
+
+html.high-contrast .agentive-robot path,
+html.high-contrast .agentive-robot rect,
+html.high-contrast .agentive-robot circle,
+html.high-contrast .agentive-robot line,
+html.high-contrast .agentive-robot ellipse {
+  stroke: #FFFF00 !important;
+  fill: #FFFF00 !important;
+  stroke-width: 1.5 !important;
+}
+
+html.high-contrast .agentive-robot rect[fill="none"],
+html.high-contrast .agentive-robot circle[fill="none"] {
+  fill: none !important;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 768px) {
+  .agentive-robot-wrapper.hide-mobile {
+    display: none;
+  }
+
+  /* Reduce animation intensity on mobile */
+  .agentive-robot.animated .robot-body {
+    animation-duration: 4s;
+  }
+
+  .agentive-robot.animated .robot-antenna {
+    animation-duration: 3s;
+  }
+}
+
+@media (max-width: 480px) {
+  .agentive-robot-wrapper.size-lg,
+  .agentive-robot-wrapper.size-xl {
+    transform: scale(0.75);
+  }
+}
+
+/* ==================== DARK/LIGHT MODE SUPPORT ==================== */
+
+/* Default is dark mode - gold on dark */
+.agentive-robot path,
+.agentive-robot rect,
+.agentive-robot circle,
+.agentive-robot line,
+.agentive-robot ellipse {
+  stroke: #FFD700;
+}
+
+.agentive-robot [fill="#FFD700"] {
+  fill: #FFD700;
+}
+
+/* Light mode override (if needed) */
+@media (prefers-color-scheme: light) {
+  .agentive-robot.light-mode path,
+  .agentive-robot.light-mode rect,
+  .agentive-robot.light-mode circle,
+  .agentive-robot.light-mode line,
+  .agentive-robot.light-mode ellipse {
+    stroke: #B8860B;
+  }
+
+  .agentive-robot.light-mode [fill="#FFD700"] {
+    fill: #B8860B;
+  }
+
+  .agentive-robot.light-mode {
+    filter: drop-shadow(0 0 4px rgba(184, 134, 11, 0.4));
+  }
+}
+
+/* ==================== LOADING STATE ==================== */
+
+@keyframes robotLoading {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.agentive-robot-wrapper.loading .agentive-robot {
+  animation: robotLoading 1.5s ease-in-out infinite;
+}
+
+/* ==================== ERROR STATE ==================== */
+
+.agentive-robot-wrapper.error .agentive-robot path,
+.agentive-robot-wrapper.error .agentive-robot rect,
+.agentive-robot-wrapper.error .agentive-robot circle {
+  stroke: #ef4444;
+}
+
+.agentive-robot-wrapper.error .agentive-robot [fill="#FFD700"] {
+  fill: #ef4444;
+}
+
+.agentive-robot-wrapper.error .agentive-robot {
+  filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.4));
+}
+
+/* ==================== SUCCESS STATE ==================== */
+
+.agentive-robot-wrapper.success .agentive-robot path,
+.agentive-robot-wrapper.success .agentive-robot rect,
+.agentive-robot-wrapper.success .agentive-robot circle {
+  stroke: #22c55e;
+}
+
+.agentive-robot-wrapper.success .agentive-robot [fill="#FFD700"] {
+  fill: #22c55e;
+}
+
+.agentive-robot-wrapper.success .agentive-robot {
+  filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.4));
+}

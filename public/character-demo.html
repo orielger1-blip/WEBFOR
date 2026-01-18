@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Character Animation Demo</title>
+  <style>
+    /* ============================================
+       CSS Custom Properties (Design Tokens)
+       ============================================ */
+    :root {
+      /* Timing Functions - Premium easing curves */
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+      --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+      --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Animation Durations */
+      --breathing-duration: 4s;
+      --floating-duration: 3s;
+      --sway-duration: 6s;
+      --blink-interval: 4s;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+      color: white;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      opacity: 0.8;
+      margin-bottom: 40px;
+    }
+
+    .demo-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .demo-section h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .character-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn.active {
+      background: white;
+      color: #764ba2;
+    }
+
+    /* ============================================
+       Performance Optimization Base Styles
+       ============================================ */
+    .svg-character {
+      will-change: transform, opacity;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      contain: layout style paint;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .svg-character,
+      .svg-character * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ============================================
+       Idle Animations
+       ============================================ */
+    @keyframes breathing {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.02) translateY(-1px); }
+    }
+
+    @keyframes floating-gentle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes blink-natural {
+      0%, 92%, 94%, 100% { transform: scaleY(1); }
+      93% { transform: scaleY(0.05); }
+    }
+
+    @keyframes sway-gentle {
+      0%, 100% { transform: rotate(0deg); }
+      33% { transform: rotate(0.5deg); }
+      66% { transform: rotate(-0.5deg); }
+    }
+
+    .character-body {
+      animation: breathing var(--breathing-duration) var(--ease-in-out-cubic) infinite;
+      transform-origin: 50% 100%;
+    }
+
+    .character-eye {
+      transform-origin: center center;
+      animation: blink-natural var(--blink-interval) var(--ease-out-quart) infinite;
+    }
+
+    .character-eye--right {
+      animation-delay: 0.05s;
+    }
+
+    .character-idle-full {
+      animation: sway-gentle var(--sway-duration) var(--ease-in-out-cubic) infinite;
+      transform-origin: 50% 100%;
+    }
+
+    .character-floating {
+      animation: floating-gentle var(--floating-duration) var(--ease-smooth) infinite;
+    }
+
+    /* ============================================
+       Hover Effects
+       ============================================ */
+    @keyframes perk-up {
+      0% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1.05) translateY(-8px); }
+      100% { transform: scale(1.02) translateY(-4px); }
+    }
+
+    .character-interactive {
+      cursor: pointer;
+      transition: transform 0.3s var(--ease-out-expo);
+    }
+
+    .character-interactive:hover {
+      animation: perk-up 0.5s var(--ease-out-back) forwards;
+    }
+
+    /* ============================================
+       Emotion States
+       ============================================ */
+    @keyframes emotion-to-happy {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.05) translateY(-3px); }
+      100% { transform: scale(1.02); }
+    }
+
+    @keyframes emotion-to-sad {
+      0% { transform: scale(1) translateY(0); }
+      100% { transform: scale(0.98) translateY(3px); }
+    }
+
+    @keyframes emotion-to-excited {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.05) rotate(-3deg); }
+      50% { transform: scale(1.08) rotate(3deg); }
+      75% { transform: scale(1.05) rotate(-2deg); }
+    }
+
+    @keyframes emotion-to-surprised {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.15) translateY(-8px); }
+      100% { transform: scale(1.1) translateY(-5px); }
+    }
+
+    .character--happy {
+      animation: emotion-to-happy 0.3s var(--ease-out-back) forwards;
+    }
+
+    .character--happy .character-eye {
+      transform: scaleY(0.7);
+    }
+
+    .character--happy .character-mouth {
+      d: path("M42,47 Q50,55 58,47");
+    }
+
+    .character--sad {
+      animation: emotion-to-sad 0.5s var(--ease-out-quart) forwards;
+    }
+
+    .character--sad .character-mouth {
+      d: path("M42,50 Q50,45 58,50");
+    }
+
+    .character--excited {
+      animation: emotion-to-excited 0.6s var(--ease-out-back) infinite;
+    }
+
+    .character--surprised {
+      animation: emotion-to-surprised 0.2s var(--ease-out-back) forwards;
+    }
+
+    .character--surprised .character-eye {
+      transform: scale(1.3);
+    }
+
+    /* ============================================
+       Scroll Reveal
+       ============================================ */
+    @keyframes slide-up-fade {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pop-in-bounce {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(20px);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1) translateY(-10px);
+      }
+      70% {
+        transform: scale(0.95) translateY(5px);
+      }
+      100% {
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .character-scroll-reveal {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .character-scroll-reveal.visible {
+      animation: pop-in-bounce 0.8s var(--ease-out-back) forwards;
+    }
+
+    .character-scroll-reveal--delay-1 { animation-delay: 0.1s; }
+    .character-scroll-reveal--delay-2 { animation-delay: 0.2s; }
+    .character-scroll-reveal--delay-3 { animation-delay: 0.3s; }
+    .character-scroll-reveal--delay-4 { animation-delay: 0.4s; }
+
+    /* ============================================
+       Character Grid
+       ============================================ */
+    .character-grid {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .character-grid-item {
+      text-align: center;
+    }
+
+    .character-grid-item span {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* ============================================
+       Scroll Demo
+       ============================================ */
+    .scroll-spacer {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.5;
+    }
+
+    .scroll-characters {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Eye pupil styling for mouse tracking */
+    .character-eye-pupil {
+      transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SVG Character Animation System</h1>
+    <p class="subtitle">Production-ready animations with premium easing</p>
+
+    <!-- Basic Demo -->
+    <section class="demo-section">
+      <h2>Interactive Character with Eye Tracking</h2>
+      <p>Move your mouse around - the eyes follow! Click to see bounce animation.</p>
+      <div class="character-container">
+        <div id="main-character" data-character-animator data-emotion="happy">
+          <svg viewBox="0 0 100 100" width="200" height="200">
+            <!-- Body -->
+            <g class="character-body">
+              <ellipse cx="50" cy="65" rx="30" ry="25" fill="#7C3AED"/>
+            </g>
+
+            <!-- Head -->
+            <g class="character-head">
+              <circle cx="50" cy="35" r="25" fill="#8B5CF6"/>
+              <!-- Ears -->
+              <ellipse cx="30" cy="20" rx="8" ry="12" fill="#7C3AED" class="character-ear"/>
+              <ellipse cx="70" cy="20" rx="8" ry="12" fill="#7C3AED" class="character-ear"/>
+            </g>
+
+            <!-- Face -->
+            <g class="character-face">
+              <!-- Left Eye -->
+              <g class="character-eye-container">
+                <ellipse cx="40" cy="32" rx="6" ry="7" fill="white" class="character-eye character-eye--left"/>
+                <circle cx="41" cy="33" r="3" fill="#1F2937" class="character-eye-pupil character-eye-pupil--left"/>
+                <circle cx="42" cy="31" r="1" fill="white" opacity="0.8"/>
+              </g>
+
+              <!-- Right Eye -->
+              <g class="character-eye-container">
+                <ellipse cx="60" cy="32" rx="6" ry="7" fill="white" class="character-eye character-eye--right"/>
+                <circle cx="61" cy="33" r="3" fill="#1F2937" class="character-eye-pupil character-eye-pupil--right"/>
+                <circle cx="62" cy="31" r="1" fill="white" opacity="0.8"/>
+              </g>
+
+              <!-- Eyebrows -->
+              <path d="M34 25 Q40 23 46 25" stroke="#5B21B6" stroke-width="2" fill="none" stroke-linecap="round" class="character-eyebrow"/>
+              <path d="M54 25 Q60 23 66 25" stroke="#5B21B6" stroke-width="2" fill="none" stroke-linecap="round" class="character-eyebrow"/>
+
+              <!-- Nose -->
+              <ellipse cx="50" cy="40" rx="2" ry="1.5" fill="#6D28D9"/>
+
+              <!-- Mouth -->
+              <path d="M42 47 Q50 52 58 47" stroke="#5B21B6" stroke-width="2" fill="none" stroke-linecap="round" class="character-mouth"/>
+
+              <!-- Blush -->
+              <circle cx="32" cy="42" r="4" fill="#F472B6" opacity="0.4"/>
+              <circle cx="68" cy="42" r="4" fill="#F472B6" opacity="0.4"/>
+            </g>
+
+            <!-- Arms -->
+            <g class="character-arms">
+              <ellipse cx="22" cy="60" rx="8" ry="12" fill="#7C3AED" class="character-arm"/>
+              <ellipse cx="78" cy="60" rx="8" ry="12" fill="#7C3AED" class="character-arm"/>
+            </g>
+
+            <!-- Feet -->
+            <g class="character-feet">
+              <ellipse cx="38" cy="88" rx="10" ry="5" fill="#6D28D9"/>
+              <ellipse cx="62" cy="88" rx="10" ry="5" fill="#6D28D9"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emotion Demo -->
+    <section class="demo-section">
+      <h2>Emotion Transitions</h2>
+      <div class="button-group" id="emotion-buttons">
+        <button class="btn active" data-emotion="neutral">Neutral</button>
+        <button class="btn" data-emotion="happy">Happy</button>
+        <button class="btn" data-emotion="sad">Sad</button>
+        <button class="btn" data-emotion="excited">Excited</button>
+        <button class="btn" data-emotion="surprised">Surprised</button>
+      </div>
+      <div class="character-container">
+        <div id="emotion-character" class="svg-character character-interactive character-idle-full">
+          <svg viewBox="0 0 100 100" width="180" height="180">
+            <g class="character-body">
+              <circle cx="50" cy="50" r="40" fill="#10B981"/>
+            </g>
+            <g class="character-eye-container">
+              <circle cx="38" cy="45" r="8" fill="white" class="character-eye character-eye--left"/>
+              <circle cx="39" cy="46" r="4" fill="#1F2937" class="character-eye-pupil"/>
+            </g>
+            <g class="character-eye-container">
+              <circle cx="62" cy="45" r="8" fill="white" class="character-eye character-eye--right"/>
+              <circle cx="63" cy="46" r="4" fill="#1F2937" class="character-eye-pupil"/>
+            </g>
+            <path d="M38 65 Q50 75 62 65" stroke="#065F46" stroke-width="3" fill="none" stroke-linecap="round" class="character-mouth"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Click Animation Demo -->
+    <section class="demo-section">
+      <h2>Click Animations</h2>
+      <div class="button-group" id="animation-buttons">
+        <button class="btn active" data-animation="bounce">Bounce</button>
+        <button class="btn" data-animation="jump">Jump</button>
+        <button class="btn" data-animation="wave">Wave</button>
+        <button class="btn" data-animation="spin">Spin</button>
+        <button class="btn" data-animation="squish">Squish</button>
+        <button class="btn" data-animation="shake">Shake</button>
+      </div>
+      <p>Click the character to play the selected animation</p>
+      <div class="character-container">
+        <div id="animation-character" class="svg-character character-interactive">
+          <svg viewBox="0 0 100 100" width="180" height="180">
+            <rect x="20" y="20" width="60" height="60" rx="15" fill="#F59E0B"/>
+            <g class="character-eye-container">
+              <circle cx="38" cy="45" r="6" fill="white" class="character-eye"/>
+              <circle cx="39" cy="46" r="3" fill="#1F2937" class="character-eye-pupil"/>
+            </g>
+            <g class="character-eye-container">
+              <circle cx="62" cy="45" r="6" fill="white" class="character-eye"/>
+              <circle cx="63" cy="46" r="3" fill="#1F2937" class="character-eye-pupil"/>
+            </g>
+            <path d="M35 60 Q50 70 65 60" stroke="#B45309" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scroll Reveal Demo -->
+    <section class="demo-section">
+      <h2>Scroll Reveal Animation</h2>
+      <p>Scroll down to see characters appear with staggered timing</p>
+    </section>
+
+    <div class="scroll-spacer">
+      <span>Keep scrolling...</span>
+    </div>
+
+    <section class="demo-section">
+      <div class="scroll-characters">
+        <div class="character-scroll-reveal character-scroll-reveal--delay-1">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="40" fill="#EF4444"/>
+            <circle cx="38" cy="45" r="5" fill="white"/>
+            <circle cx="62" cy="45" r="5" fill="white"/>
+            <path d="M38 60 Q50 70 62 60" stroke="#B91C1C" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="character-scroll-reveal character-scroll-reveal--delay-2">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="40" fill="#3B82F6"/>
+            <circle cx="38" cy="45" r="5" fill="white"/>
+            <circle cx="62" cy="45" r="5" fill="white"/>
+            <path d="M38 60 Q50 70 62 60" stroke="#1D4ED8" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="character-scroll-reveal character-scroll-reveal--delay-3">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="40" fill="#10B981"/>
+            <circle cx="38" cy="45" r="5" fill="white"/>
+            <circle cx="62" cy="45" r="5" fill="white"/>
+            <path d="M38 60 Q50 70 62 60" stroke="#065F46" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="character-scroll-reveal character-scroll-reveal--delay-4">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="40" fill="#F59E0B"/>
+            <circle cx="38" cy="45" r="5" fill="white"/>
+            <circle cx="62" cy="45" r="5" fill="white"/>
+            <path d="M38 60 Q50 70 62 60" stroke="#B45309" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <div style="height: 50vh;"></div>
+  </div>
+
+  <script>
+    // ============================================
+    // Mouse Following Eyes Implementation
+    // ============================================
+
+    class MouseFollowingEyes {
+      constructor(container, pupilSelector, config = {}) {
+        this.container = typeof container === 'string'
+          ? document.querySelector(container)
+          : container;
+
+        if (!this.container) return;
+
+        this.pupils = this.container.querySelectorAll(pupilSelector || '.character-eye-pupil');
+        this.config = {
+          maxOffset: 4,
+          smoothing: 0.15,
+          ...config
+        };
+
+        this.current = { x: 0, y: 0 };
+        this.target = { x: 0, y: 0 };
+        this.animationId = null;
+        this.isActive = false;
+      }
+
+      start() {
+        if (this.isActive) return;
+        this.isActive = true;
+
+        document.addEventListener('mousemove', this._onMouseMove.bind(this), { passive: true });
+        this.container.addEventListener('mouseleave', this._onMouseLeave.bind(this));
+        this._animate();
+      }
+
+      _onMouseMove(e) {
+        const rect = this.container.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        this.target = {
+          x: Math.max(-1, Math.min(1, (e.clientX - centerX) / (window.innerWidth / 2))),
+          y: Math.max(-1, Math.min(1, (e.clientY - centerY) / (window.innerHeight / 2)))
+        };
+      }
+
+      _onMouseLeave() {
+        this.target = { x: 0, y: 0 };
+      }
+
+      _animate() {
+        if (!this.isActive) return;
+
+        this.current.x += (this.target.x - this.current.x) * this.config.smoothing;
+        this.current.y += (this.target.y - this.current.y) * this.config.smoothing;
+
+        const tx = this.current.x * this.config.maxOffset;
+        const ty = this.current.y * this.config.maxOffset;
+
+        this.pupils.forEach(pupil => {
+          pupil.style.transform = `translate(${tx}px, ${ty}px)`;
+        });
+
+        this.animationId = requestAnimationFrame(() => this._animate());
+      }
+
+      stop() {
+        this.isActive = false;
+        if (this.animationId) cancelAnimationFrame(this.animationId);
+      }
+    }
+
+    // ============================================
+    // Click Animation Controller
+    // ============================================
+
+    class ClickAnimationController {
+      constructor(element) {
+        this.element = typeof element === 'string'
+          ? document.querySelector(element)
+          : element;
+
+        this.animations = {
+          wave: [
+            { transform: 'rotate(0deg)' },
+            { transform: 'rotate(14deg)', offset: 0.1 },
+            { transform: 'rotate(-8deg)', offset: 0.2 },
+            { transform: 'rotate(14deg)', offset: 0.3 },
+            { transform: 'rotate(-4deg)', offset: 0.4 },
+            { transform: 'rotate(10deg)', offset: 0.5 },
+            { transform: 'rotate(0deg)' }
+          ],
+          jump: [
+            { transform: 'translateY(0) scaleY(1)' },
+            { transform: 'translateY(0) scaleY(0.9)', offset: 0.1 },
+            { transform: 'translateY(-30px) scaleY(1.1)', offset: 0.3 },
+            { transform: 'translateY(0) scaleY(0.95)', offset: 0.5 },
+            { transform: 'translateY(-10px) scaleY(1.05)', offset: 0.7 },
+            { transform: 'translateY(0) scaleY(1)' }
+          ],
+          bounce: [
+            { transform: 'translateY(0)' },
+            { transform: 'translateY(-15px)', offset: 0.2 },
+            { transform: 'translateY(0)', offset: 0.4 },
+            { transform: 'translateY(-8px)', offset: 0.6 },
+            { transform: 'translateY(0)' }
+          ],
+          spin: [
+            { transform: 'rotate(0deg) scale(1)' },
+            { transform: 'rotate(90deg) scale(1.1)', offset: 0.25 },
+            { transform: 'rotate(180deg) scale(1)', offset: 0.5 },
+            { transform: 'rotate(270deg) scale(1.1)', offset: 0.75 },
+            { transform: 'rotate(360deg) scale(1)' }
+          ],
+          squish: [
+            { transform: 'scale(1, 1)' },
+            { transform: 'scale(1.1, 0.9)', offset: 0.3 },
+            { transform: 'scale(0.95, 1.05)', offset: 0.6 },
+            { transform: 'scale(1, 1)' }
+          ],
+          shake: [
+            { transform: 'translateX(0)' },
+            { transform: 'translateX(-5px)', offset: 0.1 },
+            { transform: 'translateX(5px)', offset: 0.2 },
+            { transform: 'translateX(-5px)', offset: 0.3 },
+            { transform: 'translateX(5px)', offset: 0.4 },
+            { transform: 'translateX(-3px)', offset: 0.5 },
+            { transform: 'translateX(3px)', offset: 0.6 },
+            { transform: 'translateX(0)' }
+          ]
+        };
+      }
+
+      play(type, duration = 500) {
+        if (!this.animations[type]) return;
+
+        return this.element.animate(this.animations[type], {
+          duration,
+          easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+          fill: 'forwards'
+        });
+      }
+    }
+
+    // ============================================
+    // Scroll Reveal Observer
+    // ============================================
+
+    class ScrollRevealObserver {
+      constructor(config = {}) {
+        this.config = {
+          threshold: 0.2,
+          rootMargin: '0px 0px -50px 0px',
+          ...config
+        };
+
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, this.config);
+      }
+
+      observe(selector) {
+        document.querySelectorAll(selector).forEach(el => {
+          this.observer.observe(el);
+        });
+      }
+    }
+
+    // ============================================
+    // Initialize Everything
+    // ============================================
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Main character with eye tracking
+      const mainCharacter = document.getElementById('main-character');
+      const mainEyes = new MouseFollowingEyes(mainCharacter, '.character-eye-pupil', {
+        maxOffset: 4,
+        smoothing: 0.12
+      });
+      mainEyes.start();
+
+      const mainClick = new ClickAnimationController(mainCharacter);
+      mainCharacter.addEventListener('click', () => mainClick.play('bounce'));
+
+      // Emotion character
+      const emotionCharacter = document.getElementById('emotion-character');
+      const emotionEyes = new MouseFollowingEyes(emotionCharacter, '.character-eye-pupil');
+      emotionEyes.start();
+
+      document.querySelectorAll('#emotion-buttons .btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#emotion-buttons .btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const emotion = btn.dataset.emotion;
+          emotionCharacter.className = 'svg-character character-interactive character-idle-full';
+          if (emotion !== 'neutral') {
+            emotionCharacter.classList.add('character--' + emotion);
+          }
+        });
+      });
+
+      // Animation character
+      const animationCharacter = document.getElementById('animation-character');
+      const animationEyes = new MouseFollowingEyes(animationCharacter, '.character-eye-pupil');
+      animationEyes.start();
+
+      const animationClick = new ClickAnimationController(animationCharacter);
+      let currentAnimation = 'bounce';
+
+      document.querySelectorAll('#animation-buttons .btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#animation-buttons .btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentAnimation = btn.dataset.animation;
+        });
+      });
+
+      animationCharacter.addEventListener('click', () => {
+        animationClick.play(currentAnimation);
+      });
+
+      // Scroll reveal
+      const scrollReveal = new ScrollRevealObserver();
+      scrollReveal.observe('.character-scroll-reveal');
+    });
+  </script>
+</body>
+</html>

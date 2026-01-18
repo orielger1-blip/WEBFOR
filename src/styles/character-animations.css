@@ -1,0 +1,909 @@
+/**
+ * Advanced SVG Character Animations
+ * Production-ready CSS for premium character interactions
+ * Inspired by Stripe, Linear, and Vercel design systems
+ */
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+  /* Timing Functions - Premium easing curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Animation Durations */
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 800ms;
+  --duration-slowest: 1200ms;
+
+  /* Idle Animation Durations */
+  --breathing-duration: 4s;
+  --floating-duration: 3s;
+  --sway-duration: 6s;
+  --blink-interval: 4s;
+
+  /* Transform Origins */
+  --origin-center: 50% 50%;
+  --origin-bottom: 50% 100%;
+  --origin-top: 50% 0%;
+}
+
+/* ============================================
+   Performance Optimization Base Styles
+   ============================================ */
+.svg-character {
+  /* GPU acceleration hints */
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
+  /* Prevent layout thrashing */
+  contain: layout style paint;
+
+  /* Smooth rendering */
+  image-rendering: optimizeQuality;
+  shape-rendering: geometricPrecision;
+}
+
+.svg-character * {
+  /* Inherit GPU acceleration */
+  transform-style: preserve-3d;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .svg-character,
+  .svg-character * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   1. IDLE ANIMATIONS - Breathing Effect
+   ============================================ */
+@keyframes breathing {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.02) translateY(-1px);
+  }
+}
+
+@keyframes breathing-subtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.008);
+  }
+}
+
+@keyframes chest-breathing {
+  0%, 100% {
+    transform: scaleY(1) translateY(0);
+  }
+  40% {
+    transform: scaleY(1.03) translateY(-0.5px);
+  }
+  60% {
+    transform: scaleY(1.03) translateY(-0.5px);
+  }
+}
+
+.character-body {
+  animation: breathing var(--breathing-duration) var(--ease-in-out-cubic) infinite;
+  transform-origin: var(--origin-bottom);
+}
+
+.character-body--subtle {
+  animation: breathing-subtle var(--breathing-duration) var(--ease-in-out-cubic) infinite;
+}
+
+.character-chest {
+  animation: chest-breathing var(--breathing-duration) var(--ease-in-out-cubic) infinite;
+  transform-origin: var(--origin-bottom);
+}
+
+/* ============================================
+   2. IDLE ANIMATIONS - Floating/Hovering
+   ============================================ */
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-4px) rotate(0.5deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-4px) rotate(-0.5deg);
+  }
+}
+
+@keyframes floating-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes floating-with-shadow {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  }
+  50% {
+    transform: translateY(-8px);
+    filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.15));
+  }
+}
+
+.character-floating {
+  animation: floating var(--floating-duration) var(--ease-in-out-cubic) infinite;
+}
+
+.character-floating--gentle {
+  animation: floating-gentle var(--floating-duration) var(--ease-smooth) infinite;
+}
+
+.character-floating--shadow {
+  animation: floating-with-shadow var(--floating-duration) var(--ease-in-out-cubic) infinite;
+}
+
+/* ============================================
+   3. IDLE ANIMATIONS - Eye Blinking
+   ============================================ */
+@keyframes blink {
+  0%, 9%, 11%, 100% {
+    transform: scaleY(1);
+  }
+  10% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes blink-double {
+  0%, 9%, 11%, 14%, 16%, 100% {
+    transform: scaleY(1);
+  }
+  10%, 15% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes blink-natural {
+  0%, 92%, 94%, 100% {
+    transform: scaleY(1);
+  }
+  93% {
+    transform: scaleY(0.05);
+  }
+}
+
+@keyframes blink-sleepy {
+  0%, 30%, 35%, 100% {
+    transform: scaleY(1);
+  }
+  32% {
+    transform: scaleY(0.3);
+  }
+  50%, 55% {
+    transform: scaleY(0.7);
+  }
+}
+
+.character-eye {
+  transform-origin: center center;
+  animation: blink-natural var(--blink-interval) var(--ease-out-quart) infinite;
+}
+
+.character-eye--left {
+  animation-delay: 0s;
+}
+
+.character-eye--right {
+  animation-delay: 0.05s; /* Slight offset for natural feel */
+}
+
+.character-eye--sleepy {
+  animation: blink-sleepy 3s var(--ease-smooth) infinite;
+}
+
+/* Eyelid for more realistic blink */
+@keyframes eyelid-blink {
+  0%, 92%, 94%, 100% {
+    transform: translateY(-100%);
+  }
+  93% {
+    transform: translateY(0%);
+  }
+}
+
+.character-eyelid {
+  animation: eyelid-blink var(--blink-interval) var(--ease-out-quart) infinite;
+}
+
+/* ============================================
+   4. IDLE ANIMATIONS - Body Sway
+   ============================================ */
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  25% {
+    transform: rotate(1deg) translateX(2px);
+  }
+  75% {
+    transform: rotate(-1deg) translateX(-2px);
+  }
+}
+
+@keyframes sway-gentle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  33% {
+    transform: rotate(0.5deg);
+  }
+  66% {
+    transform: rotate(-0.5deg);
+  }
+}
+
+@keyframes sway-playful {
+  0%, 100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  20% {
+    transform: rotate(2deg) translateX(3px);
+  }
+  40% {
+    transform: rotate(-1deg) translateX(-1px);
+  }
+  60% {
+    transform: rotate(1.5deg) translateX(2px);
+  }
+  80% {
+    transform: rotate(-2deg) translateX(-3px);
+  }
+}
+
+.character-sway {
+  animation: sway var(--sway-duration) var(--ease-in-out-cubic) infinite;
+  transform-origin: var(--origin-bottom);
+}
+
+.character-sway--gentle {
+  animation: sway-gentle var(--sway-duration) var(--ease-smooth) infinite;
+  transform-origin: var(--origin-bottom);
+}
+
+.character-sway--playful {
+  animation: sway-playful 4s var(--ease-smooth) infinite;
+  transform-origin: var(--origin-bottom);
+}
+
+/* ============================================
+   5. INTERACTIVE - Hover Reactions
+   ============================================ */
+@keyframes perk-up {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.05) translateY(-8px);
+  }
+  100% {
+    transform: scale(1.02) translateY(-4px);
+  }
+}
+
+@keyframes ears-perk {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-15deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes attention {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.03) rotate(-2deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(0deg);
+  }
+  75% {
+    transform: scale(1.03) rotate(2deg);
+  }
+  100% {
+    transform: scale(1.02) rotate(0deg);
+  }
+}
+
+.character-interactive {
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.character-interactive:hover {
+  animation: perk-up var(--duration-slow) var(--ease-out-back) forwards;
+}
+
+.character-ear {
+  transition: transform var(--duration-normal) var(--ease-out-back);
+  transform-origin: bottom center;
+}
+
+.character-interactive:hover .character-ear {
+  animation: ears-perk var(--duration-slower) var(--ease-out-back);
+}
+
+/* Eyebrow raise on hover */
+@keyframes eyebrow-raise {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.character-eyebrow {
+  transition: transform var(--duration-fast) var(--ease-out-quart);
+}
+
+.character-interactive:hover .character-eyebrow {
+  animation: eyebrow-raise var(--duration-normal) var(--ease-out-back);
+}
+
+/* ============================================
+   6. INTERACTIVE - Click Responses
+   ============================================ */
+@keyframes wave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+  10% {
+    transform: translateY(0) scaleY(0.9);
+  }
+  30% {
+    transform: translateY(-30px) scaleY(1.1);
+  }
+  50% {
+    transform: translateY(0) scaleY(0.95);
+  }
+  70% {
+    transform: translateY(-10px) scaleY(1.05);
+  }
+  85% {
+    transform: translateY(0) scaleY(0.98);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-15px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  60% {
+    transform: translateY(-8px);
+  }
+  80% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes squish {
+  0%, 100% {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.1, 0.9);
+  }
+  60% {
+    transform: scale(0.95, 1.05);
+  }
+}
+
+@keyframes spin-happy {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.character-arm {
+  transform-origin: top center;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.character-arm--waving {
+  animation: wave 1.5s var(--ease-out-quart);
+}
+
+.character-jumping {
+  animation: jump 0.8s var(--ease-out-quart);
+  transform-origin: var(--origin-bottom);
+}
+
+.character-bouncing {
+  animation: bounce 0.6s var(--ease-out-quart);
+}
+
+.character-squishing {
+  animation: squish 0.4s var(--ease-out-back);
+  transform-origin: var(--origin-bottom);
+}
+
+.character-spinning {
+  animation: spin-happy 0.8s var(--ease-out-expo);
+}
+
+/* ============================================
+   7. SCROLL-TRIGGERED APPEARANCES
+   ============================================ */
+@keyframes slide-up-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pop-in-bounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(20px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) translateY(-10px);
+  }
+  70% {
+    transform: scale(0.95) translateY(5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes reveal-rotate {
+  0% {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* Initial hidden state */
+.character-scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.character-scroll-reveal--visible {
+  animation: slide-up-fade var(--duration-slower) var(--ease-out-expo) forwards;
+}
+
+.character-scroll-reveal--pop {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.character-scroll-reveal--pop.visible {
+  animation: pop-in-bounce var(--duration-slower) var(--ease-out-back) forwards;
+}
+
+.character-scroll-reveal--left {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+
+.character-scroll-reveal--left.visible {
+  animation: slide-in-left var(--duration-slower) var(--ease-out-expo) forwards;
+}
+
+.character-scroll-reveal--right {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+.character-scroll-reveal--right.visible {
+  animation: slide-in-right var(--duration-slower) var(--ease-out-expo) forwards;
+}
+
+/* Stagger delays for multiple characters */
+.character-scroll-reveal--delay-1 { animation-delay: 0.1s; }
+.character-scroll-reveal--delay-2 { animation-delay: 0.2s; }
+.character-scroll-reveal--delay-3 { animation-delay: 0.3s; }
+.character-scroll-reveal--delay-4 { animation-delay: 0.4s; }
+.character-scroll-reveal--delay-5 { animation-delay: 0.5s; }
+
+/* ============================================
+   8. STATE TRANSITIONS - Pose Morphing
+   ============================================ */
+@keyframes morph-happy {
+  0% {
+    d: path("M10,20 Q15,25 20,20"); /* neutral mouth */
+  }
+  100% {
+    d: path("M10,20 Q15,15 20,20"); /* smile */
+  }
+}
+
+@keyframes morph-sad {
+  0% {
+    d: path("M10,20 Q15,25 20,20"); /* neutral */
+  }
+  100% {
+    d: path("M10,22 Q15,27 20,22"); /* frown */
+  }
+}
+
+/* Smooth property transitions */
+.character-morphable {
+  transition:
+    transform var(--duration-normal) var(--ease-out-expo),
+    opacity var(--duration-normal) var(--ease-smooth);
+}
+
+.character-morphable path,
+.character-morphable circle,
+.character-morphable ellipse,
+.character-morphable rect {
+  transition:
+    d var(--duration-slow) var(--ease-out-expo),
+    fill var(--duration-normal) var(--ease-smooth),
+    stroke var(--duration-normal) var(--ease-smooth),
+    transform var(--duration-normal) var(--ease-out-expo);
+}
+
+/* ============================================
+   9. STATE TRANSITIONS - Enter/Exit
+   ============================================ */
+@keyframes character-enter {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes character-exit {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+    filter: blur(4px);
+  }
+}
+
+@keyframes character-enter-spring {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) rotate(-5deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotate(2deg);
+  }
+  80% {
+    transform: scale(0.95) rotate(-1deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes character-exit-shrink {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+.character-entering {
+  animation: character-enter var(--duration-slower) var(--ease-out-expo) forwards;
+}
+
+.character-entering--spring {
+  animation: character-enter-spring var(--duration-slowest) var(--ease-out-back) forwards;
+}
+
+.character-exiting {
+  animation: character-exit var(--duration-slow) var(--ease-in-out-cubic) forwards;
+}
+
+.character-exiting--shrink {
+  animation: character-exit-shrink var(--duration-normal) var(--ease-in-out-cubic) forwards;
+}
+
+/* ============================================
+   10. EMOTION TRANSITIONS
+   ============================================ */
+@keyframes emotion-to-happy {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.05) translateY(-3px);
+  }
+  100% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes emotion-to-sad {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    transform: scale(0.98) translateY(3px);
+  }
+}
+
+@keyframes emotion-to-excited {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.05) rotate(-3deg);
+  }
+  50% {
+    transform: scale(1.08) rotate(3deg);
+  }
+  75% {
+    transform: scale(1.05) rotate(-2deg);
+  }
+}
+
+@keyframes emotion-to-surprised {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.15) translateY(-8px);
+  }
+  100% {
+    transform: scale(1.1) translateY(-5px);
+  }
+}
+
+@keyframes emotion-to-sleepy {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    transform: scale(0.95) rotate(3deg) translateY(5px);
+  }
+}
+
+.character--happy {
+  animation: emotion-to-happy var(--duration-normal) var(--ease-out-back) forwards;
+}
+
+.character--sad {
+  animation: emotion-to-sad var(--duration-slow) var(--ease-out-quart) forwards;
+}
+
+.character--excited {
+  animation: emotion-to-excited 0.6s var(--ease-out-back) infinite;
+}
+
+.character--surprised {
+  animation: emotion-to-surprised var(--duration-fast) var(--ease-out-back) forwards;
+}
+
+.character--sleepy {
+  animation: emotion-to-sleepy var(--duration-slow) var(--ease-smooth) forwards;
+}
+
+/* Eye variations for emotions */
+.character--happy .character-eye {
+  transform: scaleY(0.7); /* Squinted happy eyes */
+}
+
+.character--surprised .character-eye {
+  transform: scale(1.3);
+}
+
+.character--sad .character-eye {
+  transform: scaleY(0.9) translateY(2px);
+}
+
+/* ============================================
+   11. MOUSE-FOLLOWING EYES (CSS Variables)
+   ============================================ */
+.character-eye-pupil {
+  transition: transform 0.1s var(--ease-out-quart);
+  transform: translate(
+    calc(var(--mouse-x, 0) * 3px),
+    calc(var(--mouse-y, 0) * 3px)
+  );
+}
+
+.character-eye-pupil--responsive {
+  transition: transform 0.05s linear;
+}
+
+/* Constrained movement */
+.character-eye-container {
+  overflow: hidden;
+}
+
+/* ============================================
+   12. COMBINED IDLE ANIMATION STATES
+   ============================================ */
+.character-idle {
+  animation:
+    breathing var(--breathing-duration) var(--ease-in-out-cubic) infinite,
+    floating-gentle var(--floating-duration) var(--ease-smooth) infinite;
+}
+
+.character-idle-full {
+  animation:
+    sway-gentle var(--sway-duration) var(--ease-in-out-cubic) infinite;
+  transform-origin: var(--origin-bottom);
+}
+
+.character-idle-full .character-body {
+  animation: breathing var(--breathing-duration) var(--ease-in-out-cubic) infinite;
+  transform-origin: var(--origin-bottom);
+}
+
+.character-idle-full .character-eye {
+  animation: blink-natural var(--blink-interval) var(--ease-out-quart) infinite;
+}
+
+/* ============================================
+   13. UTILITY CLASSES
+   ============================================ */
+.animation-paused {
+  animation-play-state: paused !important;
+}
+
+.animation-running {
+  animation-play-state: running !important;
+}
+
+/* Visibility-based pause (for Intersection Observer) */
+.character-offscreen {
+  animation-play-state: paused;
+  will-change: auto; /* Release GPU memory when offscreen */
+}
+
+.character-onscreen {
+  animation-play-state: running;
+}
+
+/* High performance mode - disable non-essential animations */
+.performance-mode .character-sway,
+.performance-mode .character-floating {
+  animation: none;
+}
+
+/* Debug mode - show animation boundaries */
+.debug-animations .svg-character {
+  outline: 2px solid rgba(255, 0, 0, 0.3);
+}
+
+.debug-animations .svg-character * {
+  outline: 1px solid rgba(0, 0, 255, 0.2);
+}
