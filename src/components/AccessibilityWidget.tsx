@@ -31,6 +31,16 @@ const AccessibilityWidget = () => {
     applySettings(settings);
   }, [settings]);
 
+  // Lock body scroll when accessibility panel is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('accessibility-open');
+    } else {
+      document.body.classList.remove('accessibility-open');
+    }
+    return () => document.body.classList.remove('accessibility-open');
+  }, [isOpen]);
+
   const applySettings = (s: AccessibilitySettings) => {
     const root = document.documentElement;
 

@@ -68,9 +68,18 @@ button {
 }
 
 .btn-primary:active {
-  transform: translateY(1px) scale(0.98) translateZ(0);
+  transform: translateY(1px) scale(0.96) translateZ(0);
   box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* Touch feedback for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .btn-primary:active {
+    transform: scale(0.96) translateZ(0);
+    opacity: 0.9;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+  }
 }
 
 .btn-secondary {
@@ -102,8 +111,18 @@ button {
 }
 
 .btn-secondary:active {
-  transform: translateY(1px) scale(0.98) translateZ(0);
+  transform: translateY(1px) scale(0.96) translateZ(0);
   transition: transform 0.1s ease;
+}
+
+/* Touch feedback for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .btn-secondary:active {
+    transform: scale(0.96) translateZ(0);
+    background: rgba(245, 158, 11, 0.12);
+    border-color: var(--accent-gold);
+    transition: transform 0.1s ease, background 0.1s ease;
+  }
 }
 
 .btn-icon {
@@ -863,9 +882,11 @@ section {
     transform: none;
   }
 
-  .process-content {
+  .process-content,
+  .process-step:nth-child(odd) .process-content,
+  .process-step:nth-child(even) .process-content {
     width: 100%;
-    text-align: right !important;
+    text-align: right;
   }
 }
 
@@ -1867,56 +1888,6 @@ section {
   }
 }
 
-@media (max-width: 480px) {
-  .team-member-card {
-    padding: 32px 24px;
-    border-radius: 20px;
-  }
-
-  .team-member-avatar-container {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 24px;
-  }
-
-  .team-member-avatar {
-    width: 80px;
-    height: 80px;
-  }
-
-  .avatar-initials {
-    font-size: 1.25rem;
-  }
-
-  .team-member-name {
-    font-size: 1.4rem;
-  }
-
-  .team-member-role {
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .role-divider {
-    display: none;
-  }
-
-  .expertise-tag {
-    padding: 6px 12px;
-    font-size: 0.75rem;
-  }
-
-  .team-value-item {
-    flex-direction: column;
-    text-align: center;
-    padding: 28px 20px;
-  }
-
-  .team-value-icon-wrapper {
-    margin-bottom: 8px;
-  }
-}
-
 /* ==================== FOOTER ==================== */
 .footer {
   background: var(--bg-primary);
@@ -2091,6 +2062,43 @@ section {
   }
 }
 
+/* Mobile-optimized fadeInUp - smoother with hardware acceleration */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Chat bubble stagger animation */
+@keyframes chatBubbleIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* Button press feedback animation */
+@keyframes buttonPress {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .animate-float {
   animation: float 6s var(--ease-in-out-smooth) infinite;
   will-change: transform;
@@ -2186,19 +2194,6 @@ section {
   border: 1px solid var(--border-subtle);
 }
 
-@media (max-width: 768px) {
-  .whatsapp-float {
-    bottom: 20px;
-    right: 20px; /* RTL: right side on mobile too */
-    width: 54px;
-    height: 54px;
-  }
-
-  .whatsapp-tooltip {
-    display: none;
-  }
-}
-
 /* ==================== FAQ SECTION ==================== */
 .faq-section {
   background: var(--bg-primary);
@@ -2279,13 +2274,13 @@ section {
 
 .form-success {
   background: linear-gradient(145deg, var(--bg-card) 0%, rgba(10, 10, 15, 0.98) 100%);
-  border: 2px solid rgba(34, 197, 94, 0.4);
+  border: 2px solid rgba(245, 158, 11, 0.4);
   border-radius: var(--radius-xl);
   padding: 60px 40px;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(34, 197, 94, 0.1);
+  box-shadow: 0 20px 60px rgba(245, 158, 11, 0.1);
 }
 
 .form-success::before {
@@ -2295,26 +2290,26 @@ section {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #22c55e, #16a34a, #22c55e);
+  background: linear-gradient(90deg, #f59e0b, #d97706, #f59e0b);
 }
 
 .success-icon {
   width: 88px;
   height: 88px;
   margin: 0 auto 28px;
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
-  border: 2px solid rgba(34, 197, 94, 0.3);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.05) 100%);
+  border: 2px solid rgba(245, 158, 11, 0.3);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #22c55e;
+  color: #f59e0b;
   animation: successPulse 2s ease-in-out infinite;
 }
 
 @keyframes successPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.3); }
-  50% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); }
 }
 
 .success-icon svg {
@@ -2793,22 +2788,275 @@ section {
   }
 }
 
+/* ==================== MOBILE HERO GRADIENT BACKGROUND ==================== */
+.hero-mobile-gradient {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
 /* ==================== MOBILE LANDSCAPE / SMALL TABLET (max 768px) ==================== */
 @media (max-width: 768px) {
+  /* ===== STUNNING FULL-SCREEN MOBILE HERO ===== */
   .hero {
+    min-height: 100vh;
+    min-height: 100dvh;
     padding-top: 80px;
     padding-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Reduce desktop particle network opacity */
+  .hero .particle-network {
+    opacity: 0.25;
+  }
+
+  .hero-mobile-gradient {
+    display: block;
+    background:
+      radial-gradient(ellipse 120% 50% at 50% -10%, rgba(245, 158, 11, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(251, 191, 36, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 100% 40% at 50% 100%, rgba(217, 119, 6, 0.08) 0%, transparent 60%),
+      linear-gradient(180deg, #050508 0%, #08080c 50%, #0a0a0f 100%);
+    animation: mobileHeroGradientPulse 8s ease-in-out infinite;
+  }
+
+  @keyframes mobileHeroGradientPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+  }
+
+  .hero-overlay {
+    background:
+      radial-gradient(ellipse 100% 80% at 50% 50%, transparent 0%, rgba(5, 5, 8, 0.3) 60%, rgba(5, 5, 8, 0.6) 100%);
   }
 
   .hero-grid {
-    gap: 36px;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 24px;
+    text-align: center;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  /* ===== ANIMATED BADGE/PILL ===== */
+  .hero-badge {
+    padding: 12px 24px;
+    font-size: 0.85rem;
+    margin-bottom: 28px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    box-shadow:
+      0 4px 20px rgba(245, 158, 11, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    animation: badgeGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes badgeGlow {
+    0%, 100% {
+      box-shadow:
+        0 4px 20px rgba(245, 158, 11, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    50% {
+      box-shadow:
+        0 4px 30px rgba(245, 158, 11, 0.25),
+        0 0 40px rgba(245, 158, 11, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .hero-badge-dot {
+    width: 10px;
+    height: 10px;
+    animation: pulse-gold 1.5s ease-in-out infinite;
+  }
+
+  .hero-badge-text {
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== IMPACTFUL HEADLINE ===== */
+  .hero-title {
+    font-size: clamp(2.2rem, 9vw, 3.2rem);
+    margin-bottom: 20px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-title-line {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .hero-title-accent {
+    display: block;
+    font-size: 1.1em;
+  }
+
+  /* ===== VALUE PROPOSITION ===== */
+  .hero-subtitle {
+    font-size: 1.05rem;
+    margin-bottom: 32px;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 90%;
+  }
+
+  .hero-subtitle-text {
+    display: block;
+  }
+
+  /* ===== TWO PROMINENT CTA BUTTONS (STACKED) ===== */
+  .hero-cta {
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 0 8px;
+  }
+
+  .hero .btn-primary,
+  .hero .btn-secondary,
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    width: 100%;
+    min-height: 56px;
+    padding: 16px 28px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    justify-content: center;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-btn-primary,
+  .hero-cta .btn-primary {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+    box-shadow:
+      0 4px 20px rgba(245, 158, 11, 0.35),
+      0 8px 40px rgba(245, 158, 11, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #000;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-cta .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+    animation: heroCTAShimmer 4s ease-in-out infinite;
+  }
+
+  @keyframes heroCTAShimmer {
+    0%, 100% { left: -100%; }
+    50% { left: 100%; }
+  }
+
+  .hero-btn-secondary,
+  .hero-cta .btn-secondary {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(245, 158, 11, 0.35);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+  }
+
+  .hero-cta .btn-primary:active,
+  .hero-cta .btn-secondary:active {
+    transform: scale(0.97) translateZ(0);
+  }
+
+  .btn-text {
+    flex: 1;
+    text-align: center;
+  }
+
+  .btn-icon,
+  .btn-icon-play {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  /* ===== HIDE PHONE MOCKUP ON MOBILE ===== */
+  .hero-mockup {
+    display: none !important;
+  }
+
+  /* ===== CHAT PREVIEW CARD (BELOW CTAs) ===== */
+  .hero-chat-preview {
+    display: block;
+    width: 100%;
+    margin-top: 36px;
+    animation: chatCardSlideUp 0.8s ease-out 0.4s both;
+  }
+
+  @keyframes chatCardSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .chat-preview-card {
+    border-radius: 18px;
+    box-shadow:
+      0 16px 50px rgba(0, 0, 0, 0.4),
+      0 0 80px rgba(245, 158, 11, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+  }
+}
+
+/* ==================== MOBILE PORTRAIT (max 600px) ==================== */
+@media (max-width: 600px) {
+  .hero {
+    padding-top: 72px;
+    padding-bottom: 36px;
+  }
+
+  .hero-grid {
     padding: 0 20px;
   }
 
+  .hero-badge {
+    padding: 11px 22px;
+    font-size: 0.82rem;
+    margin-bottom: 24px;
+  }
+
   .hero-title {
-    font-size: clamp(2rem, 7vw, 3rem);
-    margin-bottom: 20px;
-    line-height: 1.1;
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    margin-bottom: 18px;
   }
 
   .hero-subtitle {
@@ -2817,126 +3065,44 @@ section {
     line-height: 1.7;
   }
 
-  .hero-badge {
-    padding: 10px 20px;
-    font-size: 0.85rem;
-    margin-bottom: 24px;
-  }
-
   .hero-cta {
-    margin-bottom: 0;
-    gap: 14px;
+    gap: 12px;
+    padding: 0 4px;
   }
 
-  /* Phone mockup - smaller but still visible, centered */
-  .hero-mockup {
-    display: flex;
-    justify-content: center;
+  .hero .btn-primary,
+  .hero .btn-secondary,
+  .hero-btn-primary,
+  .hero-btn-secondary,
+  .hero-cta .btn-primary,
+  .hero-cta .btn-secondary {
+    min-height: 54px;
+    padding: 15px 24px;
+    font-size: 1rem;
+    border-radius: 12px;
   }
 
-  .phone-mockup {
-    width: 180px;
-    height: 380px;
-    border-radius: 28px;
-    padding: 8px;
-  }
-
-  .phone-notch {
-    width: 60px;
-    height: 18px;
-    border-radius: 0 0 12px 12px;
-    top: 8px;
-  }
-
-  .phone-screen {
-    border-radius: 22px;
-  }
-
-  .wa-header {
-    padding: 6px 10px;
-    padding-top: 22px;
-    gap: 8px;
-  }
-
-  .wa-header-avatar {
-    width: 26px;
-    height: 26px;
-  }
-
-  .wa-header-avatar svg {
-    width: 12px;
-    height: 12px;
-  }
-
-  .wa-header-name {
-    font-size: 0.75rem;
-  }
-
-  .wa-header-status {
-    font-size: 0.6rem;
-  }
-
-  .wa-chat {
-    padding: 8px;
-    gap: 4px;
-  }
-
-  .wa-message {
-    font-size: 0.65rem;
-    padding: 5px 8px;
-    border-radius: 5px;
-    max-width: 88%;
-  }
-
-  .wa-input {
-    padding: 5px 8px;
-  }
-
-  .wa-input span {
-    font-size: 0.65rem;
-  }
-
-  .mockup-glow {
-    width: 150px;
-    height: 150px;
-  }
-
-  /* Hide chat preview when phone mockup is shown */
   .hero-chat-preview {
-    display: none;
+    margin-top: 32px;
   }
 }
 
-/* ==================== MOBILE (max 600px) - Switch to Chat Preview ==================== */
-@media (max-width: 600px) {
+/* ==================== SMALL PHONE (max 480px) ==================== */
+@media (max-width: 480px) {
   .hero {
-    padding-top: 72px;
+    padding-top: 68px;
     padding-bottom: 32px;
-    min-height: auto;
   }
 
   .hero-grid {
-    gap: 24px;
-    padding: 0 16px;
-  }
-
-  .hero-title {
-    font-size: clamp(1.85rem, 6vw, 2.4rem);
-    margin-bottom: 16px;
-    line-height: 1.15;
-  }
-
-  .hero-subtitle {
-    font-size: 0.95rem;
-    margin-bottom: 22px;
-    line-height: 1.65;
+    padding: 0 18px;
   }
 
   .hero-badge {
-    padding: 9px 18px;
-    font-size: 0.8rem;
-    gap: 10px;
-    margin-bottom: 20px;
+    padding: 10px 18px;
+    font-size: 0.78rem;
+    margin-bottom: 22px;
+    gap: 8px;
   }
 
   .hero-badge-dot {
@@ -2944,36 +3110,64 @@ section {
     height: 8px;
   }
 
-  /* Stack buttons vertically with proper touch targets */
+  .hero-title {
+    font-size: clamp(1.85rem, 7.5vw, 2.4rem);
+    margin-bottom: 16px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    max-width: 95%;
+  }
+
   .hero-cta {
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    margin-bottom: 0;
+    gap: 11px;
+    padding: 0;
   }
 
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    padding: 16px 24px;
-    justify-content: center;
-    font-size: 1rem;
-    min-height: 52px; /* Touch-friendly tap target */
+  .hero .btn-primary,
+  .hero .btn-secondary,
+  .hero-btn-primary,
+  .hero-btn-secondary,
+  .hero-cta .btn-primary,
+  .hero-cta .btn-secondary {
+    min-height: 52px;
+    padding: 14px 22px;
+    font-size: 0.95rem;
   }
 
-  /* Hide phone mockup, show chat preview card */
-  .hero-mockup {
-    display: none;
+  .btn-icon,
+  .btn-icon-play {
+    width: 20px;
+    height: 20px;
   }
 
   .hero-chat-preview {
-    display: block;
-    margin: 20px 0 0;
+    margin-top: 28px;
+  }
+
+  .chat-preview-card {
+    border-radius: 16px;
+  }
+
+  .chat-preview-header {
+    padding: 10px 14px;
+  }
+
+  .chat-preview-messages {
+    padding: 14px;
+    gap: 8px;
+  }
+
+  .chat-bubble {
+    padding: 10px 14px;
+    font-size: 0.88rem;
   }
 }
 
-/* ==================== SMALL PHONE (max 480px) ==================== */
-@media (max-width: 480px) {
+/* ==================== EXTRA SMALL PHONE (max 360px) ==================== */
+@media (max-width: 360px) {
   .hero {
     padding-top: 64px;
     padding-bottom: 28px;
@@ -2981,25 +3175,13 @@ section {
 
   .hero-grid {
     padding: 0 14px;
-    gap: 20px;
-  }
-
-  .hero-title {
-    font-size: clamp(1.7rem, 5.5vw, 2.1rem);
-    margin-bottom: 14px;
-  }
-
-  .hero-subtitle {
-    font-size: 0.9rem;
-    margin-bottom: 18px;
-    line-height: 1.6;
   }
 
   .hero-badge {
     padding: 8px 14px;
-    font-size: 0.75rem;
-    gap: 8px;
+    font-size: 0.72rem;
     margin-bottom: 18px;
+    gap: 6px;
   }
 
   .hero-badge-dot {
@@ -3007,69 +3189,70 @@ section {
     height: 7px;
   }
 
+  .hero-title {
+    font-size: clamp(1.65rem, 7vw, 2rem);
+    margin-bottom: 14px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+    line-height: 1.65;
+  }
+
   .hero-cta {
     gap: 10px;
   }
 
-  .btn-primary,
-  .btn-secondary {
-    padding: 14px 20px;
-    font-size: 0.95rem;
-    min-height: 48px;
-  }
-
-  .hero-chat-preview {
-    margin: 16px 0 0;
-  }
-}
-
-/* ==================== EXTRA SMALL PHONE (max 360px) ==================== */
-@media (max-width: 360px) {
-  .hero {
-    padding-top: 60px;
-    padding-bottom: 24px;
-  }
-
-  .hero-grid {
-    padding: 0 12px;
-    gap: 16px;
-  }
-
-  .hero-title {
-    font-size: clamp(1.5rem, 5vw, 1.85rem);
-    margin-bottom: 12px;
-  }
-
-  .hero-subtitle {
-    font-size: 0.85rem;
-    margin-bottom: 16px;
-  }
-
-  .hero-badge {
-    padding: 6px 12px;
-    font-size: 0.72rem;
-    gap: 6px;
-    margin-bottom: 14px;
-  }
-
-  .hero-badge-dot {
-    width: 6px;
-    height: 6px;
-  }
-
-  .hero-cta {
-    gap: 8px;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    padding: 12px 16px;
+  .hero .btn-primary,
+  .hero .btn-secondary,
+  .hero-btn-primary,
+  .hero-btn-secondary,
+  .hero-cta .btn-primary,
+  .hero-cta .btn-secondary {
+    min-height: 50px;
+    padding: 13px 18px;
     font-size: 0.9rem;
-    min-height: 46px;
+    border-radius: 11px;
+  }
+
+  .btn-icon,
+  .btn-icon-play {
+    width: 18px;
+    height: 18px;
   }
 
   .hero-chat-preview {
-    margin: 12px 0 0;
+    margin-top: 24px;
+  }
+
+  .chat-preview-card {
+    border-radius: 14px;
+  }
+
+  .chat-preview-header {
+    padding: 8px 12px;
+    gap: 10px;
+  }
+
+  .chat-preview-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .chat-preview-name {
+    font-size: 0.85rem;
+  }
+
+  .chat-preview-messages {
+    padding: 12px;
+    gap: 7px;
+  }
+
+  .chat-bubble {
+    padding: 9px 12px;
+    font-size: 0.85rem;
+    border-radius: 14px;
   }
 }
 
@@ -3087,6 +3270,10 @@ section {
   border: 1px solid rgba(245, 158, 11, 0.25);
   max-width: 100%;
   position: relative;
+  /* Smooth entrance animation on mobile */
+  animation: fadeInUp 0.6s ease-out both;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .chat-preview-card::before {
@@ -3185,7 +3372,17 @@ section {
   line-height: 1.5;
   position: relative;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  /* Stagger animation for chat bubbles */
+  animation: chatBubbleIn 0.4s ease-out both;
+  transform: translateZ(0);
 }
+
+/* Chat bubble stagger delays */
+.chat-bubble:nth-child(1) { animation-delay: 0.2s; }
+.chat-bubble:nth-child(2) { animation-delay: 0.4s; }
+.chat-bubble:nth-child(3) { animation-delay: 0.6s; }
+.chat-bubble:nth-child(4) { animation-delay: 0.8s; }
+.chat-bubble:nth-child(5) { animation-delay: 1.0s; }
 
 .chat-bubble-incoming {
   background: rgba(255, 255, 255, 0.05);
@@ -3311,6 +3508,45 @@ section {
   .chat-preview-status::after {
     animation: none !important;
     opacity: 0.6;
+  }
+
+  /* Disable all mobile entrance animations */
+  .chat-preview-card,
+  .chat-bubble,
+  .hero-content,
+  .hero-badge,
+  .hero-title,
+  .hero-subtitle,
+  .hero-cta {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Disable button animations but keep instant feedback */
+  .btn-primary,
+  .btn-secondary {
+    transition: none !important;
+  }
+
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.05s ease !important;
+  }
+
+  /* Disable scroll-triggered animations */
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Keep typing dots visible but static */
+  .typing-dots,
+  .wa-header-status::after,
+  .chat-preview-status::after {
+    opacity: 0.7 !important;
   }
 }
 
@@ -3787,24 +4023,6 @@ html.big-cursor input[type="button"] {
   outline: 2px solid var(--accent-gold);
   outline-offset: 2px;
   border-color: var(--accent-gold);
-}
-
-@media (max-width: 768px) {
-  .accessibility-btn {
-    bottom: 80px;
-    left: 20px;
-    width: 44px;
-    height: 44px;
-  }
-
-  .accessibility-btn svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .statement-text {
-    padding: 24px;
-  }
 }
 
 /* ==================== NEURAL NETWORK STATIC FALLBACK ==================== */
@@ -4496,69 +4714,85 @@ html.high-contrast .agentive-robot circle[fill="none"] {
 .agentive-robot-wrapper.success .agentive-robot path,
 .agentive-robot-wrapper.success .agentive-robot rect,
 .agentive-robot-wrapper.success .agentive-robot circle {
-  stroke: #22c55e;
+  stroke: #f59e0b;
 }
 
 .agentive-robot-wrapper.success .agentive-robot [fill="#FFD700"] {
-  fill: #22c55e;
+  fill: #fbbf24;
 }
 
 .agentive-robot-wrapper.success .agentive-robot {
-  filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.4));
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.4));
 }
 
 /* ==================== STICKY MOBILE CTA BAR ==================== */
+/* Shows after scrolling past hero, hides near footer */
 .mobile-cta-bar {
   display: none;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg, rgba(5, 5, 8, 0.95) 0%, rgba(5, 5, 8, 0.99) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(180deg, rgba(5, 5, 8, 0.97) 0%, rgba(5, 5, 8, 0.99) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-top: 1px solid var(--border-gold);
-  padding: 14px 16px;
-  padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
   z-index: 999;
   gap: 12px;
   justify-content: center;
   align-items: center;
   transform: translateY(100%);
-  transition: transform 0.4s var(--ease-out-expo);
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5),
-              0 -2px 20px rgba(245, 158, 11, 0.1);
+  transition: transform 0.4s var(--ease-out-expo),
+              opacity 0.3s ease;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6),
+              0 -2px 20px rgba(245, 158, 11, 0.12);
 }
 
-.mobile-cta-bar:not(.hidden) {
+/* Visible state - show after scrolling past hero */
+.mobile-cta-bar.visible {
   transform: translateY(0);
+  opacity: 1;
 }
 
+/* Hidden state - near footer or before scroll threshold */
 .mobile-cta-bar.hidden {
   transform: translateY(100%);
+  pointer-events: none;
 }
 
-/* Primary CTA Button */
+/* Legacy support */
+.mobile-cta-bar:not(.hidden) {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Primary CTA Button - "Schedule Call" - Gold Gradient, Prominent */
 .mobile-cta-primary {
   flex: 1;
-  max-width: 280px;
+  max-width: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   background: var(--accent-gradient);
   color: #000;
-  padding: 14px 24px;
+  padding: 14px 28px;
   border-radius: var(--radius-md);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1rem;
   text-decoration: none;
   min-height: 52px;
-  transition: transform 0.2s var(--ease-out-back),
-              box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  transition: transform 0.15s ease,
+              box-shadow 0.2s ease,
+              opacity 0.15s ease;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.35),
+              0 0 30px rgba(245, 158, 11, 0.15);
   position: relative;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .mobile-cta-primary::before {
@@ -4571,10 +4805,10 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.3) 50%,
     transparent 100%
   );
-  animation: mobileCTAShimmer 3s ease-in-out infinite;
+  animation: mobileCTAShimmer 3.5s ease-in-out infinite;
 }
 
 @keyframes mobileCTAShimmer {
@@ -4583,39 +4817,48 @@ html.high-contrast .agentive-robot circle[fill="none"] {
 }
 
 .mobile-cta-primary svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
 }
 
+/* Touch feedback for primary CTA */
 .mobile-cta-primary:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
   opacity: 0.9;
+  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.3);
 }
 
 /* WhatsApp Quick Button */
 .mobile-cta-whatsapp {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #25D366;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
   border-radius: 50%;
   color: white;
   text-decoration: none;
   flex-shrink: 0;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+  transition: transform 0.15s ease,
+              box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4),
+              0 0 20px rgba(37, 211, 102, 0.15);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .mobile-cta-whatsapp svg {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
 }
 
+/* Touch feedback for WhatsApp button */
 .mobile-cta-whatsapp:active {
-  transform: scale(0.95);
+  transform: scale(0.94);
+  box-shadow: 0 2px 10px rgba(37, 211, 102, 0.3);
 }
 
 /* Show on mobile only */
@@ -4644,23 +4887,25 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   .mobile-cta-bar {
     padding: 10px 12px;
     padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-    gap: 8px;
+    gap: 10px;
   }
 
   .mobile-cta-primary {
-    padding: 12px 20px;
-    font-size: 0.9rem;
+    padding: 14px 20px;
+    font-size: 0.95rem;
     max-width: none;
+    min-height: 52px;
   }
 
   .mobile-cta-whatsapp {
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
   }
 
   .mobile-cta-whatsapp svg {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -4687,16 +4932,6 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   /* Cards - reduce padding */
   .card {
     padding: 28px 24px;
-  }
-
-  /* Hero improvements */
-  .hero {
-    padding-top: 80px;
-    min-height: auto;
-  }
-
-  .hero-content {
-    padding: 0 16px;
   }
 
   /* Problem section */
@@ -4833,90 +5068,6 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   /* Cards - more compact */
   .card {
     padding: 24px 20px;
-  }
-
-  /* Hero section */
-  .hero {
-    padding-top: 70px;
-  }
-
-  .hero-grid {
-    gap: 20px;
-    padding: 0 12px;
-  }
-
-  .hero-title {
-    font-size: clamp(1.8rem, 7vw, 2.4rem);
-    margin-bottom: 16px;
-  }
-
-  .hero-subtitle {
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-
-  .hero-badge {
-    padding: 8px 14px;
-    font-size: 0.78rem;
-    margin-bottom: 20px;
-    gap: 8px;
-  }
-
-  .hero-badge-dot {
-    width: 7px;
-    height: 7px;
-  }
-
-  .hero-cta {
-    gap: 10px;
-    margin-bottom: 24px;
-  }
-
-  /* Chat Preview Card improvements */
-  .chat-preview-card {
-    border-radius: 12px;
-    margin: 16px 0;
-  }
-
-  .chat-preview-header {
-    padding: 10px 12px;
-    gap: 10px;
-  }
-
-  .chat-preview-avatar {
-    width: 32px;
-    height: 32px;
-  }
-
-  .chat-preview-avatar svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .chat-preview-name {
-    font-size: 0.85rem;
-  }
-
-  .chat-preview-status {
-    font-size: 0.7rem;
-  }
-
-  .chat-preview-badge {
-    width: 24px;
-    height: 24px;
-  }
-
-  .chat-preview-messages {
-    padding: 12px;
-    gap: 8px;
-  }
-
-  .chat-bubble {
-    max-width: 88%;
-    padding: 8px 12px;
-    font-size: 0.85rem;
-    border-radius: 10px;
   }
 
   /* Problem section */
@@ -5288,57 +5439,6 @@ html.high-contrast .agentive-robot circle[fill="none"] {
     padding: 20px 16px;
   }
 
-  /* Hero section */
-  .hero {
-    padding-top: 60px;
-  }
-
-  .hero-grid {
-    gap: 16px;
-    padding: 0 8px;
-  }
-
-  .hero-title {
-    font-size: clamp(1.5rem, 6vw, 2rem);
-    margin-bottom: 12px;
-  }
-
-  .hero-subtitle {
-    font-size: 0.9rem;
-    margin-bottom: 16px;
-  }
-
-  .hero-badge {
-    padding: 6px 12px;
-    font-size: 0.72rem;
-    margin-bottom: 16px;
-  }
-
-  .hero-cta {
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-
-  /* Chat Preview Card - compact */
-  .chat-preview-card {
-    margin: 12px 0;
-  }
-
-  .chat-preview-header {
-    padding: 8px 10px;
-  }
-
-  .chat-preview-messages {
-    padding: 10px;
-    gap: 6px;
-  }
-
-  .chat-bubble {
-    padding: 7px 10px;
-    font-size: 0.82rem;
-    border-radius: 8px;
-  }
-
   /* Problem section */
   .problem-card {
     padding: 24px 16px;
@@ -5535,6 +5635,15 @@ html.high-contrast .agentive-robot circle[fill="none"] {
     font-size: 1.2rem;
   }
 
+  .team-member-role {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .role-divider {
+    display: none;
+  }
+
   .role-hebrew {
     font-size: 0.88rem;
   }
@@ -5546,6 +5655,16 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   .expertise-tag {
     padding: 5px 10px;
     font-size: 0.72rem;
+  }
+
+  .team-value-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 20px;
+  }
+
+  .team-value-icon-wrapper {
+    margin-bottom: 8px;
   }
 
   /* Footer */
@@ -5792,5 +5911,1221 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   .phone-mockup {
     width: 260px;
     height: 540px;
+  }
+}
+
+/* ============================================================================
+   MOBILE ANIMATION FIXES AND OPTIMIZATIONS
+   Ensuring smooth, performant animations on mobile devices
+   ============================================================================ */
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ==================== MOBILE HERO ENTRANCE ANIMATIONS ==================== */
+@media (max-width: 768px) {
+  /* Hero content fadeInUp animation */
+  .hero-content {
+    animation: fadeInUp 0.7s ease-out both;
+  }
+
+  .hero-badge {
+    animation: fadeInUp 0.5s ease-out 0.1s both;
+  }
+
+  .hero-title {
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+  }
+
+  .hero-subtitle {
+    animation: fadeInUp 0.6s ease-out 0.3s both;
+  }
+
+  .hero-cta {
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+  }
+
+  /* Disable heavy phone mockup floating on mobile */
+  .phone-mockup {
+    animation: none;
+    transform: none;
+  }
+
+  /* Simplify mockup glow on mobile */
+  .mockup-glow {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* ==================== MOBILE BUTTON TAP FEEDBACK ==================== */
+@media (max-width: 768px) {
+  /* Enhanced tap feedback with haptic-style animation */
+  .btn-primary,
+  .btn-secondary {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  .btn-primary:active {
+    transform: scale(0.96) translateZ(0);
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+    transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.96) translateZ(0);
+    background: rgba(245, 158, 11, 0.1);
+    transition: transform 0.08s ease-out, background 0.08s ease-out;
+  }
+
+  /* Remove hover transforms on touch devices - they cause sticky states */
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: none;
+  }
+}
+
+/* ==================== MOBILE CHAT CARD OPTIMIZATIONS ==================== */
+@media (max-width: 600px) {
+  /* Ensure chat card animation is smooth */
+  .chat-preview-card {
+    animation: fadeInUp 0.5s ease-out 0.5s both;
+  }
+
+  /* Faster stagger for smaller screens */
+  .chat-bubble:nth-child(1) { animation-delay: 0.7s; }
+  .chat-bubble:nth-child(2) { animation-delay: 0.85s; }
+  .chat-bubble:nth-child(3) { animation-delay: 1.0s; }
+
+  /* Ensure typing dots are visible and animated (gold color) */
+  .chat-preview-status::after,
+  .wa-header-status::after {
+    background:
+      radial-gradient(circle at 2px 3px, #f59e0b 1.5px, transparent 1.5px),
+      radial-gradient(circle at 8px 3px, #f59e0b 1.5px, transparent 1.5px),
+      radial-gradient(circle at 14px 3px, #f59e0b 1.5px, transparent 1.5px);
+    animation: typingDots 1.4s ease-in-out infinite;
+  }
+}
+
+/* ==================== SIMPLIFY 3D TRANSFORMS ON MOBILE ==================== */
+@media (max-width: 768px) {
+  /* Remove 3D perspective effects that cause jank */
+  .card,
+  .solution-card,
+  .industry-card,
+  .stat-card,
+  .problem-card,
+  .testimonial-card {
+    transform-style: flat;
+    perspective: none;
+  }
+
+  /* Simplified card hover - 2D only */
+  .card:hover,
+  .solution-card:hover,
+  .industry-card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Disable complex glow animations on cards */
+  .card::before,
+  .solution-card::before {
+    animation: none;
+  }
+}
+
+/* ==================== SMALL PHONE ANIMATION SIMPLIFICATION ==================== */
+@media (max-width: 480px) {
+  /* Faster, simpler animations for low-end devices */
+  .hero-content,
+  .hero-badge,
+  .hero-title,
+  .hero-subtitle,
+  .hero-cta {
+    animation-duration: 0.4s;
+  }
+
+  .chat-preview-card {
+    animation-duration: 0.35s;
+  }
+
+  .chat-bubble {
+    animation-duration: 0.25s;
+  }
+
+  /* Minimal card hover effect */
+  .card:hover,
+  .industry-card:hover {
+    transform: translateY(-2px);
+    transition-duration: 0.2s;
+  }
+
+  /* Disable all floating animations */
+  .animate-float,
+  .animate-bounce {
+    animation: none;
+  }
+}
+
+/* ==================== EXTRA SMALL PHONE (360px and below) ==================== */
+@media (max-width: 360px) {
+  /* Instant animations - no delays */
+  .hero-content,
+  .hero-badge,
+  .hero-title,
+  .hero-subtitle,
+  .hero-cta,
+  .chat-preview-card {
+    animation-delay: 0s !important;
+    animation-duration: 0.3s;
+  }
+
+  .chat-bubble {
+    animation-delay: 0.1s !important;
+    animation-duration: 0.2s;
+  }
+
+  .chat-bubble:nth-child(2) { animation-delay: 0.15s !important; }
+  .chat-bubble:nth-child(3) { animation-delay: 0.2s !important; }
+}
+
+/* ==================== GPU ACCELERATION & SCROLL ANIMATIONS (768px) ==================== */
+@media (max-width: 768px) {
+  /* Force GPU acceleration on animated elements */
+  .chat-preview-card,
+  .chat-bubble,
+  .hero-content,
+  .btn-primary,
+  .btn-secondary {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Reduce reveal animation distance on mobile */
+  .reveal-on-scroll {
+    transform: translateY(15px) translateZ(0);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  }
+
+  .reveal-on-scroll.revealed {
+    transform: translateY(0) translateZ(0);
+  }
+
+  /* Reduce stagger delays on mobile */
+  .reveal-stagger-1 { transition-delay: 0.05s; }
+  .reveal-stagger-2 { transition-delay: 0.1s; }
+  .reveal-stagger-3 { transition-delay: 0.15s; }
+  .reveal-stagger-4 { transition-delay: 0.2s; }
+}
+
+/* ==================== PERFECT MOBILE CTA TOUCH FEEDBACK ==================== */
+/* Comprehensive touch feedback for all buttons throughout the site */
+
+/* Base button touch optimization */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices - they cause sticky states */
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+
+  /* Global touch feedback settings */
+  .btn-primary,
+  .btn-secondary,
+  button,
+  a.btn-primary,
+  a.btn-secondary,
+  .mobile-cta-primary,
+  .mobile-cta-whatsapp,
+  .mobile-nav-link,
+  .nav-link,
+  .submit-btn,
+  .contact-btn {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  /* Primary buttons - scale down and glow reduction */
+  .btn-primary:active {
+    transform: scale(0.96) translateZ(0) !important;
+    opacity: 0.9;
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.25);
+    transition: transform 0.1s ease, opacity 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  /* Secondary buttons - scale and subtle background change */
+  .btn-secondary:active {
+    transform: scale(0.96) translateZ(0) !important;
+    background: rgba(245, 158, 11, 0.12);
+    border-color: var(--accent-gold);
+    transition: transform 0.1s ease, background 0.1s ease, border-color 0.1s ease;
+  }
+
+  /* Contact/Submit buttons */
+  .submit-btn:active,
+  .contact-btn:active {
+    transform: scale(0.97) translateZ(0);
+    opacity: 0.9;
+  }
+
+  /* Navigation links */
+  .mobile-nav-link:active {
+    background: rgba(245, 158, 11, 0.15);
+    transform: translateX(-4px);
+  }
+
+  /* Card-style buttons (like solution cards with links) */
+  .card:active,
+  .solution-card:active,
+  .industry-card:active {
+    transform: translateY(-2px) scale(0.99) translateZ(0);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Ensure min-height on all touchable buttons for accessibility */
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-secondary,
+  .submit-btn,
+  .contact-btn,
+  .mobile-cta-primary,
+  button[type="submit"] {
+    min-height: 52px;
+  }
+
+  /* Ensure proper contrast for gold gradient buttons */
+  .btn-primary {
+    color: #000;
+    font-weight: 700;
+  }
+
+  /* Ensure border style is clear for secondary buttons */
+  .btn-secondary {
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: rgba(245, 158, 11, 0.4);
+  }
+
+  .btn-secondary:active {
+    border-color: var(--accent-gold);
+  }
+}
+
+/* ============================================================================
+   MOBILE TYPOGRAPHY FIXES - Ensuring Readability on All Devices
+   Minimum sizes: Body text 16px (1rem), Small text 12px (0.75rem)
+   Line heights: 1.5-1.7 for comfortable reading
+   Hebrew: RTL direction and proper font handling
+   ============================================================================ */
+
+/* ==================== HEBREW TEXT - RTL & FONT SUPPORT ==================== */
+.role-hebrew,
+[lang="he"],
+.hebrew-text {
+  direction: rtl;
+  font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+  unicode-bidi: isolate;
+}
+
+/* ==================== MOBILE (max-width: 768px) - Typography Baseline ==================== */
+@media (max-width: 768px) {
+  /* Hero Typography - Impactful but fits */
+  .hero-title {
+    font-size: clamp(1.85rem, 7vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  /* Section Titles - Clear hierarchy */
+  .section-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* Body Text - Minimum 16px */
+  .problem-description,
+  .solution-description,
+  .process-description,
+  .team-member-description,
+  .faq-answer p,
+  .testimonial-content,
+  .stat-description {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* Card Titles */
+  .problem-title,
+  .solution-title,
+  .process-title {
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+
+  /* Small Text - Minimum 12px (0.75rem) */
+  .hero-badge,
+  .section-badge {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+  }
+
+  .hero-badge-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Feature/List Items */
+  .solution-features li {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  /* Hebrew Role Text */
+  .role-hebrew {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .role-english {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+  }
+
+  /* Expertise Tags */
+  .expertise-tag {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  /* Chat Preview Typography */
+  .chat-bubble {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .chat-preview-name {
+    font-size: 0.875rem;
+  }
+
+  .chat-preview-status {
+    font-size: 0.75rem;
+  }
+
+  /* WhatsApp Mockup Messages */
+  .wa-message {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .wa-input span {
+    font-size: 0.875rem;
+  }
+
+  /* Statistics */
+  .stat-number {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+
+  .stat-label {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  /* FAQ */
+  .faq-question {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* Footer Typography */
+  .footer-tagline {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .footer-column h4 {
+    font-size: 0.9375rem;
+  }
+
+  .footer-column a,
+  .footer-link-placeholder {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .footer-bottom p,
+  .footer-bottom-links span {
+    font-size: 0.75rem;
+  }
+
+  /* Form Labels */
+  .form-group label {
+    font-size: 0.9375rem;
+  }
+
+  /* Buttons - Readable CTA text */
+  .btn-primary,
+  .btn-secondary {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .hero-cta .btn-primary {
+    font-size: 1rem;
+  }
+
+  .hero-cta .btn-secondary {
+    font-size: 0.9375rem;
+  }
+}
+
+/* ==================== SMALL MOBILE (max-width: 480px) ==================== */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(1.625rem, 6.5vw, 2.2rem);
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
+    line-height: 1.25;
+  }
+
+  .section-subtitle {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+
+  .problem-description,
+  .solution-description,
+  .process-description,
+  .team-member-description,
+  .faq-answer p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+
+  .problem-title,
+  .solution-title,
+  .process-title {
+    font-size: 1.1rem;
+    line-height: 1.35;
+  }
+
+  .hero-badge,
+  .section-badge {
+    font-size: 0.75rem;
+    padding: 7px 14px;
+    gap: 8px;
+  }
+
+  .role-hebrew {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .role-english {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .expertise-tag {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+
+  .stat-number {
+    font-size: clamp(1.75rem, 7vw, 2.4rem);
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+  }
+
+  .faq-question {
+    font-size: 0.9375rem;
+    padding: 16px 20px;
+  }
+
+  .footer-tagline {
+    font-size: 0.875rem;
+  }
+
+  .footer-column h4 {
+    font-size: 0.875rem;
+  }
+
+  .footer-column a,
+  .footer-link-placeholder {
+    font-size: 0.8125rem;
+  }
+
+  .footer-bottom p,
+  .footer-bottom-links span {
+    font-size: 0.75rem;
+  }
+}
+
+/* ==================== EXTRA SMALL MOBILE (max-width: 360px) ==================== */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: clamp(1.5rem, 6vw, 1.875rem);
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .section-title {
+    font-size: clamp(1.375rem, 5vw, 1.75rem);
+    line-height: 1.25;
+  }
+
+  .hero-badge,
+  .section-badge {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    gap: 6px;
+  }
+
+  .problem-description,
+  .solution-description,
+  .process-description,
+  .team-member-description,
+  .faq-answer p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .role-hebrew {
+    font-size: 0.875rem;
+  }
+
+  .role-english {
+    font-size: 0.75rem;
+  }
+
+  .expertise-tag {
+    font-size: 0.75rem;
+    padding: 5px 8px;
+  }
+
+  .chat-bubble,
+  .wa-message {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .faq-question {
+    font-size: 0.9375rem;
+  }
+
+  .footer-bottom p,
+  .footer-bottom-links span {
+    font-size: 0.75rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    font-size: 0.9375rem;
+  }
+}
+
+/* ==================== TEXT CONTRAST ENHANCEMENT ==================== */
+@media (max-width: 768px) {
+  .hero-subtitle,
+  .section-subtitle,
+  .problem-description,
+  .solution-description,
+  .team-member-description {
+    color: var(--text-secondary);
+  }
+
+  .role-english,
+  .chat-preview-status,
+  .footer-bottom p {
+    color: var(--text-muted);
+  }
+}
+
+/* ==================== LINE HEIGHT CONSISTENCY ==================== */
+@media (max-width: 768px) {
+  p,
+  .hero-subtitle,
+  .section-subtitle,
+  .problem-description,
+  .solution-description,
+  .process-description,
+  .team-member-description,
+  .faq-answer p,
+  .testimonial-content,
+  .footer-tagline {
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .hero-title,
+  .section-title,
+  .problem-title,
+  .solution-title,
+  .process-title {
+    line-height: 1.2;
+  }
+
+  .hero-badge,
+  .section-badge,
+  .expertise-tag,
+  .role-english {
+    line-height: 1.4;
+  }
+}
+
+
+/* ============================================================================
+   MOBILE UX CRITICAL FIXES
+   Ensures minimum font sizes (14px), touch targets (44px), proper spacing,
+   and prevents horizontal overflow across all breakpoints
+   ============================================================================ */
+
+/* ==================== 768px BREAKPOINT FIXES ==================== */
+@media (max-width: 768px) {
+  /* Prevent horizontal overflow */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  section {
+    overflow-x: hidden;
+  }
+
+  /* Problem Section - Ensure readable text */
+  .problem-title {
+    font-size: 1.2rem; /* 19.2px */
+  }
+
+  .problem-description {
+    font-size: 0.938rem; /* 15px - above 14px minimum */
+    line-height: 1.7;
+  }
+
+  /* Solutions Section - Card stacking & readability */
+  .solution-description {
+    font-size: 0.938rem; /* 15px */
+    line-height: 1.65;
+  }
+
+  .solution-features li {
+    font-size: 0.875rem; /* 14px minimum */
+    padding: 10px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Process Section - Timeline mobile optimization */
+  .process-description {
+    font-size: 0.938rem; /* 15px */
+    line-height: 1.7;
+  }
+
+  /* Results Section - Stats visibility */
+  .stat-label {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  .stat-description {
+    font-size: 0.875rem; /* 14px minimum */
+  }
+
+  /* Industries Section - Grid adaptation */
+  .industry-name {
+    font-size: 1rem; /* 16px */
+  }
+
+  .industry-card {
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* FAQ Section - Touch-friendly accordion */
+  .faq-question {
+    min-height: 56px; /* Well above 44px touch target */
+    font-size: 1rem; /* 16px */
+    padding: 18px 20px;
+  }
+
+  .faq-answer p {
+    font-size: 0.938rem; /* 15px */
+    line-height: 1.75;
+  }
+
+  /* Contact Section - Form usability */
+  .contact-method {
+    min-height: 72px; /* Touch-friendly */
+    padding: 18px;
+  }
+
+  .contact-method-text h4 {
+    font-size: 1rem; /* 16px */
+  }
+
+  .contact-method-text span {
+    font-size: 0.875rem; /* 14px minimum */
+  }
+
+  .form-group label {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 1rem; /* 16px - prevents iOS zoom */
+    min-height: 52px;
+    padding: 16px;
+  }
+
+  .submit-btn {
+    min-height: 52px;
+    font-size: 1rem;
+  }
+
+  /* Footer - Link accessibility */
+  .footer-column a {
+    font-size: 0.938rem; /* 15px */
+    padding: 8px 0;
+    display: inline-block;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-column li {
+    margin-bottom: 8px;
+  }
+
+  .footer-tagline {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  .footer-bottom p {
+    font-size: 0.875rem; /* 14px minimum */
+  }
+
+  .footer-bottom-links a {
+    font-size: 0.875rem; /* 14px minimum */
+    padding: 8px 4px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-social a {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* ==================== 600px BREAKPOINT FIXES ==================== */
+@media (max-width: 600px) {
+  /* Problem Section */
+  .problem-title {
+    font-size: 1.125rem; /* 18px */
+  }
+
+  .problem-description {
+    font-size: 0.938rem; /* 15px - stays above 14px */
+  }
+
+  /* Solutions Section */
+  .solution-title {
+    font-size: 1.125rem; /* 18px */
+  }
+
+  .solution-description {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  .solution-features li {
+    font-size: 0.875rem; /* 14px minimum */
+    gap: 10px;
+    min-height: 44px;
+  }
+
+  /* Process Section */
+  .process-title {
+    font-size: 1.0625rem; /* 17px */
+  }
+
+  .process-description {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  /* Results Section */
+  .stat-number {
+    font-size: 2.25rem; /* 36px */
+  }
+
+  .stat-label {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  .testimonial-content {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  .testimonial-info h4 {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  .testimonial-info span {
+    font-size: 0.875rem; /* 14px */
+  }
+
+  /* Industries Section */
+  .industry-name {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  /* FAQ Section - Ensure touch targets */
+  .faq-question {
+    min-height: 52px;
+    font-size: 0.938rem; /* 15px */
+    padding: 16px;
+  }
+
+  .faq-answer p {
+    font-size: 0.938rem; /* 15px */
+    padding: 0 16px 16px;
+  }
+
+  /* Contact Section */
+  .contact-info h2 {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  .contact-info p {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  .contact-method {
+    min-height: 68px;
+    gap: 14px;
+  }
+
+  .contact-method-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+
+  .contact-form {
+    padding: 24px 18px;
+  }
+
+  /* Footer */
+  .footer-column h4 {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  .footer-column a {
+    font-size: 0.875rem; /* 14px minimum */
+    min-height: 44px;
+  }
+
+  .footer-bottom-links {
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .footer-bottom-links a {
+    font-size: 0.875rem; /* 14px */
+  }
+}
+
+/* ==================== 480px BREAKPOINT FIXES ==================== */
+@media (max-width: 480px) {
+  /* Global text minimum - enforce 14px base */
+  body {
+    font-size: 0.875rem; /* 14px minimum base */
+  }
+
+  /* Problem Section - Small phone optimizations */
+  .problem-title {
+    font-size: 1.0625rem; /* 17px */
+  }
+
+  .problem-description {
+    font-size: 0.875rem; /* 14px minimum */
+    line-height: 1.65;
+  }
+
+  /* Solutions Section */
+  .solution-title {
+    font-size: 1.0625rem; /* 17px */
+  }
+
+  .solution-description {
+    font-size: 0.875rem; /* 14px minimum */
+  }
+
+  .solution-features li {
+    font-size: 0.875rem; /* 14px - not going below */
+    min-height: 44px;
+  }
+
+  /* Process Section */
+  .process-title {
+    font-size: 1rem; /* 16px */
+  }
+
+  .process-description {
+    font-size: 0.875rem; /* 14px minimum */
+  }
+
+  /* Results Section */
+  .stat-number {
+    font-size: 1.875rem; /* 30px */
+  }
+
+  .stat-label {
+    font-size: 0.875rem; /* 14px minimum */
+  }
+
+  .stat-description {
+    font-size: 0.875rem; /* 14px */
+  }
+
+  .testimonial-content {
+    font-size: 0.875rem; /* 14px minimum */
+    line-height: 1.7;
+  }
+
+  .testimonial-info span {
+    font-size: 0.875rem; /* 14px - not going below */
+  }
+
+  /* Industries Section */
+  .industry-name {
+    font-size: 0.875rem; /* 14px minimum */
+  }
+
+  .industry-card {
+    min-height: 100px;
+  }
+
+  /* FAQ Section */
+  .faq-question {
+    min-height: 48px;
+    font-size: 0.875rem; /* 14px minimum */
+    padding: 14px 16px;
+  }
+
+  .faq-answer p {
+    font-size: 0.875rem; /* 14px minimum */
+    line-height: 1.65;
+    padding: 0 16px 14px;
+  }
+
+  /* Contact Section */
+  .contact-info h2 {
+    font-size: 1.375rem; /* 22px */
+  }
+
+  .contact-info p {
+    font-size: 0.875rem; /* 14px minimum */
+    line-height: 1.65;
+  }
+
+  .contact-method {
+    min-height: 64px;
+    padding: 14px;
+  }
+
+  .contact-method-text h4 {
+    font-size: 0.938rem; /* 15px */
+  }
+
+  .contact-method-text span {
+    font-size: 0.875rem; /* 14px minimum */
+  }
+
+  .form-group label {
+    font-size: 0.875rem; /* 14px minimum */
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 1rem; /* 16px - prevents iOS zoom on focus */
+    min-height: 48px;
+    padding: 14px;
+  }
+
+  .submit-btn {
+    min-height: 48px;
+    font-size: 0.938rem; /* 15px */
+  }
+
+  /* Footer - Compact but accessible */
+  .footer-tagline {
+    font-size: 0.875rem; /* 14px minimum */
+    line-height: 1.65;
+  }
+
+  .footer-column h4 {
+    font-size: 0.875rem; /* 14px */
+    margin-bottom: 14px;
+  }
+
+  .footer-column a {
+    font-size: 0.875rem; /* 14px minimum */
+    min-height: 44px;
+    padding: 10px 0;
+  }
+
+  .footer-bottom p {
+    font-size: 0.875rem; /* 14px minimum */
+  }
+
+  .footer-bottom-links a {
+    font-size: 0.875rem; /* 14px minimum */
+    padding: 10px 6px;
+  }
+
+  .footer-social a {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Chat bubbles - ensure readability */
+  .chat-bubble {
+    font-size: 0.875rem; /* 14px minimum */
+    padding: 10px 14px;
+  }
+
+  /* Section badges - smaller but still readable */
+  .section-badge {
+    font-size: 0.75rem; /* 12px OK for badges/labels */
+    padding: 6px 14px;
+  }
+}
+
+/* ==================== HORIZONTAL OVERFLOW PREVENTION ==================== */
+@media (max-width: 768px) {
+  .section-container,
+  .hero-grid,
+  .problem-grid,
+  .solutions-grid,
+  .process-timeline,
+  .results-stats,
+  .industries-grid,
+  .faq-grid,
+  .contact-wrapper,
+  .footer-content {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Ensure images do not overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Prevent long words from breaking layout */
+  .problem-description,
+  .solution-description,
+  .process-description,
+  .faq-answer p,
+  .contact-info p,
+  .testimonial-content {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+}
+
+/* ==================== TOUCH TARGET ENFORCEMENT ==================== */
+@media (max-width: 768px) {
+  /* Ensure all interactive elements meet 44px minimum */
+  .btn-primary,
+  .btn-secondary,
+  .mobile-nav-link,
+  .contact-method,
+  .industry-card,
+  .faq-question,
+  .footer-social a,
+  .footer-column a,
+  .footer-bottom-links a {
+    -webkit-tap-highlight-color: rgba(245, 158, 11, 0.1);
+  }
+
+  /* Mobile navigation links */
+  .mobile-nav-link {
+    min-height: 52px;
+    padding: 16px 20px;
+  }
+
+  /* Industry cards as touch targets */
+  .industry-card {
+    min-height: 100px;
+  }
+}
+
+/* ==================== SAFE AREA SPACING (notched phones) ==================== */
+@supports (padding: max(0px)) {
+  @media (max-width: 768px) {
+    .navbar {
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+    }
+
+    section {
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+    }
+
+    .footer {
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+      padding-bottom: max(40px, env(safe-area-inset-bottom));
+    }
   }
 }

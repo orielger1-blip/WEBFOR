@@ -11,6 +11,26 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open (preserve scroll position)
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const scrollY = window.scrollY;
+      document.body.classList.add('mobile-menu-open');
+      document.body.style.top = `-${scrollY}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.classList.remove('mobile-menu-open');
+      document.body.style.top = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+    return () => {
+      document.body.classList.remove('mobile-menu-open');
+      document.body.style.top = '';
+    };
+  }, [mobileMenuOpen]);
+
   const navItems = [
     { label: 'הפתרונות', href: '#solutions' },
     { label: 'התהליך', href: '#process' },
@@ -71,7 +91,8 @@ const Navbar = () => {
         </div>
 
         <div className="nav-cta">
-          <motion.button
+          <motion.a
+            href="#contact"
             className="btn-primary"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -80,7 +101,7 @@ const Navbar = () => {
             <svg className="btn-icon" viewBox="0 0 24 24" fill="none">
               <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </motion.button>
+          </motion.a>
         </div>
 
         <button
@@ -110,7 +131,13 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <button className="btn-primary mobile-cta">בואו נדבר</button>
+            <a
+                href="#contact"
+                className="btn-primary mobile-cta"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                בואו נדבר
+              </a>
           </motion.div>
         )}
       </AnimatePresence>

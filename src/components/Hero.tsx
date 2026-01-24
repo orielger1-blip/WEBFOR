@@ -7,23 +7,40 @@ const Hero = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.3 },
+      transition: { staggerChildren: 0.12, delayChildren: 0.2 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] as const },
+      transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] as const },
+    },
+  };
+
+  const badgeVariants = {
+    hidden: { opacity: 0, scale: 0.8, y: -20 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1] as const,
+        delay: 0.1
+      },
     },
   };
 
   return (
-    <section className="hero" dir="rtl">
+    <section id="hero" className="hero" dir="rtl">
       <ParticleNetwork />
       <div className="hero-overlay"></div>
+
+      {/* Mobile gradient background overlay */}
+      <div className="hero-mobile-gradient"></div>
 
       <div className="hero-grid">
         <motion.div
@@ -32,51 +49,66 @@ const Hero = () => {
           initial="hidden"
           animate="visible"
         >
-          <motion.div className="hero-badge" variants={itemVariants}>
+          {/* Animated badge/pill */}
+          <motion.div
+            className="hero-badge"
+            variants={badgeVariants}
+          >
             <span className="hero-badge-dot"></span>
-            <span>סוכנים דיגיטליים מותאמים אישית</span>
+            <span className="hero-badge-text">סוכנים דיגיטליים מותאמים אישית</span>
           </motion.div>
 
+          {/* Impactful headline */}
           <motion.h1 className="hero-title" variants={itemVariants}>
-            הסוכן שעובד
+            <span className="hero-title-line">הסוכן שעובד</span>
             <br />
-            <span className="gradient-text">בשבילכם 24/7</span>
+            <span className="gradient-text hero-title-accent">בשבילכם 24/7</span>
           </motion.h1>
 
+          {/* Clear value proposition */}
           <motion.p className="hero-subtitle" variants={itemVariants}>
-            לא עוד בוט גנרי. אנחנו מפתחים סוכנים חכמים שמבינים את העסק שלכם,
-            מדברים בשפה שלכם, ועובדים סביב השעון — כאילו הם חלק מהצוות.
+            <span className="hero-subtitle-text">
+              לא עוד בוט גנרי. אנחנו מפתחים סוכנים חכמים שמבינים את העסק שלכם,
+              מדברים בשפה שלכם, ועובדים סביב השעון — כאילו הם חלק מהצוות.
+            </span>
           </motion.p>
 
-          {/* Mobile-only chat preview card */}
-          <motion.div className="hero-chat-preview" variants={itemVariants}>
-            <ChatPreviewCard />
-          </motion.div>
-
+          {/* TWO prominent CTA buttons (stacked on mobile) */}
           <motion.div className="hero-cta" variants={itemVariants}>
             <motion.a
               href="#contact"
-              className="btn-primary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn-primary hero-btn-primary"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
             >
-              קבעו שיחת ייעוץ
+              <span className="btn-text">קבעו שיחת ייעוץ חינם</span>
               <svg className="btn-icon" viewBox="0 0 24 24" fill="none">
                 <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </motion.a>
             <motion.a
               href="#solutions"
-              className="btn-secondary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn-secondary hero-btn-secondary"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: 20, height: 20 }}>
+              <svg className="btn-icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10"/>
                 <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/>
               </svg>
-              איך זה עובד
+              <span className="btn-text">גלו איך זה עובד</span>
             </motion.a>
+          </motion.div>
+
+          {/* Mobile-only chat preview card (below CTAs) */}
+          <motion.div
+            className="hero-chat-preview"
+            variants={itemVariants}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+          >
+            <ChatPreviewCard />
           </motion.div>
         </motion.div>
 
