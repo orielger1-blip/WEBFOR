@@ -44,6 +44,38 @@
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-xl: 32px;
+  --radius-pill: 50px;
+  --radius-full: 50%;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 20px 60px rgba(0, 0, 0, 0.4);
+  --shadow-card-elevated: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 80px rgba(245, 158, 11, 0.08);
+
+  /* Icon Sizes */
+  --icon-xs: 16px;
+  --icon-sm: 20px;
+  --icon-md: 24px;
+  --icon-lg: 32px;
+  --icon-xl: 40px;
+
+  /* Gap Scale */
+  --gap-xs: 8px;
+  --gap-sm: 12px;
+  --gap-md: 16px;
+  --gap-lg: 24px;
+  --gap-xl: 32px;
+  --gap-2xl: 48px;
+
+  /* Animation Timing Functions - Premium easing curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Touch Target Variables - WCAG 2.5.5 compliance */
+  --touch-target-min: 44px;
+  --touch-target-comfortable: 48px;
 }
 
 /* Mobile-specific CSS variables */
@@ -67,6 +99,58 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-top: 100px;
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 80px;
+  }
+}
+
+/* ==================== GOLD THEME TAP HIGHLIGHT ==================== */
+* {
+  -webkit-tap-highlight-color: rgba(245, 158, 11, 0.2);
+}
+
+/* Remove tap highlight on elements with custom active states */
+button, a, .btn-primary, .btn-secondary, .card, .industry-card,
+.solution-card, .faq-question, .contact-method, .whatsapp-float,
+.accessibility-btn, .mobile-nav-link, .nav-link, .footer-social a,
+.toggle-btn, .team-member-card, .stat-card {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ==================== FOCUS-VISIBLE ENHANCEMENT ==================== */
+/* Remove default focus for mouse/touch, show only on keyboard */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.btn-primary:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 3px;
+  box-shadow: var(--glow-gold), 0 0 0 6px rgba(245, 158, 11, 0.3);
+}
+
+.btn-secondary:focus-visible {
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.15);
+}
+
+.card:focus-visible,
+.industry-card:focus-visible,
+.faq-question:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
 }
 
 body {
@@ -168,44 +252,88 @@ textarea,
 
 /* ==================== TOUCH FEEDBACK STATES ==================== */
 @media (hover: none) and (pointer: coarse) {
-  /* Active states for touch feedback */
+  /* Active states for touch feedback - immediate response */
   .btn-primary:active {
     transform: scale(0.97);
     opacity: 0.9;
+    transition: transform 0.1s ease, opacity 0.1s ease;
   }
 
   .btn-secondary:active {
     transform: scale(0.97);
     background: rgba(245, 158, 11, 0.1);
+    transition: transform 0.1s ease, background 0.1s ease;
   }
 
   .card:active,
   .industry-card:active,
   .solution-card:active {
     transform: scale(0.98);
+    transition: transform 0.1s ease;
   }
 
   .nav-link:active,
   .mobile-nav-link:active {
     color: var(--accent-gold);
-    background: rgba(245, 158, 11, 0.05);
+    background: rgba(245, 158, 11, 0.08);
+    transition: color 0.1s ease, background 0.1s ease;
   }
 
   .faq-question:active {
-    background: rgba(245, 158, 11, 0.05);
+    background: rgba(245, 158, 11, 0.08);
+    transition: background 0.1s ease;
   }
 
   .contact-method:active {
     transform: scale(0.98);
     border-color: var(--accent-gold);
+    transition: transform 0.1s ease, border-color 0.1s ease;
   }
 
   .whatsapp-float:active {
     transform: scale(0.95);
+    transition: transform 0.1s ease;
   }
 
   .accessibility-btn:active {
     transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+
+  .stat-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  .team-member-card:active {
+    transform: scale(0.99);
+    transition: transform 0.1s ease;
+  }
+
+  .footer-social a:active {
+    transform: scale(0.9);
+    transition: transform 0.1s ease;
+  }
+
+  .submit-btn:active:not(:disabled) {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  .expertise-tag:active {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: var(--accent-gold);
+    transition: background 0.1s ease, border-color 0.1s ease;
+  }
+
+  .team-value-item:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  .testimonial-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
   }
 
   /* Disable hover effects on touch devices */
@@ -214,5 +342,31 @@ textarea,
   .solution-card:hover,
   .stat-card:hover {
     transform: none;
+  }
+}
+
+/* ==================== MINIMUM TOUCH TARGETS FOR MOBILE ==================== */
+@media (pointer: coarse) {
+  .footer-column a,
+  .footer-bottom-links a,
+  .footer-bottom-links span {
+    display: inline-block;
+    min-height: var(--touch-target-min);
+    padding: 10px 0;
+  }
+
+  .form-group label {
+    display: block;
+    padding: 8px 0;
+    cursor: pointer;
+    min-height: var(--touch-target-min);
+  }
+
+  /* Form inputs - prevent iOS zoom */
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    min-height: var(--touch-target-comfortable);
+    font-size: 16px;
   }
 }
