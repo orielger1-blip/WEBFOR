@@ -1,4 +1,4 @@
-import { useRef, useMemo, useEffect } from 'react';
+import { useRef, useMemo, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
@@ -571,16 +571,33 @@ const Scene = () => (
 // ============================================================================
 // EXPORT
 // ============================================================================
-const NeuralNetwork = () => (
-  <div className="hero-canvas" style={{ background: CONFIG.COLOR_BACKGROUND }}>
-    <Canvas
-      camera={{ position: CONFIG.CAMERA_POSITION, fov: CONFIG.CAMERA_FOV }}
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: false }}
-    >
-      <Scene />
-    </Canvas>
-  </div>
-);
+const NeuralNetwork = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Disable on mobile for performance - Three.js is very heavy
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Don't render on mobile - saves significant resources
+  if (isMobile) {
+    return null;
+  }
+
+  return (
+    <div className="hero-canvas" style={{ background: CONFIG.COLOR_BACKGROUND }}>
+      <Canvas
+        camera={{ position: CONFIG.CAMERA_POSITION, fov: CONFIG.CAMERA_FOV }}
+        dpr={[1, 2]}
+        gl={{ antialias: true, alpha: false }}
+      >
+        <Scene />
+      </Canvas>
+    </div>
+  );
+};
 
 export default NeuralNetwork;

@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -117,6 +117,21 @@ const FloatingOrb = () => {
 };
 
 const ParticleField = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Disable on mobile for performance - Three.js is very heavy
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Don't render on mobile - saves significant resources
+  if (isMobile) {
+    return null;
+  }
+
   return (
     <div className="hero-canvas">
       <Canvas camera={{ position: [0, 0, 10], fov: 60 }}>

@@ -2,58 +2,74 @@ import { useState, useEffect } from 'react';
 
 /**
  * Mobile CTA Bar
- * Sticky call-to-action bar at bottom of screen on mobile
- * Shows primary CTA + WhatsApp quick action
- * Hides when near contact section or footer
+ * Fixed bottom bar with primary CTA + WhatsApp quick action
+ * Shows after scrolling past hero, hides near contact/footer
  */
 const MobileCTABar = () => {
-  const [isHidden, setIsHidden] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Delay showing to prevent flash on load
-    const showTimeout = setTimeout(() => setIsVisible(true), 1000);
-
     const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const heroThreshold = 400;
+
+      // Must scroll past hero first
+      if (scrollY < heroThreshold) {
+        setIsVisible(false);
+        return;
+      }
+
+      // Check proximity to contact section and footer
       const contactSection = document.getElementById('contact');
       const footer = document.querySelector('.footer');
-      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
 
-      // Only show after scrolling past hero
-      const showAfterScroll = scrollY > 400;
+      let shouldHide = false;
 
-      if (contactSection && footer) {
+      if (contactSection) {
         const contactRect = contactSection.getBoundingClientRect();
-        const footerRect = footer.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        // Hide when contact section or footer is visible
-        const isNearContact = contactRect.top < windowHeight * 0.7;
-        const isNearFooter = footerRect.top < windowHeight;
-
-        setIsHidden(!showAfterScroll || isNearContact || isNearFooter);
-      } else {
-        setIsHidden(!showAfterScroll);
+        // Hide when contact section is 70% visible
+        if (contactRect.top < windowHeight * 0.7) {
+          shouldHide = true;
+        }
       }
+
+      if (footer) {
+        const footerRect = footer.getBoundingClientRect();
+        // Hide when footer enters viewport
+        if (footerRect.top < windowHeight) {
+          shouldHide = true;
+        }
+      }
+
+      setIsVisible(!shouldHide);
     };
 
+    // Initial check after mount
+    const initialDelay = setTimeout(() => {
+      handleScroll();
+    }, 100);
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
 
     return () => {
-      clearTimeout(showTimeout);
+      clearTimeout(initialDelay);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  if (!isVisible) return null;
-
   return (
-    <div className={`mobile-cta-bar ${isHidden ? 'hidden' : ''}`} dir="rtl">
+    <div className={`mobile-cta-bar ${isVisible ? 'visible' : ''}`} dir="rtl">
       <a href="#contact" className="mobile-cta-primary">
         <span>קבעו שיחה</span>
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path
+            d="M19 12H5M12 19l-7-7 7-7"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </a>
       <a
