@@ -501,3 +501,46 @@
     animation: none !important;
   }
 }
+
+/* ==================== MOBILE CLEAN STYLES ==================== */
+/* Remove gold glows and simplify for cleaner mobile appearance */
+@media (max-width: 768px) {
+  .ai-widget-glow {
+    display: none !important;
+  }
+
+  .ai-avatar-pulse {
+    display: none !important;
+  }
+
+  .ai-status-indicator {
+    animation: none !important;
+    box-shadow: none !important;
+  }
+
+  .ai-typing-dots span {
+    animation: none !important;
+    box-shadow: none !important;
+  }
+
+  .ai-robot-avatar {
+    box-shadow: none !important;
+  }
+
+  .ai-widget-header::after {
+    display: none !important;
+  }
+
+  .ai-send-btn {
+    box-shadow: none !important;
+  }
+
+  .ai-msg-assistant .ai-msg-bubble::before {
+    display: none !important;
+  }
+
+  .ai-assistant-widget {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+    animation: none !important;
+  }
+}
