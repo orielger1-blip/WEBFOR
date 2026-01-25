@@ -1,12 +1,29 @@
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 /**
  * Premium Animated Background
  * Stripe-style mesh gradient with floating orbs
  * Clean, professional, and performant
+ * Disabled on mobile for performance
  */
 
 const AnimatedBackground = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Disable on mobile for performance
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Don't render on mobile - CSS handles the gradient background
+  if (isMobile) {
+    return null;
+  }
+
   return (
     <div className="animated-background">
       {/* Base gradient layer */}

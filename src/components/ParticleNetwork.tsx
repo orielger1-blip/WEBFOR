@@ -392,13 +392,9 @@ const ParticleNetwork = () => {
     };
   }, [animate, handleResize]);
 
-  // Don't render heavy animation on mobile - show static gradient instead
+  // Don't render anything on mobile - CSS handles the gradient background
   if (isMobile) {
-    return (
-      <div className="particle-network particle-network-mobile">
-        <div className="particle-overlay" />
-      </div>
-    );
+    return null;
   }
 
   return (

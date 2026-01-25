@@ -354,7 +354,7 @@ section {
 }
 
 .mobile-menu-btn {
-  display: none;
+  display: none; /* Hidden on desktop, shown via media query */
   background: none;
   border: none;
   padding: 12px;
@@ -362,7 +362,6 @@ section {
   /* 44x44px minimum touch target */
   min-width: 44px;
   min-height: 44px;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -412,10 +411,12 @@ section {
   background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   border-bottom: 1px solid var(--border-gold);
   padding: 20px 24px 28px;
-  display: none;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
               0 0 30px rgba(245, 158, 11, 0.05);
-  animation: slideDown 0.3s var(--ease-out-expo);
+  overflow: hidden;
 }
 
 @keyframes slideDown {
@@ -430,7 +431,8 @@ section {
 }
 
 .mobile-nav-link {
-  display: block;
+  display: flex;
+  align-items: center;
   color: var(--text-secondary);
   text-decoration: none;
   padding: 16px 20px;
@@ -438,8 +440,6 @@ section {
   transition: color 0.3s ease, background 0.3s ease, transform 0.2s ease;
   border-radius: var(--radius-md);
   min-height: 52px;
-  display: flex;
-  align-items: center;
 }
 
 .mobile-nav-link:hover {
@@ -459,10 +459,20 @@ section {
 }
 
 @media (max-width: 900px) {
-  .nav-links-desktop, .nav-cta { display: none; }
-  .mobile-menu-btn { display: block; }
-  .mobile-menu { display: block; }
+  .nav-links-desktop, .nav-cta { display: none !important; }
+  .mobile-menu-btn { display: flex !important; }
   .navbar { padding: 16px 20px; }
+}
+
+/* ==================== MOBILE NAVBAR (768px) ==================== */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+
+  .nav-links-desktop {
+    display: none !important;
+  }
 }
 
 /* ==================== HERO ==================== */
@@ -2307,6 +2317,24 @@ section {
   animation: successPulse 2s ease-in-out infinite;
 }
 
+/* MOBILE PERFORMANCE: Simplify form success state */
+@media (max-width: 768px) {
+  .form-success {
+    background: var(--bg-card);
+    box-shadow: none;
+    padding: 40px 24px;
+  }
+
+  .form-success::before {
+    background: #f59e0b;
+  }
+
+  .success-icon {
+    background: rgba(245, 158, 11, 0.1);
+    animation: none;
+  }
+}
+
 @keyframes successPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.3); }
   50% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); }
@@ -2598,6 +2626,20 @@ section {
   backdrop-filter: blur(8px);
 }
 
+/* MOBILE PERFORMANCE: Remove backdrop-filter, solid backgrounds on mobile */
+@media (max-width: 768px) {
+  .wa-incoming {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(30, 30, 35, 0.95);
+  }
+
+  .wa-outgoing {
+    background: rgba(245, 158, 11, 0.12);
+    box-shadow: none;
+  }
+}
+
 /* AI Assistant Messages - Gold accent */
 .wa-outgoing {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.12) 100%);
@@ -2812,29 +2854,33 @@ section {
     overflow: hidden;
   }
 
-  /* Reduce desktop particle network opacity */
-  .hero .particle-network {
-    opacity: 0.25;
+  /* DISABLE particle network and all canvas animations on mobile for performance */
+  .particle-network,
+  .particle-network canvas,
+  .hero-canvas,
+  canvas {
+    display: none !important;
+    visibility: hidden !important;
   }
 
+  /* Disable animated background on mobile */
+  .animated-background {
+    display: none !important;
+  }
+
+  /* MOBILE PERFORMANCE: Simple solid background instead of complex gradients */
   .hero-mobile-gradient {
     display: block;
-    background:
-      radial-gradient(ellipse 120% 50% at 50% -10%, rgba(245, 158, 11, 0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(251, 191, 36, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse 100% 40% at 50% 100%, rgba(217, 119, 6, 0.08) 0%, transparent 60%),
-      linear-gradient(180deg, #050508 0%, #08080c 50%, #0a0a0f 100%);
-    animation: mobileHeroGradientPulse 8s ease-in-out infinite;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(180deg, #050508 0%, #0a0a0f 100%);
+    /* Animation disabled for performance */
   }
 
-  @keyframes mobileHeroGradientPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.85; }
-  }
-
+  /* MOBILE PERFORMANCE: Simple overlay instead of radial gradient */
   .hero-overlay {
-    background:
-      radial-gradient(ellipse 100% 80% at 50% 50%, transparent 0%, rgba(5, 5, 8, 0.3) 60%, rgba(5, 5, 8, 0.6) 100%);
+    display: none;
   }
 
   .hero-grid {
@@ -2854,31 +2900,15 @@ section {
     max-width: 100%;
   }
 
-  /* ===== ANIMATED BADGE/PILL ===== */
+  /* MOBILE PERFORMANCE: Simple badge - solid background, minimal shadow, no animation */
   .hero-badge {
     padding: 12px 24px;
     font-size: 0.85rem;
     margin-bottom: 28px;
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%);
+    background: rgba(245, 158, 11, 0.1);
     border: 1px solid rgba(245, 158, 11, 0.3);
-    box-shadow:
-      0 4px 20px rgba(245, 158, 11, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    animation: badgeGlow 3s ease-in-out infinite;
-  }
-
-  @keyframes badgeGlow {
-    0%, 100% {
-      box-shadow:
-        0 4px 20px rgba(245, 158, 11, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    }
-    50% {
-      box-shadow:
-        0 4px 30px rgba(245, 158, 11, 0.25),
-        0 0 40px rgba(245, 158, 11, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    }
+    box-shadow: none;
+    animation: none;
   }
 
   .hero-badge-dot {
@@ -2947,42 +2977,28 @@ section {
     gap: 10px;
   }
 
+  /* MOBILE PERFORMANCE: Solid gold color, minimal shadow, no shimmer */
   .hero-btn-primary,
   .hero-cta .btn-primary {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
-    box-shadow:
-      0 4px 20px rgba(245, 158, 11, 0.35),
-      0 8px 40px rgba(245, 158, 11, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    background: #f59e0b;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
     border: none;
     color: #000;
     position: relative;
     overflow: hidden;
   }
 
+  /* Shimmer animation disabled for mobile performance */
   .hero-cta .btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
-    animation: heroCTAShimmer 4s ease-in-out infinite;
+    display: none;
   }
 
-  @keyframes heroCTAShimmer {
-    0%, 100% { left: -100%; }
-    50% { left: 100%; }
-  }
-
+  /* MOBILE PERFORMANCE: Simplified secondary button */
   .hero-btn-secondary,
   .hero-cta .btn-secondary {
     background: rgba(255, 255, 255, 0.04);
     border: 1.5px solid rgba(245, 158, 11, 0.35);
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    box-shadow: none;
     color: var(--text-primary);
   }
 
@@ -3009,17 +3025,18 @@ section {
   }
 
   /* ===== CHAT PREVIEW CARD (BELOW CTAs) ===== */
+  /* MOBILE PERFORMANCE: Simpler animation, minimal shadow */
   .hero-chat-preview {
     display: block;
     width: 100%;
     margin-top: 36px;
-    animation: chatCardSlideUp 0.8s ease-out 0.4s both;
+    animation: chatCardSlideUp 0.5s ease-out both;
   }
 
   @keyframes chatCardSlideUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -3029,10 +3046,7 @@ section {
 
   .chat-preview-card {
     border-radius: 18px;
-    box-shadow:
-      0 16px 50px rgba(0, 0, 0, 0.4),
-      0 0 80px rgba(245, 158, 11, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(245, 158, 11, 0.2);
   }
 }
@@ -3400,92 +3414,30 @@ section {
   border: 1px solid rgba(245, 158, 11, 0.25);
 }
 
-/* ==================== MOBILE PARTICLE NETWORK - PREMIUM FALLBACK ==================== */
+/* MOBILE PERFORMANCE: Solid backgrounds for chat bubbles */
+@media (max-width: 768px) {
+  .chat-bubble-outgoing {
+    background: rgba(245, 158, 11, 0.12);
+  }
+}
+
+/* ==================== MOBILE PARTICLE NETWORK - SIMPLIFIED FOR PERFORMANCE ==================== */
+/* MOBILE PERFORMANCE: Simple solid background, no pseudo-elements, no animations */
 .particle-network-mobile {
-  /* Multi-layer gradient background - creates depth without particles */
-  background:
-    /* Top ambient gold glow */
-    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(245, 158, 11, 0.06) 0%, transparent 50%),
-    /* Center focal point glow */
-    radial-gradient(ellipse 80% 50% at 50% 30%, rgba(251, 191, 36, 0.04) 0%, transparent 50%),
-    /* Left accent */
-    radial-gradient(ellipse 40% 50% at 15% 60%, rgba(217, 119, 6, 0.03) 0%, transparent 50%),
-    /* Right accent */
-    radial-gradient(ellipse 40% 50% at 85% 40%, rgba(245, 158, 11, 0.025) 0%, transparent 50%),
-    /* Bottom subtle warmth */
-    radial-gradient(ellipse 120% 40% at 50% 100%, rgba(217, 119, 6, 0.04) 0%, transparent 60%),
-    /* Base gradient */
-    linear-gradient(180deg, #050508 0%, #08080c 40%, #0a0a0f 100%);
+  background: linear-gradient(180deg, #050508 0%, #0a0a0f 100%);
   position: relative;
   overflow: hidden;
 }
 
-/* Animated gradient shimmer overlay */
-.particle-network-mobile::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      125deg,
-      transparent 0%,
-      transparent 40%,
-      rgba(245, 158, 11, 0.015) 45%,
-      rgba(251, 191, 36, 0.025) 50%,
-      rgba(245, 158, 11, 0.015) 55%,
-      transparent 60%,
-      transparent 100%
-    );
-  background-size: 200% 200%;
-  animation: mobileGradientShimmer 12s ease-in-out infinite;
-  pointer-events: none;
-}
-
-/* CSS Gold particles - ambient floating dots */
+/* Pseudo-elements disabled for mobile performance */
+.particle-network-mobile::before,
 .particle-network-mobile::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    /* Layer 1 - Distant tiny particles */
-    radial-gradient(1px 1px at 10% 15%, rgba(245, 158, 11, 0.4) 50%, transparent 50%),
-    radial-gradient(1px 1px at 25% 35%, rgba(251, 191, 36, 0.3) 50%, transparent 50%),
-    radial-gradient(1px 1px at 40% 10%, rgba(245, 158, 11, 0.35) 50%, transparent 50%),
-    radial-gradient(1px 1px at 55% 55%, rgba(217, 119, 6, 0.25) 50%, transparent 50%),
-    radial-gradient(1px 1px at 70% 25%, rgba(245, 158, 11, 0.3) 50%, transparent 50%),
-    radial-gradient(1px 1px at 85% 45%, rgba(251, 191, 36, 0.35) 50%, transparent 50%),
-    /* Layer 2 - Medium particles with glow */
-    radial-gradient(2px 2px at 20% 20%, rgba(245, 158, 11, 0.5) 40%, transparent 70%),
-    radial-gradient(2px 2px at 75% 15%, rgba(245, 158, 11, 0.5) 40%, transparent 70%),
-    radial-gradient(2px 2px at 35% 70%, rgba(217, 119, 6, 0.4) 40%, transparent 70%),
-    radial-gradient(2px 2px at 90% 50%, rgba(251, 191, 36, 0.5) 40%, transparent 70%),
-    /* Layer 3 - Bright accent particles */
-    radial-gradient(3px 3px at 30% 25%, rgba(255, 215, 100, 0.6) 30%, transparent 70%),
-    radial-gradient(3px 3px at 70% 60%, rgba(255, 215, 100, 0.55) 30%, transparent 70%);
-  animation: mobileParticleFloat 20s ease-in-out infinite;
-  pointer-events: none;
-  opacity: 0.85;
+  display: none;
 }
 
-/* Mobile gradient shimmer animation */
-@keyframes mobileGradientShimmer {
-  0% { background-position: 100% 0%; opacity: 0.6; }
-  50% { background-position: 0% 100%; opacity: 1; }
-  100% { background-position: 100% 0%; opacity: 0.6; }
-}
-
-/* Mobile particle float animation */
-@keyframes mobileParticleFloat {
-  0%, 100% { transform: translateY(0); opacity: 0.85; }
-  50% { transform: translateY(-8px); opacity: 0.95; }
-}
-
-/* Enhanced particle overlay for mobile */
+/* Particle overlay disabled for mobile */
 .particle-network-mobile .particle-overlay {
-  background:
-    radial-gradient(ellipse 70% 45% at 40% 15%, rgba(245, 158, 11, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 55% at 75% 50%, rgba(251, 191, 36, 0.04) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 40% at 25% 85%, rgba(217, 119, 6, 0.045) 0%, transparent 55%);
+  display: none;
 }
 
 /* Reduced motion preference for mobile background */
@@ -3608,6 +3560,25 @@ section::before {
 .industries-section::before,
 .faq-section::before {
   opacity: 0.5;
+}
+
+/* MOBILE PERFORMANCE: Disable section divider pseudo-elements and section overlays */
+@media (max-width: 768px) {
+  .section-divider::before,
+  .section-divider::after {
+    display: none;
+  }
+
+  .section-divider {
+    background: var(--border-subtle);
+  }
+
+  section::before,
+  .problem-section::before,
+  .industries-section::before,
+  .faq-section::before {
+    display: none;
+  }
 }
 
 /* Update Navbar link for FAQ */
@@ -4727,15 +4698,15 @@ html.high-contrast .agentive-robot circle[fill="none"] {
 
 /* ==================== STICKY MOBILE CTA BAR ==================== */
 /* Shows after scrolling past hero, hides near footer */
+/* MOBILE PERFORMANCE: Solid background, no blur, minimal shadow */
 .mobile-cta-bar {
   display: none;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(180deg, rgba(5, 5, 8, 0.97) 0%, rgba(5, 5, 8, 0.99) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: rgba(8, 8, 12, 0.98);
+  /* backdrop-filter removed for mobile performance */
   border-top: 1px solid var(--border-gold);
   padding: 12px 16px;
   padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
@@ -4744,10 +4715,9 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   justify-content: center;
   align-items: center;
   transform: translateY(100%);
-  transition: transform 0.4s var(--ease-out-expo),
-              opacity 0.3s ease;
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6),
-              0 -2px 20px rgba(245, 158, 11, 0.12);
+  transition: transform 0.3s ease,
+              opacity 0.2s ease;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.5);
 }
 
 /* Visible state - show after scrolling past hero */
@@ -4769,6 +4739,7 @@ html.high-contrast .agentive-robot circle[fill="none"] {
 }
 
 /* Primary CTA Button - "Schedule Call" - Gold Gradient, Prominent */
+/* MOBILE PERFORMANCE: Simplified shadow, no shimmer animation */
 .mobile-cta-primary {
   flex: 1;
   max-width: 320px;
@@ -4785,35 +4756,17 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   text-decoration: none;
   min-height: 52px;
   transition: transform 0.15s ease,
-              box-shadow 0.2s ease,
               opacity 0.15s ease;
-  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.35),
-              0 0 30px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
   position: relative;
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
 
+/* Shimmer disabled for mobile performance */
 .mobile-cta-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.3) 50%,
-    transparent 100%
-  );
-  animation: mobileCTAShimmer 3.5s ease-in-out infinite;
-}
-
-@keyframes mobileCTAShimmer {
-  0%, 100% { left: -100%; }
-  50% { left: 100%; }
+  display: none;
 }
 
 .mobile-cta-primary svg {
@@ -4830,6 +4783,7 @@ html.high-contrast .agentive-robot circle[fill="none"] {
 }
 
 /* WhatsApp Quick Button */
+/* MOBILE PERFORMANCE: Solid color, minimal shadow */
 .mobile-cta-whatsapp {
   width: 52px;
   height: 52px;
@@ -4837,15 +4791,13 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  background: #25D366;
   border-radius: 50%;
   color: white;
   text-decoration: none;
   flex-shrink: 0;
-  transition: transform 0.15s ease,
-              box-shadow 0.2s ease;
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4),
-              0 0 20px rgba(37, 211, 102, 0.15);
+  transition: transform 0.15s ease;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
@@ -5726,7 +5678,178 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   }
 }
 
-/* ==================== MOBILE ANIMATION PERFORMANCE ==================== */
+/* ==================== CRITICAL MOBILE PERFORMANCE OPTIMIZATIONS ==================== */
+/* Global performance rules for mobile - reduces animation/transition overhead */
+@media (max-width: 768px) {
+  /* CRITICAL: Reduce all animation and transition durations globally */
+  *, *::before, *::after {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.2s !important;
+  }
+
+  /* Hide heavy animated backgrounds completely */
+  .particle-network,
+  .animated-background,
+  .particle-overlay {
+    display: none !important;
+  }
+
+  /* Disable expensive backdrop-filter on mobile */
+  .navbar-scrolled,
+  .mobile-menu,
+  .mobile-cta-bar,
+  .modal-overlay,
+  .chat-preview-card,
+  [class*="backdrop"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Replace backdrop-filter with solid backgrounds for performance */
+  .navbar-scrolled {
+    background: rgba(5, 5, 8, 0.98) !important;
+  }
+
+  .mobile-cta-bar {
+    background: rgba(5, 5, 8, 0.98) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Disable all complex keyframe animations on mobile */
+  .animate-float,
+  .animate-glow,
+  .animate-bounce,
+  .mockup-glow,
+  .hero-badge-dot,
+  .section-badge::before,
+  .whatsapp-float::before {
+    animation: none !important;
+  }
+
+  /* Remove will-change globally to save GPU memory */
+  .card,
+  .card::before,
+  .btn-primary,
+  .btn-secondary,
+  .industry-card,
+  .stat-card,
+  .solution-card,
+  .problem-card,
+  .testimonial-card,
+  .team-member-card,
+  .whatsapp-float,
+  .animate-float,
+  .animate-bounce {
+    will-change: auto !important;
+  }
+
+  /* Simplify all transforms - remove translateZ for 2D only */
+  .card:hover,
+  .industry-card:hover,
+  .solution-card:hover,
+  .stat-card:hover,
+  .problem-card:hover {
+    transform: translateY(-4px) !important;
+  }
+
+  /* Reduce box-shadow complexity on all cards */
+  .card,
+  .solution-card,
+  .industry-card,
+  .stat-card,
+  .problem-card,
+  .testimonial-card,
+  .faq-item {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .card:hover,
+  .solution-card:hover,
+  .industry-card:hover,
+  .stat-card:hover,
+  .problem-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  /* Disable filter effects on mobile (expensive) */
+  .client-logo,
+  .problem-icon svg,
+  .solution-icon svg,
+  .stat-number,
+  .section-divider::after {
+    filter: none !important;
+  }
+
+  /* Simplify gradients on mobile */
+  .hero-mobile-gradient {
+    animation: none !important;
+    background: linear-gradient(180deg, #050508 0%, #0a0a0f 100%) !important;
+  }
+
+  /* Disable shimmer animations */
+  .hero-cta .btn-primary::before,
+  .mobile-cta-primary::before {
+    animation: none !important;
+    display: none !important;
+  }
+
+  /* Reduce WhatsApp button complexity */
+  .whatsapp-float {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3) !important;
+  }
+
+  .whatsapp-float::before {
+    display: none !important;
+  }
+
+  /* Disable glow effects */
+  .animate-glow,
+  .mockup-glow {
+    box-shadow: none !important;
+    opacity: 0.7 !important;
+  }
+}
+
+/* ==================== EXTRA PERFORMANCE FOR SMALL PHONES ==================== */
+@media (max-width: 480px) {
+  /* Even faster transitions on small phones */
+  *, *::before, *::after {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.15s !important;
+  }
+
+  /* Disable all hover transforms on small phones */
+  .card:hover,
+  .solution-card:hover,
+  .industry-card:hover,
+  .stat-card:hover,
+  .problem-card:hover {
+    transform: none !important;
+  }
+
+  /* Minimal box-shadows */
+  .card,
+  .solution-card,
+  .industry-card,
+  .stat-card,
+  .problem-card,
+  .testimonial-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Use simple solid backgrounds */
+  .hero-mobile-gradient,
+  .particle-network-mobile {
+    background: #050508 !important;
+  }
+
+  .particle-network-mobile::before,
+  .particle-network-mobile::after {
+    display: none !important;
+  }
+}
+
+/* ==================== LEGACY MOBILE ANIMATION PERFORMANCE ==================== */
 @media (max-width: 768px) {
   /* Reduce animation complexity on mobile */
   .card,
@@ -6622,13 +6745,16 @@ html {
 
 /* ==================== 768px BREAKPOINT FIXES ==================== */
 @media (max-width: 768px) {
-  /* Prevent horizontal overflow */
+  /* Prevent horizontal overflow, enable natural vertical scrolling */
   html, body {
     overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   section {
     overflow-x: hidden;
+    overflow-y: visible;
   }
 
   /* Problem Section - Ensure readable text */
@@ -7127,5 +7253,260 @@ html {
       padding-right: max(16px, env(safe-area-inset-right));
       padding-bottom: max(40px, env(safe-area-inset-bottom));
     }
+  }
+}
+
+/* ============================================================================
+   MOBILE ANIMATION SIMPLIFICATION
+   Disable heavy animations for better performance on mobile devices (max-width: 768px)
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  /* ==================== DISABLE HEAVY ANIMATIONS ==================== */
+
+  /* Disable phoneFloat animation */
+  .phone-mockup {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Disable glowPulse animation */
+  .mockup-glow {
+    animation: none !important;
+    opacity: 0.5;
+  }
+
+  /* Disable gradient animations */
+  .hero-mobile-gradient {
+    animation: none !important;
+  }
+
+  .particle-network-mobile::before {
+    animation: none !important;
+  }
+
+  .particle-network-mobile::after {
+    animation: none !important;
+  }
+
+  /* Disable particle animations */
+  .particle-network canvas {
+    display: none;
+  }
+
+  .particle-overlay {
+    animation: none !important;
+  }
+
+  /* MOBILE PERFORMANCE: Disable complex hover effects, pseudo-elements, heavy shadows */
+  .card::before,
+  .card::after,
+  .solution-card::before,
+  .industry-card::before,
+  .stat-card::before,
+  .team-member-card::before {
+    display: none !important;
+  }
+
+  .card:hover,
+  .solution-card:hover,
+  .problem-card:hover,
+  .testimonial-card:hover,
+  .stat-card:hover,
+  .industry-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .solution-icon,
+  .problem-icon {
+    transition: none;
+  }
+
+  .solution-card:hover .solution-icon,
+  .problem-card:hover .problem-icon {
+    transform: none;
+  }
+
+  /* Disable shimmer animations */
+  .hero-cta .btn-primary::before,
+  .mobile-cta-primary::before {
+    animation: none !important;
+    display: none;
+  }
+
+  /* Disable badge glow animation - use simple solid background */
+  .hero-badge {
+    animation: none !important;
+    box-shadow: none !important;
+    background: rgba(245, 158, 11, 0.1) !important;
+  }
+
+  /* Disable robot animations */
+  .agentive-robot *,
+  .golden-dashed-robot-wrapper * {
+    animation: none !important;
+  }
+
+  /* Disable typing dots animation - show static */
+  .wa-header-status::after,
+  .chat-preview-status::after {
+    animation: none !important;
+    opacity: 0.7;
+  }
+
+  /* Disable pulse-gold animation for badges */
+  .section-badge::before,
+  .hero-badge-dot {
+    animation: none !important;
+    opacity: 1;
+  }
+
+  /* ==================== REMOVE BACKDROP-FILTER (causes lag) ==================== */
+
+  .navbar,
+  .navbar-scrolled {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(5, 5, 8, 0.98);
+  }
+
+  .mobile-cta-bar {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(5, 5, 8, 0.98);
+  }
+
+  .wa-incoming {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* ==================== KEEP ESSENTIAL ANIMATIONS ==================== */
+
+  /* Simple fade-in for content (one-time, not looping) */
+  .hero-content,
+  .hero-chat-preview,
+  .chat-preview-card {
+    animation: mobileFadeIn 0.5s ease-out both;
+  }
+
+  .chat-bubble {
+    animation: mobileFadeIn 0.3s ease-out both;
+  }
+
+  /* Stagger chat bubbles */
+  .chat-bubble:nth-child(1) { animation-delay: 0.1s; }
+  .chat-bubble:nth-child(2) { animation-delay: 0.2s; }
+  .chat-bubble:nth-child(3) { animation-delay: 0.3s; }
+  .chat-bubble:nth-child(4) { animation-delay: 0.4s; }
+  .chat-bubble:nth-child(5) { animation-delay: 0.5s; }
+
+  /* Basic button tap feedback - instant response */
+  .btn-primary:active,
+  .btn-secondary:active,
+  .mobile-cta-primary:active,
+  .mobile-cta-whatsapp:active,
+  .mobile-nav-link:active {
+    transform: scale(0.96);
+    opacity: 0.9;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+  }
+
+  /* Menu slide animation - keep for UX */
+  .mobile-menu {
+    animation: slideDown 0.25s ease-out;
+  }
+
+  /* Simplify all transitions */
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.15s !important;
+  }
+}
+
+/* Simple fade-in keyframe for mobile */
+@keyframes mobileFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================================
+   PREFERS-REDUCED-MOTION SUPPORT
+   Comprehensive motion reduction for users who prefer reduced motion
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable ALL animations globally */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Remove transforms that create motion */
+  .phone-mockup,
+  .mockup-glow,
+  .hero-badge,
+  .card:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .solution-card:hover,
+  .problem-card:hover {
+    transform: none !important;
+  }
+
+  /* Keep instant tap feedback for accessibility */
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.01ms !important;
+  }
+
+  /* Hide particle canvas completely */
+  .particle-network canvas {
+    display: none !important;
+  }
+
+  /* Static states for animated elements */
+  .mockup-glow {
+    opacity: 0.6;
+  }
+
+  .hero-badge-dot,
+  .section-badge::before {
+    opacity: 1;
+  }
+
+  .wa-header-status::after,
+  .chat-preview-status::after {
+    opacity: 0.6;
+  }
+
+  /* Ensure all content is visible */
+  .hero-content,
+  .hero-chat-preview,
+  .chat-preview-card,
+  .chat-bubble,
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Disable shimmer effects */
+  .hero-cta .btn-primary::before,
+  .mobile-cta-primary::before {
+    display: none !important;
   }
 }

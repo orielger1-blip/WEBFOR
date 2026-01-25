@@ -11,23 +11,15 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open (preserve scroll position)
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
-      const scrollY = window.scrollY;
-      document.body.classList.add('mobile-menu-open');
-      document.body.style.top = `-${scrollY}px`;
+      document.body.style.overflow = 'hidden';
     } else {
-      const scrollY = document.body.style.top;
-      document.body.classList.remove('mobile-menu-open');
-      document.body.style.top = '';
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
+      document.body.style.overflow = '';
     }
     return () => {
-      document.body.classList.remove('mobile-menu-open');
-      document.body.style.top = '';
+      document.body.style.overflow = '';
     };
   }, [mobileMenuOpen]);
 
@@ -105,8 +97,11 @@ const Navbar = () => {
         </div>
 
         <button
+          type="button"
           className="mobile-menu-btn"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileMenuOpen}
         >
           <span className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}></span>
         </button>

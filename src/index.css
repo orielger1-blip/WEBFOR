@@ -101,9 +101,13 @@ html {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scroll-padding-top: 100px;
-  /* Prevent pull-to-refresh and scroll chaining */
-  overscroll-behavior: none;
-  overscroll-behavior-y: contain;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Smooth scroll for all elements */
+* {
+  scroll-behavior: smooth;
 }
 
 @media (max-width: 768px) {
@@ -162,19 +166,16 @@ body {
   color: var(--text-primary);
   line-height: 1.7;
   overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Prevent horizontal scroll on mobile */
   max-width: 100vw;
+  /* Allow natural scrolling - no position:fixed */
 }
 
-/* Lock body scroll when mobile menu is open */
-body.mobile-menu-open {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-}
+/* Lock body scroll when mobile menu is open - handled via inline styles in Navbar.tsx */
 
 /* Lock body scroll when accessibility panel is open */
 body.accessibility-open {
@@ -240,6 +241,7 @@ textarea,
 main,
 section {
   touch-action: pan-x pan-y;
+  overflow: visible;
 }
 
 /* Safe area insets for notched devices (iPhone X+, etc.) */
