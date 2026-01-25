@@ -68,7 +68,7 @@ const ChatPreviewCard = () => {
         {/* Branding & Status */}
         <div className="ai-brand-info">
           <div className="ai-brand-name">
-            <span className="ai-brand-text">Agentive</span>
+            <span className="ai-brand-text">Servebot</span>
             <span className="ai-brand-badge">AI</span>
           </div>
           <div className="ai-status-line">
@@ -139,7 +139,7 @@ const ChatPreviewCard = () => {
           </div>
           <div className="ai-msg-content">
             <div className="ai-msg-bubble">
-              <p>שלום! אני הסוכן הדיגיטלי של Agentive.</p>
+              <p>שלום! אני הסוכן הדיגיטלי של Servebot.</p>
               <p>אנחנו מתמחים בבניית סוכני AI שעובדים 24/7 עבור העסק שלך.</p>
             </div>
             <span className="ai-msg-time">12:34</span>

@@ -10,9 +10,9 @@ import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import AccessibilityStatement from './components/AccessibilityStatement';
 import Footer from './components/Footer';
-import WhatsAppButton from './components/WhatsAppButton';
 import AccessibilityWidget from './components/AccessibilityWidget';
 import MobileCTABar from './components/MobileCTABar';
+import WhatsAppButton from './components/WhatsAppButton';
 import './App.css';
 
 function App() {

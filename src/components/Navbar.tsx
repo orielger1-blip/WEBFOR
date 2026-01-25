@@ -99,7 +99,7 @@ const Navbar = () => {
                 </defs>
               </svg>
             </div>
-            <span className="logo-text">Agentive</span>
+            <span className="logo-text">Servebot</span>
           </motion.div>
 
           {/* Desktop Navigation */}
