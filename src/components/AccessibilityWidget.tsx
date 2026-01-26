@@ -21,6 +21,8 @@ const defaultSettings: AccessibilitySettings = {
 
 const AccessibilityWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [settings, setSettings] = useState<AccessibilitySettings>(() => {
     const saved = localStorage.getItem('accessibilitySettings');
     return saved ? JSON.parse(saved) : defaultSettings;
@@ -40,6 +42,42 @@ const AccessibilityWidget = () => {
     }
     return () => document.body.classList.remove('accessibility-open');
   }, [isOpen]);
+
+  // Hide button when scrolling down, show when scrolling up
+  useEffect(() => {
+    // Don't hide if panel is open
+    if (isOpen) {
+      setIsVisible(true);
+      return;
+    }
+
+    let scrollTimeout: NodeJS.Timeout;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Hide when scrolling down, show when scrolling up or at top
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+
+      // Also show after stopping scroll for 1 second
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setIsVisible(true);
+      }, 1000);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, [lastScrollY, isOpen]);
 
   const applySettings = (s: AccessibilitySettings) => {
     const root = document.documentElement;
@@ -102,11 +140,16 @@ const AccessibilityWidget = () => {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="תפריט נגישות"
         aria-expanded={isOpen}
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.5 }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{
+          scale: isVisible ? 1 : 0.8,
+          opacity: isVisible ? 1 : 0,
+          y: isVisible ? 0 : 20
+        }}
+        transition={{ duration: 0.3 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
+        style={{ pointerEvents: isVisible ? 'auto' : 'none' }}
       >
         {/* Universal Accessibility Symbol */}
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
