@@ -30,7 +30,7 @@ const AgentiveRobotDemo = () => {
         fontSize: '2.5rem',
         fontWeight: 800,
         marginBottom: '8px',
-        background: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%)',
+        background: 'linear-gradient(135deg, #14b8a6 0%, #5eead4 50%, #14b8a6 100%)',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
         backgroundClip: 'text'
@@ -71,7 +71,7 @@ const AgentiveRobotDemo = () => {
           />
           <p style={{
             marginTop: '30px',
-            color: '#f59e0b',
+            color: '#14b8a6',
             fontSize: '1.2rem',
             fontWeight: 600,
             textTransform: 'capitalize'
@@ -84,7 +84,7 @@ const AgentiveRobotDemo = () => {
         <div style={{ flex: '1', minWidth: '300px' }}>
           {/* Pose Selection */}
           <div style={{ marginBottom: '32px' }}>
-            <h3 style={{ color: '#f59e0b', marginBottom: '12px', fontSize: '0.9rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            <h3 style={{ color: '#14b8a6', marginBottom: '12px', fontSize: '0.9rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
               Pose
             </h3>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -94,9 +94,9 @@ const AgentiveRobotDemo = () => {
                   onClick={() => setCurrentPose(pose)}
                   style={{
                     padding: '10px 20px',
-                    background: currentPose === pose ? 'linear-gradient(135deg, #f59e0b, #fbbf24)' : 'rgba(255, 255, 255, 0.05)',
+                    background: currentPose === pose ? 'linear-gradient(135deg, #14b8a6, #5eead4)' : 'rgba(255, 255, 255, 0.05)',
                     border: '1px solid',
-                    borderColor: currentPose === pose ? '#f59e0b' : 'rgba(255, 255, 255, 0.1)',
+                    borderColor: currentPose === pose ? '#14b8a6' : 'rgba(255, 255, 255, 0.1)',
                     borderRadius: '8px',
                     color: currentPose === pose ? '#000' : '#fff',
                     cursor: 'pointer',
@@ -113,7 +113,7 @@ const AgentiveRobotDemo = () => {
 
           {/* Expression Selection */}
           <div style={{ marginBottom: '32px' }}>
-            <h3 style={{ color: '#f59e0b', marginBottom: '12px', fontSize: '0.9rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            <h3 style={{ color: '#14b8a6', marginBottom: '12px', fontSize: '0.9rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
               Expression
             </h3>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -123,9 +123,9 @@ const AgentiveRobotDemo = () => {
                   onClick={() => setCurrentExpression(expr)}
                   style={{
                     padding: '10px 20px',
-                    background: currentExpression === expr ? 'linear-gradient(135deg, #f59e0b, #fbbf24)' : 'rgba(255, 255, 255, 0.05)',
+                    background: currentExpression === expr ? 'linear-gradient(135deg, #14b8a6, #5eead4)' : 'rgba(255, 255, 255, 0.05)',
                     border: '1px solid',
-                    borderColor: currentExpression === expr ? '#f59e0b' : 'rgba(255, 255, 255, 0.1)',
+                    borderColor: currentExpression === expr ? '#14b8a6' : 'rgba(255, 255, 255, 0.1)',
                     borderRadius: '8px',
                     color: currentExpression === expr ? '#000' : '#fff',
                     cursor: 'pointer',
@@ -143,7 +143,7 @@ const AgentiveRobotDemo = () => {
           {/* Peek Direction (only shown when peeking) */}
           {currentPose === 'peeking' && (
             <div style={{ marginBottom: '32px' }}>
-              <h3 style={{ color: '#f59e0b', marginBottom: '12px', fontSize: '0.9rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
+              <h3 style={{ color: '#14b8a6', marginBottom: '12px', fontSize: '0.9rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
                 Peek Direction
               </h3>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -153,9 +153,9 @@ const AgentiveRobotDemo = () => {
                     onClick={() => setPeekFrom(dir)}
                     style={{
                       padding: '8px 16px',
-                      background: peekFrom === dir ? 'linear-gradient(135deg, #f59e0b, #fbbf24)' : 'rgba(255, 255, 255, 0.05)',
+                      background: peekFrom === dir ? 'linear-gradient(135deg, #14b8a6, #5eead4)' : 'rgba(255, 255, 255, 0.05)',
                       border: '1px solid',
-                      borderColor: peekFrom === dir ? '#f59e0b' : 'rgba(255, 255, 255, 0.1)',
+                      borderColor: peekFrom === dir ? '#14b8a6' : 'rgba(255, 255, 255, 0.1)',
                       borderRadius: '8px',
                       color: peekFrom === dir ? '#000' : '#fff',
                       cursor: 'pointer',
@@ -172,7 +172,7 @@ const AgentiveRobotDemo = () => {
 
           {/* Size Slider */}
           <div style={{ marginBottom: '32px' }}>
-            <h3 style={{ color: '#f59e0b', marginBottom: '12px', fontSize: '0.9rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            <h3 style={{ color: '#14b8a6', marginBottom: '12px', fontSize: '0.9rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
               Size: {size}px
             </h3>
             <input
@@ -183,7 +183,7 @@ const AgentiveRobotDemo = () => {
               onChange={(e) => setSize(Number(e.target.value))}
               style={{
                 width: '100%',
-                accentColor: '#f59e0b'
+                accentColor: '#14b8a6'
               }}
             />
           </div>
@@ -200,7 +200,7 @@ const AgentiveRobotDemo = () => {
                 type="checkbox"
                 checked={animated}
                 onChange={(e) => setAnimated(e.target.checked)}
-                style={{ accentColor: '#f59e0b', width: '20px', height: '20px' }}
+                style={{ accentColor: '#14b8a6', width: '20px', height: '20px' }}
               />
               <span style={{ color: '#fff' }}>Enable Animations</span>
             </label>
@@ -247,7 +247,7 @@ const AgentiveRobotDemo = () => {
                 showLegs={pose !== 'peeking' && pose !== 'sleeping'}
               />
               <span style={{
-                color: '#f59e0b',
+                color: '#14b8a6',
                 fontWeight: 600,
                 textTransform: 'capitalize',
                 fontSize: '0.95rem'
@@ -332,7 +332,7 @@ const AgentiveRobotDemo = () => {
             borderRadius: '16px',
             border: '1px solid rgba(255, 255, 255, 0.06)'
           }}>
-            <h4 style={{ color: '#f59e0b', marginBottom: '16px' }}>Loading State</h4>
+            <h4 style={{ color: '#14b8a6', marginBottom: '16px' }}>Loading State</h4>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <AgentiveRobot pose="thinking" size={48} animated={true} showLegs={false} />
               <span style={{ color: '#a0a0b0' }}>Processing your request...</span>
@@ -346,7 +346,7 @@ const AgentiveRobotDemo = () => {
             borderRadius: '16px',
             border: '1px solid rgba(255, 255, 255, 0.06)'
           }}>
-            <h4 style={{ color: '#f59e0b', marginBottom: '16px' }}>Success State</h4>
+            <h4 style={{ color: '#14b8a6', marginBottom: '16px' }}>Success State</h4>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <AgentiveRobot pose="celebrating" size={48} animated={true} showLegs={false} />
               <span style={{ color: '#a0a0b0' }}>Task completed successfully!</span>
@@ -360,7 +360,7 @@ const AgentiveRobotDemo = () => {
             borderRadius: '16px',
             border: '1px solid rgba(255, 255, 255, 0.06)'
           }}>
-            <h4 style={{ color: '#f59e0b', marginBottom: '16px' }}>Empty State</h4>
+            <h4 style={{ color: '#14b8a6', marginBottom: '16px' }}>Empty State</h4>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <AgentiveRobot pose="waving" expression="curious" size={48} animated={true} showLegs={false} />
               <span style={{ color: '#a0a0b0' }}>No items yet. Let's get started!</span>
@@ -374,7 +374,7 @@ const AgentiveRobotDemo = () => {
             borderRadius: '16px',
             border: '1px solid rgba(255, 255, 255, 0.06)'
           }}>
-            <h4 style={{ color: '#f59e0b', marginBottom: '16px' }}>24/7 Availability</h4>
+            <h4 style={{ color: '#14b8a6', marginBottom: '16px' }}>24/7 Availability</h4>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <AgentiveRobot pose="idle" expression="neutral" size={48} animated={true} showLegs={false} />
               <span style={{ color: '#a0a0b0' }}>Always here to help</span>

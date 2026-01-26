@@ -201,7 +201,7 @@ const MobileHero = () => {
               right: '10%',
               width: '300px',
               height: '300px',
-              background: 'radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(20, 184, 166, 0.15) 0%, transparent 70%)',
               borderRadius: '50%',
               filter: 'blur(60px)',
               animation: 'heroGlowPulse 8s ease-in-out infinite',
@@ -214,7 +214,7 @@ const MobileHero = () => {
               left: '5%',
               width: '250px',
               height: '250px',
-              background: 'radial-gradient(circle, rgba(251, 191, 36, 0.12) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(94, 234, 212, 0.12) 0%, transparent 70%)',
               borderRadius: '50%',
               filter: 'blur(50px)',
               animation: 'heroGlowPulse 10s ease-in-out infinite 2s',
@@ -228,7 +228,7 @@ const MobileHero = () => {
               transform: 'translate(-50%, -50%)',
               width: '400px',
               height: '400px',
-              background: 'radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 60%)',
+              background: 'radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 60%)',
               borderRadius: '50%',
               filter: 'blur(80px)',
               animation: 'heroGlowPulse 12s ease-in-out infinite 1s',
@@ -243,9 +243,9 @@ const MobileHero = () => {
               right: '20%',
               width: '6px',
               height: '6px',
-              background: '#f59e0b',
+              background: '#14b8a6',
               borderRadius: '50%',
-              boxShadow: '0 0 10px rgba(245, 158, 11, 0.5)',
+              boxShadow: '0 0 10px rgba(20, 184, 166, 0.5)',
               animation: 'heroParticleFloat1 15s ease-in-out infinite',
             }}
           />
@@ -256,9 +256,9 @@ const MobileHero = () => {
               left: '15%',
               width: '4px',
               height: '4px',
-              background: '#fbbf24',
+              background: '#5eead4',
               borderRadius: '50%',
-              boxShadow: '0 0 8px rgba(251, 191, 36, 0.4)',
+              boxShadow: '0 0 8px rgba(94, 234, 212, 0.4)',
               animation: 'heroParticleFloat2 18s ease-in-out infinite 3s',
             }}
           />
@@ -269,9 +269,9 @@ const MobileHero = () => {
               right: '25%',
               width: '5px',
               height: '5px',
-              background: '#f59e0b',
+              background: '#14b8a6',
               borderRadius: '50%',
-              boxShadow: '0 0 12px rgba(245, 158, 11, 0.6)',
+              boxShadow: '0 0 12px rgba(20, 184, 166, 0.6)',
               animation: 'heroParticleFloat3 20s ease-in-out infinite 1s',
             }}
           />
@@ -282,9 +282,9 @@ const MobileHero = () => {
               left: '30%',
               width: '3px',
               height: '3px',
-              background: '#fbbf24',
+              background: '#5eead4',
               borderRadius: '50%',
-              boxShadow: '0 0 6px rgba(251, 191, 36, 0.4)',
+              boxShadow: '0 0 6px rgba(94, 234, 212, 0.4)',
               animation: 'heroParticleFloat1 22s ease-in-out infinite 5s',
             }}
           />
@@ -295,9 +295,9 @@ const MobileHero = () => {
               left: '60%',
               width: '4px',
               height: '4px',
-              background: '#f59e0b',
+              background: '#14b8a6',
               borderRadius: '50%',
-              boxShadow: '0 0 8px rgba(245, 158, 11, 0.5)',
+              boxShadow: '0 0 8px rgba(20, 184, 166, 0.5)',
               animation: 'heroParticleFloat2 16s ease-in-out infinite 2s',
             }}
           />
@@ -308,8 +308,8 @@ const MobileHero = () => {
               position: 'absolute',
               inset: 0,
               backgroundImage: `
-                linear-gradient(rgba(245, 158, 11, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(245, 158, 11, 0.03) 1px, transparent 1px)
+                linear-gradient(rgba(20, 184, 166, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20, 184, 166, 0.03) 1px, transparent 1px)
               `,
               backgroundSize: '50px 50px',
               opacity: 0.5,
@@ -339,12 +339,12 @@ const MobileHero = () => {
               alignItems: 'center',
               gap: '8px',
               padding: '8px 16px',
-              background: 'rgba(245, 158, 11, 0.1)',
-              border: '1px solid rgba(245, 158, 11, 0.25)',
+              background: 'rgba(20, 184, 166, 0.1)',
+              border: '1px solid rgba(20, 184, 166, 0.25)',
               borderRadius: '100px',
               fontSize: '14px',
               fontWeight: 500,
-              color: '#f59e0b',
+              color: '#14b8a6',
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
               transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
@@ -384,7 +384,7 @@ const MobileHero = () => {
             <span
               style={{
                 display: 'block',
-                background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
+                background: 'linear-gradient(135deg, #5eead4 0%, #14b8a6 50%, #0f766e 100%)',
                 backgroundSize: '200% auto',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -439,14 +439,14 @@ const MobileHero = () => {
                 gap: '10px',
                 minHeight: '52px',
                 padding: '14px 28px',
-                background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
+                background: 'linear-gradient(135deg, #5eead4 0%, #14b8a6 100%)',
                 color: '#000000',
                 fontSize: '17px',
                 fontWeight: 600,
                 textDecoration: 'none',
                 borderRadius: '14px',
                 border: 'none',
-                boxShadow: '0 4px 24px rgba(245, 158, 11, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1) inset',
+                boxShadow: '0 4px 24px rgba(20, 184, 166, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1) inset',
                 cursor: 'pointer',
                 WebkitTapHighlightColor: 'transparent',
                 touchAction: 'manipulation',
@@ -500,7 +500,7 @@ const MobileHero = () => {
                 const target = e.currentTarget as HTMLElement;
                 target.style.transform = 'scale(0.97)';
                 target.style.background = 'rgba(255, 255, 255, 0.08)';
-                target.style.borderColor = 'rgba(245, 158, 11, 0.3)';
+                target.style.borderColor = 'rgba(20, 184, 166, 0.3)';
               }}
               onTouchEnd={(e) => {
                 const target = e.currentTarget as HTMLElement;
@@ -631,7 +631,7 @@ const MobileHero = () => {
                 width: '3px',
                 height: '8px',
                 borderRadius: '2px',
-                background: 'rgba(245, 158, 11, 0.6)',
+                background: 'rgba(20, 184, 166, 0.6)',
                 animation: 'heroFloat 2s ease-in-out infinite',
               }}
             />

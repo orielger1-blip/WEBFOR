@@ -30,7 +30,12 @@
       "Bash(git commit -m \"$\\(cat <<''EOF''\nAdditional mobile polish from 100 agents - Phase 2\n\n- Enhanced scroll containers and carousels\n- Improved RTL text alignment refinements\n- Additional touch feedback states\n- Footer and accessibility widget optimizations\n- Form validation and success state enhancements\n- Typography fine-tuning for Hebrew text\n- Animation timing refinements\n- Card hover state improvements\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git push:*)",
       "Bash(git commit:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run:*)",
+      "Bash(find:*)",
+      "WebFetch(domain:www.eleken.co)",
+      "WebFetch(domain:userpilot.com)"
     ]
   }
 }

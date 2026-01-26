@@ -191,7 +191,7 @@ function MobileFooter() {
         .mobile-footer-section-chevron {
           width: 20px;
           height: 20px;
-          color: var(--mobile-gold-primary, #f59e0b);
+          color: var(--mobile-gold-primary, #14b8a6);
           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -234,7 +234,7 @@ function MobileFooter() {
         }
 
         .mobile-footer-link:active {
-          color: var(--mobile-gold-primary, #f59e0b);
+          color: var(--mobile-gold-primary, #14b8a6);
         }
 
         .mobile-footer-link-placeholder {
@@ -277,7 +277,7 @@ function MobileFooter() {
           }
 
           .mobile-footer-link:hover {
-            color: var(--mobile-gold-primary, #f59e0b);
+            color: var(--mobile-gold-primary, #14b8a6);
           }
         }
       `}</style>
@@ -300,8 +300,8 @@ function MobileFooter() {
               <circle cx="34" cy="28" r="2" fill="white" opacity="0.6" />
               <defs>
                 <linearGradient id="mobile-footer-logo-grad" x1="0" y1="0" x2="48" y2="48">
-                  <stop stopColor="#f59e0b" />
-                  <stop offset="1" stopColor="#d97706" />
+                  <stop stopColor="#14b8a6" />
+                  <stop offset="1" stopColor="#0f766e" />
                 </linearGradient>
               </defs>
             </svg>

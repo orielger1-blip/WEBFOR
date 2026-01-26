@@ -246,8 +246,8 @@ const MobileNavbar = () => {
                 <path d="M34 28L30 24" stroke="white" strokeWidth="1.5" opacity="0.4" />
                 <defs>
                   <linearGradient id="mobile-logo-grad" x1="0" y1="0" x2="48" y2="48">
-                    <stop stopColor="#fbbf24" />
-                    <stop offset="1" stopColor="#f59e0b" />
+                    <stop stopColor="#5eead4" />
+                    <stop offset="1" stopColor="#14b8a6" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -306,8 +306,8 @@ const MobileNavbar = () => {
                 <circle cx="34" cy="28" r="2" fill="white" opacity="0.6" />
                 <defs>
                   <linearGradient id="mobile-menu-logo-grad" x1="0" y1="0" x2="48" y2="48">
-                    <stop stopColor="#fbbf24" />
-                    <stop offset="1" stopColor="#f59e0b" />
+                    <stop stopColor="#5eead4" />
+                    <stop offset="1" stopColor="#14b8a6" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -422,7 +422,7 @@ const MobileNavbar = () => {
         }
 
         .mobile-hamburger:focus-visible {
-          outline: 2px solid var(--mobile-gold-primary, #f59e0b);
+          outline: 2px solid var(--mobile-gold-primary, #14b8a6);
           outline-offset: 2px;
           border-radius: 8px;
         }
@@ -477,7 +477,7 @@ const MobileNavbar = () => {
         }
 
         .mobile-navbar-logo:focus-visible {
-          outline: 2px solid var(--mobile-gold-primary, #f59e0b);
+          outline: 2px solid var(--mobile-gold-primary, #14b8a6);
           outline-offset: 4px;
           border-radius: 8px;
         }
@@ -569,7 +569,7 @@ const MobileNavbar = () => {
         }
 
         .mobile-menu-close:focus-visible {
-          outline: 2px solid var(--mobile-gold-primary, #f59e0b);
+          outline: 2px solid var(--mobile-gold-primary, #14b8a6);
           outline-offset: 2px;
           border-radius: 8px;
         }
@@ -634,7 +634,7 @@ const MobileNavbar = () => {
         .mobile-menu-link:hover,
         .mobile-menu-link:focus {
           background: rgba(255, 255, 255, 0.05);
-          color: var(--mobile-gold-primary, #f59e0b);
+          color: var(--mobile-gold-primary, #14b8a6);
         }
 
         .mobile-menu-link:focus {
@@ -642,7 +642,7 @@ const MobileNavbar = () => {
         }
 
         .mobile-menu-link:focus-visible {
-          outline: 2px solid var(--mobile-gold-primary, #f59e0b);
+          outline: 2px solid var(--mobile-gold-primary, #14b8a6);
           outline-offset: -2px;
         }
 
@@ -657,7 +657,7 @@ const MobileNavbar = () => {
 
         .mobile-menu-link:hover .mobile-menu-link-arrow,
         .mobile-menu-link:focus .mobile-menu-link-arrow {
-          color: var(--mobile-gold-primary, #f59e0b);
+          color: var(--mobile-gold-primary, #14b8a6);
           transform: translateX(-4px);
         }
 
@@ -675,7 +675,7 @@ const MobileNavbar = () => {
           width: 100%;
           min-height: 52px;
           padding: 14px 24px;
-          background: linear-gradient(135deg, var(--mobile-gold-light, #fbbf24) 0%, var(--mobile-gold-primary, #f59e0b) 100%);
+          background: linear-gradient(135deg, var(--mobile-gold-light, #5eead4) 0%, var(--mobile-gold-primary, #14b8a6) 100%);
           border: none;
           border-radius: var(--radius-md, 12px);
           color: #000000;
@@ -731,7 +731,7 @@ const MobileNavbar = () => {
         /* ==================== HIGH CONTRAST ==================== */
         @media (prefers-contrast: high) {
           .mobile-navbar {
-            border-bottom: 2px solid var(--mobile-gold-primary, #f59e0b);
+            border-bottom: 2px solid var(--mobile-gold-primary, #14b8a6);
           }
 
           .mobile-hamburger-line {

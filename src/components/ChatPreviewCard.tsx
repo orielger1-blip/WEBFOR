@@ -4,7 +4,7 @@ import './AIChatWidget.css';
 /**
  * Premium AI Assistant Chat Widget
  * A completely unique, luxurious AI chat interface
- * Dark premium theme (#0a0a0f) with gold/amber accents (#f59e0b, #fbbf24)
+ * Dark premium theme (#0a0a0f) with gold/amber accents (#14b8a6, #5eead4)
  * NO WhatsApp styling - distinctive AI assistant branding
  */
 const ChatPreviewCard = () => {
@@ -32,23 +32,23 @@ const ChatPreviewCard = () => {
             {/* Face screen */}
             <rect x="9" y="15" width="22" height="13" rx="3" fill="#0a0a0f" />
             {/* Eyes - glowing */}
-            <circle cx="14" cy="21" r="3" fill="#fbbf24">
+            <circle cx="14" cy="21" r="3" fill="#5eead4">
               <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
             </circle>
-            <circle cx="26" cy="21" r="3" fill="#fbbf24">
+            <circle cx="26" cy="21" r="3" fill="#5eead4">
               <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
             </circle>
             {/* Mouth - sound bars */}
-            <rect x="17" y="25" width="2" height="2" rx="0.5" fill="#f59e0b" opacity="0.9" />
-            <rect x="21" y="25" width="2" height="2" rx="0.5" fill="#f59e0b" opacity="0.9" />
+            <rect x="17" y="25" width="2" height="2" rx="0.5" fill="#14b8a6" opacity="0.9" />
+            <rect x="21" y="25" width="2" height="2" rx="0.5" fill="#14b8a6" opacity="0.9" />
             {/* Ear pieces */}
             <rect x="2" y="18" width="4" height="8" rx="2" fill="url(#robotGold)" />
             <rect x="34" y="18" width="4" height="8" rx="2" fill="url(#robotGold)" />
             <defs>
               <linearGradient id="robotGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fde68a" />
-                <stop offset="50%" stopColor="#fbbf24" />
-                <stop offset="100%" stopColor="#f59e0b" />
+                <stop offset="0%" stopColor="#99f6e4" />
+                <stop offset="50%" stopColor="#5eead4" />
+                <stop offset="100%" stopColor="#14b8a6" />
               </linearGradient>
             </defs>
           </svg>
@@ -85,7 +85,7 @@ const ChatPreviewCard = () => {
             <defs>
               <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#fef3c7" />
-                <stop offset="100%" stopColor="#f59e0b" />
+                <stop offset="100%" stopColor="#14b8a6" />
               </linearGradient>
             </defs>
           </svg>

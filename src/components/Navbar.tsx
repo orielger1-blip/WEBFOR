@@ -134,8 +134,8 @@ const Navbar = () => {
                 <path d="M34 28L30 24" stroke="white" strokeWidth="1.5" opacity="0.4"/>
                 <defs>
                   <linearGradient id="logo-grad" x1="0" y1="0" x2="48" y2="48">
-                    <stop stopColor="#f59e0b"/>
-                    <stop offset="1" stopColor="#d97706"/>
+                    <stop stopColor="#14b8a6"/>
+                    <stop offset="1" stopColor="#0f766e"/>
                   </linearGradient>
                 </defs>
               </svg>

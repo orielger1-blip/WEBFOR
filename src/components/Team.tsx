@@ -104,9 +104,9 @@ const Team = () => {
                 <svg className="team-avatar-ring" viewBox="0 0 120 120">
                   <defs>
                     <linearGradient id={`gold-gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#f59e0b" />
-                      <stop offset="50%" stopColor="#fbbf24" />
-                      <stop offset="100%" stopColor="#f59e0b" />
+                      <stop offset="0%" stopColor="#14b8a6" />
+                      <stop offset="50%" stopColor="#5eead4" />
+                      <stop offset="100%" stopColor="#14b8a6" />
                     </linearGradient>
                   </defs>
                   <circle
@@ -115,7 +115,7 @@ const Team = () => {
                     cy="60"
                     r="56"
                     fill="none"
-                    stroke="rgba(245, 158, 11, 0.1)"
+                    stroke="rgba(20, 184, 166, 0.1)"
                     strokeWidth="2"
                   />
                   <circle
@@ -161,7 +161,7 @@ const Team = () => {
                         <svg viewBox="0 0 100 100" className="avatar-pattern-svg">
                           <defs>
                             <linearGradient id={`avatar-grad-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                              <stop offset="0%" stopColor="rgba(245, 158, 11, 0.3)" />
+                              <stop offset="0%" stopColor="rgba(20, 184, 166, 0.3)" />
                               <stop offset="100%" stopColor="rgba(251, 191, 36, 0.1)" />
                             </linearGradient>
                           </defs>
@@ -174,10 +174,10 @@ const Team = () => {
                           <polygon
                             points="50,20 80,35 80,65 50,80 20,65 20,35"
                             fill="none"
-                            stroke="rgba(245, 158, 11, 0.2)"
+                            stroke="rgba(20, 184, 166, 0.2)"
                             strokeWidth="1"
                           />
-                          <circle cx="50" cy="50" r="15" fill="rgba(245, 158, 11, 0.1)" />
+                          <circle cx="50" cy="50" r="15" fill="rgba(20, 184, 166, 0.1)" />
                         </svg>
                       </div>
                       <span className="avatar-initials">{member.initials}</span>

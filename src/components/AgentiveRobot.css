@@ -548,13 +548,13 @@ html.high-contrast .agentive-robot circle[fill="none"] {
 .agentive-robot-wrapper.success .agentive-robot path,
 .agentive-robot-wrapper.success .agentive-robot rect,
 .agentive-robot-wrapper.success .agentive-robot circle {
-  stroke: #f59e0b;
+  stroke: #14b8a6;
 }
 
 .agentive-robot-wrapper.success .agentive-robot [fill="#FFD700"] {
-  fill: #fbbf24;
+  fill: #5eead4;
 }
 
 .agentive-robot-wrapper.success .agentive-robot {
-  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.4));
+  filter: drop-shadow(0 0 4px rgba(20, 184, 166, 0.4));
 }

@@ -161,7 +161,7 @@ const StatCardComponent = ({
         style={{
           fontSize: '36px',
           fontWeight: 800,
-          background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
+          background: 'linear-gradient(135deg, #5eead4 0%, #14b8a6 50%, #0f766e 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',

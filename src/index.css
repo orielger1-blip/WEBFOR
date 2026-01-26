@@ -20,20 +20,20 @@
   --text-secondary: #a0a0b0;
   --text-muted: #8a8a9a; /* Improved contrast ratio: 4.5:1+ for WCAG AA */
 
-  /* Premium Gold Accent */
-  --accent-gold: #f59e0b;
-  --accent-gold-light: #fbbf24;
-  --accent-gold-dark: #d97706;
-  --accent-gradient: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%);
-  --accent-gradient-subtle: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.05));
+  /* Premium Teal Accent */
+  --accent-gold: #14b8a6;
+  --accent-gold-light: #5eead4;
+  --accent-gold-dark: #0f766e;
+  --accent-gradient: linear-gradient(135deg, #14b8a6 0%, #5eead4 50%, #14b8a6 100%);
+  --accent-gradient-subtle: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(94, 234, 212, 0.05));
 
   /* Glow Effects */
-  --glow-gold: 0 0 60px rgba(245, 158, 11, 0.3);
-  --glow-gold-strong: 0 0 100px rgba(245, 158, 11, 0.5);
+  --glow-gold: 0 0 60px rgba(20, 184, 166, 0.3);
+  --glow-gold-strong: 0 0 100px rgba(20, 184, 166, 0.5);
 
   /* Borders */
   --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-gold: rgba(245, 158, 11, 0.3);
+  --border-gold: rgba(20, 184, 166, 0.3);
 
   /* Spacing */
   --section-padding: 120px;
@@ -50,7 +50,7 @@
   /* Shadows */
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.2);
   --shadow-card-hover: 0 20px 60px rgba(0, 0, 0, 0.4);
-  --shadow-card-elevated: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 80px rgba(245, 158, 11, 0.08);
+  --shadow-card-elevated: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 80px rgba(20, 184, 166, 0.08);
 
   /* Icon Sizes */
   --icon-xs: 16px;
@@ -113,7 +113,7 @@ html {
 
 /* ==================== GOLD THEME TAP HIGHLIGHT ==================== */
 * {
-  -webkit-tap-highlight-color: rgba(245, 158, 11, 0.2);
+  -webkit-tap-highlight-color: rgba(20, 184, 166, 0.2);
 }
 
 /* Remove tap highlight on elements with custom active states */
@@ -139,13 +139,13 @@ button, a, .btn-primary, .btn-secondary, .card, .industry-card,
 .btn-primary:focus-visible {
   outline: 3px solid rgba(255, 255, 255, 0.8);
   outline-offset: 3px;
-  box-shadow: var(--glow-gold), 0 0 0 6px rgba(245, 158, 11, 0.3);
+  box-shadow: var(--glow-gold), 0 0 0 6px rgba(20, 184, 166, 0.3);
 }
 
 .btn-secondary:focus-visible {
   outline: 3px solid var(--accent-gold);
   outline-offset: 3px;
-  box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.15);
+  box-shadow: 0 0 0 6px rgba(20, 184, 166, 0.15);
 }
 
 .card:focus-visible,
@@ -194,7 +194,7 @@ body.accessibility-open {
 
 /* Selection */
 ::selection {
-  background: rgba(245, 158, 11, 0.3);
+  background: rgba(20, 184, 166, 0.3);
   color: var(--text-primary);
 }
 
@@ -300,7 +300,7 @@ section {
 
   .btn-secondary:active {
     transform: scale(0.97);
-    background: rgba(245, 158, 11, 0.1);
+    background: rgba(20, 184, 166, 0.1);
     transition: transform 0.1s ease, background 0.1s ease;
   }
 
@@ -314,12 +314,12 @@ section {
   .nav-link:active,
   .mobile-nav-link:active {
     color: var(--accent-gold);
-    background: rgba(245, 158, 11, 0.08);
+    background: rgba(20, 184, 166, 0.08);
     transition: color 0.1s ease, background 0.1s ease;
   }
 
   .faq-question:active {
-    background: rgba(245, 158, 11, 0.08);
+    background: rgba(20, 184, 166, 0.08);
     transition: background 0.1s ease;
   }
 
@@ -360,7 +360,7 @@ section {
   }
 
   .expertise-tag:active {
-    background: rgba(245, 158, 11, 0.2);
+    background: rgba(20, 184, 166, 0.2);
     border-color: var(--accent-gold);
     transition: background 0.1s ease, border-color 0.1s ease;
   }

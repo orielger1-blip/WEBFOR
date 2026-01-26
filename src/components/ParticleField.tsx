@@ -88,7 +88,7 @@ const ConnectionLines = () => {
           args={[positions, 3]}
         />
       </bufferGeometry>
-      <lineBasicMaterial color="#f59e0b" transparent opacity={0.15} />
+      <lineBasicMaterial color="#14b8a6" transparent opacity={0.15} />
     </lineSegments>
   );
 };
@@ -107,7 +107,7 @@ const FloatingOrb = () => {
     <mesh ref={meshRef} position={[0, 0, 0]}>
       <icosahedronGeometry args={[1.5, 1]} />
       <meshBasicMaterial
-        color="#f59e0b"
+        color="#14b8a6"
         wireframe
         transparent
         opacity={0.3}
