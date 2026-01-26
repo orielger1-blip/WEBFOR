@@ -4692,6 +4692,12 @@ html {
   .problem-card {
     padding: 20px 16px;
   }
+  /* Center the last card when odd number of items (3 cards = 2+1 centered) */
+  .problem-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 6px);
+    margin: 0 auto;
+  }
   .problem-title {
     font-size: 0.95rem;
   }
@@ -6145,6 +6151,12 @@ html {
   }
   .problem-card {
     padding: 16px 12px;
+  }
+  /* Center the last card when odd number */
+  .problem-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 5px);
+    margin: 0 auto;
   }
   .problem-icon {
     width: 36px;
