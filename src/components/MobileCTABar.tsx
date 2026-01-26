@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
  */
 const MobileCTABar = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,8 +59,25 @@ const MobileCTABar = () => {
     };
   }, []);
 
+  // Android keyboard visibility detection using visualViewport API
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.visualViewport) {
+        const viewportHeight = window.visualViewport.height;
+        const windowHeight = window.innerHeight;
+        // Keyboard is open if viewport is significantly smaller
+        setKeyboardVisible(windowHeight - viewportHeight > 150);
+      }
+    };
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleResize);
+      return () => window.visualViewport?.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
   return (
-    <div className={`mobile-cta-bar ${isVisible ? 'visible' : ''}`} dir="rtl">
+    <div className={`mobile-cta-bar ${isVisible && !keyboardVisible ? 'visible' : ''}`} dir="rtl">
       <a href="#contact" className="mobile-cta-primary">
         <span>קבעו שיחה</span>
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">

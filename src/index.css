@@ -440,3 +440,45 @@ section {
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   ANDROID-SPECIFIC FIXES
+   ========================================================================== */
+
+/* Android display-cutout support (viewport-fit for notch/punch-hole displays) */
+@viewport {
+  viewport-fit: cover;
+}
+
+/* Android notch/punch-hole support with safe area padding */
+@supports (padding: max(0px)) {
+  .navbar {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+}
+
+/* Android overscroll behavior - prevent pull-to-refresh and bounce effects */
+html, body {
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+}
+
+/* Hero section with 100dvh fallback for older Android browsers */
+.hero {
+  min-height: 100vh; /* Fallback for older browsers */
+  min-height: 100dvh; /* Modern dynamic viewport height */
+  min-height: -webkit-fill-available; /* WebKit fallback for Android Chrome */
+}
+
+/* Faster touch response for Android (150ms vs default 300ms delay) */
+* {
+  touch-action: manipulation;
+}
+
+/* Fix Android keyboard pushing fixed elements up - hide CTA bar when keyboard open */
+@media (max-height: 500px) {
+  .mobile-cta-bar {
+    display: none !important;
+  }
+}

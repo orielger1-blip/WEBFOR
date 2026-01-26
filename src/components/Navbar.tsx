@@ -53,6 +53,25 @@ const Navbar = () => {
     return () => document.removeEventListener('keydown', handleEscape);
   }, [menuOpen]);
 
+  // Handle Android hardware back button for menu
+  useEffect(() => {
+    if (menuOpen) {
+      // Push a fake history state when menu opens
+      window.history.pushState({ menuOpen: true }, '');
+
+      const handlePopState = () => {
+        // When back is pressed, close the menu
+        setMenuOpen(false);
+      };
+
+      window.addEventListener('popstate', handlePopState);
+
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+      };
+    }
+  }, [menuOpen]);
+
   // Navigation items with actual section IDs
   const navItems = [
     { label: 'הפתרונות', href: '#solutions' },
