@@ -175,6 +175,50 @@
   box-shadow: 0 0 4px rgba(251, 191, 36, 0.5);
 }
 
+/* CSS Keyframes for typing dots - replaces Framer Motion for better performance */
+.ai-typing-dot {
+  animation: aiTypingDot 1.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.ai-typing-dot-1 {
+  animation-delay: 0s;
+}
+
+.ai-typing-dot-2 {
+  animation-delay: 0.15s;
+}
+
+.ai-typing-dot-3 {
+  animation-delay: 0.3s;
+}
+
+@keyframes aiTypingDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+/* CSS Keyframes for robot avatar box-shadow - replaces Framer Motion for better performance */
+.ai-robot-avatar-animated {
+  animation: aiRobotGlow 2.5s ease-in-out infinite;
+  will-change: box-shadow;
+}
+
+@keyframes aiRobotGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.2), inset 0 0 15px rgba(251, 191, 36, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(251, 191, 36, 0.4), inset 0 0 20px rgba(251, 191, 36, 0.15);
+  }
+}
+
 /* Premium Seal */
 .ai-premium-seal {
   width: 32px;
@@ -296,7 +340,7 @@
 /* Timestamp */
 .ai-msg-time {
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.55);
   margin-top: 4px;
   padding: 0 4px;
 }
@@ -345,7 +389,7 @@
   box-shadow:
     0 4px 15px rgba(251, 191, 36, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transition: all 0.2s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .ai-send-btn svg {

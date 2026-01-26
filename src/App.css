@@ -120,7 +120,7 @@ button {
 
 .btn-primary:hover .btn-icon,
 .btn-secondary:hover .btn-icon {
-  transform: translateX(4px); /* Positive for RTL - arrow points left */
+  transform: translateX(-4px); /* Negative for RTL - arrow points left */
 }
 
 /* ==================== SECTIONS ==================== */
@@ -251,6 +251,7 @@ section {
   right: 0;
   z-index: 1000;
   padding: 20px 40px;
+  padding-top: max(20px, env(safe-area-inset-top, 20px));
   transition: all 0.4s ease;
 }
 
@@ -422,14 +423,18 @@ section {
   justify-content: center;
   align-items: center;
   padding: 80px 24px 40px;
+  padding-top: max(80px, calc(80px + env(safe-area-inset-top, 0px)));
+  padding-bottom: max(40px, calc(40px + env(safe-area-inset-bottom, 0px)));
+  padding-left: max(24px, env(safe-area-inset-left, 24px));
+  padding-right: max(24px, env(safe-area-inset-right, 24px));
   overflow-y: auto;
 }
 
 /* Close button (X) in menu */
 .mobile-menu-close {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: max(20px, env(safe-area-inset-top, 20px));
+  left: max(20px, env(safe-area-inset-left, 20px));
   background: none;
   border: none;
   color: var(--text-primary);
@@ -635,6 +640,8 @@ section {
   max-width: 700px;
   margin: 0 auto 48px;
   line-height: 1.8;
+  word-break: keep-all; /* RTL: prevent breaking Hebrew words */
+  hyphens: none; /* RTL: disable hyphenation for Hebrew */
 }
 
 .hero-cta {
@@ -743,6 +750,8 @@ section {
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.7;
+  word-break: keep-all; /* RTL: prevent breaking Hebrew words */
+  hyphens: none; /* RTL: disable hyphenation for Hebrew */
 }
 
 
@@ -1883,6 +1892,10 @@ section {
   background: var(--bg-primary);
   border-top: 1px solid var(--border-subtle);
   padding: 80px 24px 40px;
+  padding-top: max(80px, calc(80px + env(safe-area-inset-top, 0px)));
+  padding-bottom: max(40px, calc(40px + env(safe-area-inset-bottom, 0px)));
+  padding-left: max(24px, env(safe-area-inset-left, 24px));
+  padding-right: max(24px, env(safe-area-inset-right, 24px));
 }
 
 .footer-content {
@@ -2093,8 +2106,8 @@ section {
 /* ==================== WHATSAPP FLOATING BUTTON ==================== */
 .whatsapp-float {
   position: fixed;
-  bottom: 30px;
-  right: 30px; /* RTL: positioned on right side */
+  bottom: max(30px, calc(30px + env(safe-area-inset-bottom, 0px)));
+  right: max(30px, calc(30px + env(safe-area-inset-right, 0px))); /* RTL: positioned on right side */
   width: 60px;
   height: 60px;
   background: #25D366;
@@ -2150,12 +2163,13 @@ section {
 
 .whatsapp-float:hover .whatsapp-tooltip {
   opacity: 1;
-  transform: translateX(-10px);
+  transform: translateX(10px); /* Positive for RTL - slide right */
 }
 
 .whatsapp-tooltip {
   position: absolute;
-  left: 70px; /* RTL: tooltip appears on left of button */
+  right: 70px; /* RTL: tooltip appears on right of button */
+  left: auto;
   background: var(--bg-card);
   color: var(--text-primary);
   padding: 8px 16px;
@@ -2230,6 +2244,7 @@ section {
   height: 20px;
   flex-shrink: 0;
   color: var(--accent-gold);
+  margin-inline-start: 16px; /* RTL: proper spacing before chevron */
 }
 
 .faq-answer {
@@ -4267,6 +4282,7 @@ html {
   /* === PROBLEM SECTION === */
   .problem-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   .problem-card {
     padding: 32px 24px;
@@ -4294,6 +4310,7 @@ html {
   /* === SOLUTIONS SECTION === */
   .solutions-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   .solution-card {
     padding: 32px 24px;
@@ -4308,6 +4325,10 @@ html {
   .solution-icon {
     width: 56px;
     height: 56px;
+  }
+  .solution-icon svg {
+    width: 28px;
+    height: 28px;
   }
   .solution-features li {
     font-size: 0.875rem;
@@ -4929,11 +4950,14 @@ html {
     margin-bottom: 16px;
     font-size: 22px;
   }
+  .solutions-grid {
+    gap: 16px;
+  }
   .industry-name {
     font-size: 0.938rem;
   }
   .faq-grid {
-    gap: 12px;
+    gap: 14px;
   }
   .faq-question {
     min-height: 52px;
@@ -5051,8 +5075,8 @@ html {
     justify-content: center;
   }
   .footer-social a {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
   .footer-bottom {
     gap: 12px;
@@ -5119,6 +5143,9 @@ html {
   .card {
     padding: 20px 16px;
   }
+  .problem-grid {
+    gap: 16px;
+  }
   .problem-card {
     padding: 24px 16px;
   }
@@ -5137,12 +5164,19 @@ html {
     font-size: 0.875rem;
     line-height: 1.65;
   }
+  .solutions-grid {
+    gap: 14px;
+  }
   .solution-card {
     padding: 24px 16px;
   }
   .solution-icon {
     width: 44px;
     height: 44px;
+  }
+  .solution-icon svg {
+    width: 22px;
+    height: 22px;
   }
   .solution-title {
     font-size: 1.0625rem;
@@ -5215,7 +5249,7 @@ html {
     font-size: 0.875rem;
   }
   .faq-grid {
-    gap: 10px;
+    gap: 12px;
   }
   .faq-question {
     min-height: 48px;
@@ -5501,11 +5535,71 @@ html {
    TOUCH DEVICE SUPPORT
    ========================================================================== */
 @media (hover: none) and (pointer: coarse) {
+  /* Disable hover transforms that cause sticky states on touch devices */
   .btn-primary:hover,
   .btn-secondary:hover {
     transform: none;
     box-shadow: inherit;
   }
+
+  .team-member-card:hover {
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .team-member-card:hover::before,
+  .team-member-card:hover .team-member-glow,
+  .team-member-card:hover .avatar-glow {
+    opacity: 0;
+  }
+
+  .team-member-card:hover .team-member-accent {
+    width: 80px;
+  }
+
+  .team-member-card:hover .avatar-photo {
+    transform: none;
+  }
+
+  .team-member-card:hover .avatar-pattern-svg {
+    transform: none;
+  }
+
+  .team-member-card:hover .card-corner {
+    opacity: 0.2;
+    transform: none;
+  }
+
+  .industry-card:hover {
+    transform: none;
+    border-color: var(--border-subtle);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .industry-card:hover::before {
+    opacity: 0;
+  }
+
+  .industry-card:hover .industry-icon {
+    transform: none;
+    background: rgba(245, 158, 11, 0.08);
+    color: var(--accent-gold);
+    box-shadow: none;
+  }
+
+  .solution-card:hover {
+    transform: none;
+    border-color: rgba(245, 158, 11, 0.12);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .solution-card:hover .solution-icon {
+    transform: none;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.1);
+  }
+  /* Apply tap-highlight and touch-action to all interactive elements */
   .btn-primary,
   .btn-secondary,
   button,
@@ -5516,7 +5610,16 @@ html {
   .mobile-nav-link,
   .nav-link,
   .submit-btn,
-  .contact-btn {
+  .contact-btn,
+  .card,
+  .solution-card,
+  .industry-card,
+  .team-member-card,
+  .testimonial-card,
+  .problem-card,
+  .stat-card,
+  .faq-item,
+  .faq-question {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     user-select: none;
@@ -5542,11 +5645,50 @@ html {
     background: rgba(245, 158, 11, 0.15);
     transform: translateX(-4px);
   }
-  .card:active,
-  .solution-card:active,
-  .industry-card:active {
-    transform: translateY(-2px) scale(0.99) translateZ(0);
+  /* Card active states with stronger touch feedback */
+  .card:active {
+    transform: scale(0.98) translateZ(0);
     transition: transform 0.1s ease;
+  }
+
+  .solution-card:active {
+    transform: scale(0.97) translateZ(0);
+    border-color: rgba(245, 158, 11, 0.25);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .industry-card:active {
+    transform: scale(0.95) translateZ(0);
+    border-color: rgba(245, 158, 11, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .team-member-card:active {
+    transform: scale(0.98) translateZ(0);
+    border-color: rgba(245, 158, 11, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25),
+                0 0 20px rgba(245, 158, 11, 0.05);
+    transition: transform 0.1s ease, border-color 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .problem-card:active,
+  .stat-card:active {
+    transform: scale(0.98) translateZ(0);
+    transition: transform 0.1s ease;
+  }
+
+  .testimonial-card:active {
+    transform: scale(0.98) translateZ(0);
+    border-color: rgba(245, 158, 11, 0.15);
+    transition: transform 0.1s ease, border-color 0.1s ease;
+  }
+
+  .faq-question:active {
+    transform: scale(0.99) translateZ(0);
+    background: rgba(255, 255, 255, 0.04);
+    transition: transform 0.1s ease, background 0.1s ease;
   }
 }
 
@@ -5711,6 +5853,8 @@ html {
   gap: 12px;
   padding: 12px 16px;
   padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 16px));
+  padding-right: max(16px, env(safe-area-inset-right, 16px));
   background: rgba(5, 5, 8, 0.98);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   z-index: 999;
@@ -6238,7 +6382,7 @@ html {
 
   .hero-cta .btn-primary,
   .hero-cta .btn-secondary {
-    min-height: 40px;
+    min-height: 44px;
     padding: 10px 16px;
     font-size: 0.85rem;
   }
@@ -6257,15 +6401,15 @@ html {
   }
 
   .mobile-cta-primary {
-    min-height: 40px;
+    min-height: 44px;
     padding: 8px 16px;
     font-size: 0.85rem;
   }
 
   .mobile-cta-whatsapp {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
   }
 
   .mobile-cta-whatsapp svg {

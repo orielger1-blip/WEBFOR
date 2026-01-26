@@ -20,18 +20,8 @@ const ChatPreviewCard = () => {
 
       {/* Premium Header */}
       <div className="ai-widget-header">
-        {/* AI Robot Avatar with Pulse */}
-        <motion.div
-          className="ai-robot-avatar"
-          animate={{
-            boxShadow: [
-              '0 0 20px rgba(251, 191, 36, 0.2), inset 0 0 15px rgba(251, 191, 36, 0.1)',
-              '0 0 35px rgba(251, 191, 36, 0.4), inset 0 0 20px rgba(251, 191, 36, 0.15)',
-              '0 0 20px rgba(251, 191, 36, 0.2), inset 0 0 15px rgba(251, 191, 36, 0.1)'
-            ]
-          }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-        >
+        {/* AI Robot Avatar with Pulse - CSS animation for performance */}
+        <div className="ai-robot-avatar ai-robot-avatar-animated">
           {/* AI Robot Icon */}
           <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             {/* Antenna with glow */}
@@ -63,7 +53,7 @@ const ChatPreviewCard = () => {
             </defs>
           </svg>
           <div className="ai-avatar-pulse" />
-        </motion.div>
+        </div>
 
         {/* Branding & Status */}
         <div className="ai-brand-info">
@@ -74,19 +64,11 @@ const ChatPreviewCard = () => {
           <div className="ai-status-line">
             <span className="ai-status-indicator" />
             <span className="ai-status-hebrew">מוכן לעזור</span>
+            {/* CSS keyframe animation for typing dots - better mobile performance */}
             <div className="ai-typing-dots">
-              <motion.span
-                animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.2, repeat: Infinity, delay: 0 }}
-              />
-              <motion.span
-                animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.2, repeat: Infinity, delay: 0.15 }}
-              />
-              <motion.span
-                animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.2, repeat: Infinity, delay: 0.3 }}
-              />
+              <span className="ai-typing-dot ai-typing-dot-1" />
+              <span className="ai-typing-dot ai-typing-dot-2" />
+              <span className="ai-typing-dot ai-typing-dot-3" />
             </div>
           </div>
         </div>

@@ -141,6 +141,7 @@ const Contact = () => {
                     required
                     autoComplete="name"
                     autoCapitalize="words"
+                    enterKeyHint="next"
                   />
                 </div>
 
@@ -155,6 +156,7 @@ const Contact = () => {
                     placeholder="שם החברה או העסק"
                     required
                     autoComplete="organization"
+                    enterKeyHint="next"
                   />
                 </div>
 
@@ -170,6 +172,7 @@ const Contact = () => {
                     required
                     autoComplete="tel"
                     inputMode="tel"
+                    enterKeyHint="next"
                   />
                 </div>
 
@@ -201,6 +204,7 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="מה האתגר העיקרי שאתם רוצים לפתור?"
                     rows={4}
+                    enterKeyHint="send"
                   />
                 </div>
 
