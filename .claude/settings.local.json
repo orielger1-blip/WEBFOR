@@ -23,7 +23,14 @@
       "mcp__ide__getDiagnostics",
       "WebFetch(domain:sighack.com)",
       "WebFetch(domain:varun.ca)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nMassive mobile optimization - 100 agents CSS improvements\n\n- Hero: Phone mockup visible, compact layout, full-width CTAs\n- Solutions: Horizontal swipe carousel with scroll-snap\n- Stats: 2-column grid layout\n- Industries: 2-column responsive grid\n- Performance: GPU acceleration, reduced animations\n- Touch: 44px+ tap targets, touch-action optimization\n- Safe areas: Footer respects notch/home indicator\n- Z-index: Proper stacking for navbar, menus, overlays\n- Typography: Responsive clamp sizes, optimized line-height\n- Cards: Subtle borders, optimized shadows\n- Forms: Touch-friendly inputs, larger tap areas\n- Accessibility: Focus-visible states, reduced motion support\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(timeout:*)",
+      "Bash(ping:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdditional mobile polish from 100 agents - Phase 2\n\n- Enhanced scroll containers and carousels\n- Improved RTL text alignment refinements\n- Additional touch feedback states\n- Footer and accessibility widget optimizations\n- Form validation and success state enhancements\n- Typography fine-tuning for Hebrew text\n- Animation timing refinements\n- Card hover state improvements\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)"
     ]
   }
 }
