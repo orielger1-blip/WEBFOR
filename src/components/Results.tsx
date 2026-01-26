@@ -9,14 +9,14 @@ const capabilities = [
     description: 'הסוכן עובד סביב השעון, גם כשאתם ישנים'
   },
   {
-    value: '< 3',
-    suffix: 'שניות',
+    value: 'מיידי',
     label: 'זמן תגובה',
     description: 'תשובה מיידית לכל פנייה, בכל שעה'
   },
   {
-    value: '∞',
-    label: 'ללא הגבלה',
+    value: 'ללא',
+    suffix: 'הגבלה',
+    label: 'שיחות ופניות',
     description: 'אין מגבלה על כמות השיחות והפניות'
   },
   {
