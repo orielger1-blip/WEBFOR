@@ -4192,17 +4192,11 @@ html {
     object-fit: cover;
   }
 
-  /* === GPU ACCELERATION FOR SMOOTH SCROLLING === */
+  /* === SMOOTH SCROLLING === */
   html {
     scroll-behavior: smooth;
   }
-  body, .App, main, section {
-    will-change: scroll-position;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
+  /* Note: Removed will-change and transform from body/main - was breaking scroll */
 
   /* === SKIP TO CONTENT LINK (ACCESSIBILITY) === */
   .skip-to-content {
