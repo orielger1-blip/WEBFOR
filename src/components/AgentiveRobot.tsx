@@ -31,61 +31,61 @@ interface AgentiveRobotProps {
 
 const EyesNeutral = () => (
   <g className="robot-eyes eyes-neutral">
-    <circle cx="10.5" cy="6.5" r="0.7" fill="#FFD700" className="robot-eye robot-eye-left" />
-    <circle cx="13.5" cy="6.5" r="0.7" fill="#FFD700" className="robot-eye robot-eye-right" />
+    <circle cx="10.5" cy="6.5" r="0.7" fill="#14b8a6" className="robot-eye robot-eye-left" />
+    <circle cx="13.5" cy="6.5" r="0.7" fill="#14b8a6" className="robot-eye robot-eye-right" />
   </g>
 );
 
 const EyesHappy = () => (
   <g className="robot-eyes eyes-happy">
-    <path d="M10 6.3 Q10.5 7.2 11 6.3" stroke="#FFD700" strokeWidth="0.8" fill="none" strokeLinecap="round" />
-    <path d="M13 6.3 Q13.5 7.2 14 6.3" stroke="#FFD700" strokeWidth="0.8" fill="none" strokeLinecap="round" />
+    <path d="M10 6.3 Q10.5 7.2 11 6.3" stroke="#14b8a6" strokeWidth="0.8" fill="none" strokeLinecap="round" />
+    <path d="M13 6.3 Q13.5 7.2 14 6.3" stroke="#14b8a6" strokeWidth="0.8" fill="none" strokeLinecap="round" />
   </g>
 );
 
 const EyesSleepy = () => (
   <g className="robot-eyes eyes-sleepy">
-    <ellipse cx="10.5" cy="6.5" rx="0.7" ry="0.3" fill="#FFD700" opacity="0.7" />
-    <ellipse cx="13.5" cy="6.5" rx="0.7" ry="0.3" fill="#FFD700" opacity="0.7" />
+    <ellipse cx="10.5" cy="6.5" rx="0.7" ry="0.3" fill="#14b8a6" opacity="0.7" />
+    <ellipse cx="13.5" cy="6.5" rx="0.7" ry="0.3" fill="#14b8a6" opacity="0.7" />
   </g>
 );
 
 const EyesClosed = () => (
   <g className="robot-eyes eyes-closed">
-    <path d="M10 6.5 L11 6.5" stroke="#FFD700" strokeWidth="0.8" strokeLinecap="round" />
-    <path d="M13 6.5 L14 6.5" stroke="#FFD700" strokeWidth="0.8" strokeLinecap="round" />
+    <path d="M10 6.5 L11 6.5" stroke="#14b8a6" strokeWidth="0.8" strokeLinecap="round" />
+    <path d="M13 6.5 L14 6.5" stroke="#14b8a6" strokeWidth="0.8" strokeLinecap="round" />
   </g>
 );
 
 const EyesCurious = () => (
   <g className="robot-eyes eyes-curious">
-    <circle cx="10.5" cy="6.5" r="0.6" fill="#FFD700" className="robot-eye" />
-    <circle cx="13.5" cy="6.5" r="0.9" fill="#FFD700" className="robot-eye" />
+    <circle cx="10.5" cy="6.5" r="0.6" fill="#14b8a6" className="robot-eye" />
+    <circle cx="13.5" cy="6.5" r="0.9" fill="#14b8a6" className="robot-eye" />
   </g>
 );
 
 const EyesExcited = () => (
   <g className="robot-eyes eyes-excited">
     <circle cx="10.5" cy="6.5" r="0.9" fill="#FFFFFF" opacity="0.5" />
-    <circle cx="10.5" cy="6.5" r="0.6" fill="#FFD700" className="robot-eye" />
+    <circle cx="10.5" cy="6.5" r="0.6" fill="#14b8a6" className="robot-eye" />
     <circle cx="13.5" cy="6.5" r="0.9" fill="#FFFFFF" opacity="0.5" />
-    <circle cx="13.5" cy="6.5" r="0.6" fill="#FFD700" className="robot-eye" />
+    <circle cx="13.5" cy="6.5" r="0.6" fill="#14b8a6" className="robot-eye" />
   </g>
 );
 
 const EyesSurprised = () => (
   <g className="robot-eyes eyes-surprised">
-    <circle cx="10.5" cy="6.5" r="1" fill="none" stroke="#FFD700" strokeWidth="0.5" />
-    <circle cx="10.5" cy="6.5" r="0.4" fill="#FFD700" />
-    <circle cx="13.5" cy="6.5" r="1" fill="none" stroke="#FFD700" strokeWidth="0.5" />
-    <circle cx="13.5" cy="6.5" r="0.4" fill="#FFD700" />
+    <circle cx="10.5" cy="6.5" r="1" fill="none" stroke="#14b8a6" strokeWidth="0.5" />
+    <circle cx="10.5" cy="6.5" r="0.4" fill="#14b8a6" />
+    <circle cx="13.5" cy="6.5" r="1" fill="none" stroke="#14b8a6" strokeWidth="0.5" />
+    <circle cx="13.5" cy="6.5" r="0.4" fill="#14b8a6" />
   </g>
 );
 
 const EyesLookingUp = () => (
   <g className="robot-eyes eyes-look-up">
-    <circle cx="10.5" cy="6.2" r="0.7" fill="#FFD700" className="robot-eye" />
-    <circle cx="13.5" cy="6.2" r="0.7" fill="#FFD700" className="robot-eye" />
+    <circle cx="10.5" cy="6.2" r="0.7" fill="#14b8a6" className="robot-eye" />
+    <circle cx="13.5" cy="6.2" r="0.7" fill="#14b8a6" className="robot-eye" />
   </g>
 );
 
@@ -96,12 +96,12 @@ const EyesLookingUp = () => (
 const ArmsIdle = () => (
   <>
     <g className="robot-arm robot-arm-left">
-      <path d="M7 12 L4 14" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
-      <circle cx="3.5" cy="14.5" r="0.4" fill="#FFD700" />
+      <path d="M7 12 L4 14" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
+      <circle cx="3.5" cy="14.5" r="0.4" fill="#14b8a6" />
     </g>
     <g className="robot-arm robot-arm-right">
-      <path d="M17 12 L20 14" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
-      <circle cx="20.5" cy="14.5" r="0.4" fill="#FFD700" />
+      <path d="M17 12 L20 14" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
+      <circle cx="20.5" cy="14.5" r="0.4" fill="#14b8a6" />
     </g>
   </>
 );
@@ -109,12 +109,12 @@ const ArmsIdle = () => (
 const ArmsWaving = () => (
   <>
     <g className="robot-arm robot-arm-left">
-      <path d="M7 12 L4 14" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
-      <circle cx="3.5" cy="14.5" r="0.4" fill="#FFD700" />
+      <path d="M7 12 L4 14" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
+      <circle cx="3.5" cy="14.5" r="0.4" fill="#14b8a6" />
     </g>
     <g className="robot-arm robot-arm-right waving">
-      <path d="M17 11 L19 8 L21 6" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
-      <circle cx="21.5" cy="5.5" r="0.4" fill="#FFD700" />
+      <path d="M17 11 L19 8 L21 6" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
+      <circle cx="21.5" cy="5.5" r="0.4" fill="#14b8a6" />
     </g>
   </>
 );
@@ -122,12 +122,12 @@ const ArmsWaving = () => (
 const ArmsCelebrating = () => (
   <>
     <g className="robot-arm robot-arm-left celebrating">
-      <path d="M7 11 L4 7 L2 4" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
-      <circle cx="1.5" cy="3.5" r="0.4" fill="#FFD700" />
+      <path d="M7 11 L4 7 L2 4" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
+      <circle cx="1.5" cy="3.5" r="0.4" fill="#14b8a6" />
     </g>
     <g className="robot-arm robot-arm-right celebrating">
-      <path d="M17 11 L20 7 L22 4" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
-      <circle cx="22.5" cy="3.5" r="0.4" fill="#FFD700" />
+      <path d="M17 11 L20 7 L22 4" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
+      <circle cx="22.5" cy="3.5" r="0.4" fill="#14b8a6" />
     </g>
   </>
 );
@@ -135,12 +135,12 @@ const ArmsCelebrating = () => (
 const ArmsRelaxed = () => (
   <>
     <g className="robot-arm robot-arm-left relaxed">
-      <path d="M7 12 L5 15" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
-      <circle cx="4.5" cy="15.5" r="0.4" fill="#FFD700" />
+      <path d="M7 12 L5 15" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
+      <circle cx="4.5" cy="15.5" r="0.4" fill="#14b8a6" />
     </g>
     <g className="robot-arm robot-arm-right relaxed">
-      <path d="M17 12 L19 15" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
-      <circle cx="19.5" cy="15.5" r="0.4" fill="#FFD700" />
+      <path d="M17 12 L19 15" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
+      <circle cx="19.5" cy="15.5" r="0.4" fill="#14b8a6" />
     </g>
   </>
 );
@@ -148,12 +148,12 @@ const ArmsRelaxed = () => (
 const ArmsThinking = () => (
   <>
     <g className="robot-arm robot-arm-left">
-      <path d="M7 12 L4 14" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
-      <circle cx="3.5" cy="14.5" r="0.4" fill="#FFD700" />
+      <path d="M7 12 L4 14" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
+      <circle cx="3.5" cy="14.5" r="0.4" fill="#14b8a6" />
     </g>
     <g className="robot-arm robot-arm-right thinking">
-      <path d="M17 11 L16 9 L14.5 8.5" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
-      <circle cx="14" cy="8.5" r="0.4" fill="#FFD700" />
+      <path d="M17 11 L16 9 L14.5 8.5" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" strokeLinecap="round" />
+      <circle cx="14" cy="8.5" r="0.4" fill="#14b8a6" />
     </g>
   </>
 );
@@ -164,25 +164,25 @@ const ArmsThinking = () => (
 
 const CelebrationSparkles = () => (
   <g className="celebration-sparkles">
-    <path d="M2 8 L3 7 L2 6 L1 7 Z" fill="#FFD700" className="sparkle s1" />
-    <path d="M22 8 L23 7 L22 6 L21 7 Z" fill="#FFD700" className="sparkle s2" />
-    <path d="M5 2 L6 1 L5 0 L4 1 Z" fill="#FFD700" className="sparkle s3" />
-    <path d="M19 2 L20 1 L19 0 L18 1 Z" fill="#FFD700" className="sparkle s4" />
-    <circle cx="3" cy="4" r="0.3" fill="#FFD700" className="sparkle s5" />
-    <circle cx="21" cy="4" r="0.3" fill="#FFD700" className="sparkle s6" />
+    <path d="M2 8 L3 7 L2 6 L1 7 Z" fill="#14b8a6" className="sparkle s1" />
+    <path d="M22 8 L23 7 L22 6 L21 7 Z" fill="#14b8a6" className="sparkle s2" />
+    <path d="M5 2 L6 1 L5 0 L4 1 Z" fill="#14b8a6" className="sparkle s3" />
+    <path d="M19 2 L20 1 L19 0 L18 1 Z" fill="#14b8a6" className="sparkle s4" />
+    <circle cx="3" cy="4" r="0.3" fill="#14b8a6" className="sparkle s5" />
+    <circle cx="21" cy="4" r="0.3" fill="#14b8a6" className="sparkle s6" />
   </g>
 );
 
 const ThoughtBubbles = () => (
   <g className="thought-bubbles">
-    <circle cx="17" cy="4" r="0.4" fill="#FFD700" opacity="0.5" />
-    <circle cx="19" cy="2.5" r="0.6" fill="#FFD700" opacity="0.5" />
-    <circle cx="21.5" cy="1" r="0.9" fill="#FFD700" opacity="0.5" />
+    <circle cx="17" cy="4" r="0.4" fill="#14b8a6" opacity="0.5" />
+    <circle cx="19" cy="2.5" r="0.6" fill="#14b8a6" opacity="0.5" />
+    <circle cx="21.5" cy="1" r="0.9" fill="#14b8a6" opacity="0.5" />
   </g>
 );
 
 const SleepZzz = () => (
-  <g className="sleep-zzz" fill="#FFD700" opacity="0.6">
+  <g className="sleep-zzz" fill="#14b8a6" opacity="0.6">
     <text x="18" y="5" fontSize="2.5" fontFamily="Arial, sans-serif" fontWeight="bold">Z</text>
     <text x="20" y="3" fontSize="2" fontFamily="Arial, sans-serif" fontWeight="bold">z</text>
     <text x="21.5" y="1.5" fontSize="1.5" fontFamily="Arial, sans-serif" fontWeight="bold">z</text>
@@ -300,19 +300,19 @@ const AgentiveRobot = memo(({
           <g transform="rotate(-90, 16, 12) translate(4, -2)">
             {/* Antenna */}
             <g className="robot-antenna" filter="url(#robotGlowSleep)">
-              <path d="M12 4 L12 2" stroke="#FFD700" strokeWidth="0.8" strokeDasharray="1 1" strokeLinecap="round" />
-              <circle cx="12" cy="1.5" r="0.6" fill="#FFD700" className="antenna-tip" />
+              <path d="M12 4 L12 2" stroke="#14b8a6" strokeWidth="0.8" strokeDasharray="1 1" strokeLinecap="round" />
+              <circle cx="12" cy="1.5" r="0.6" fill="#14b8a6" className="antenna-tip" />
             </g>
 
             {/* Head */}
             <g className="robot-head">
-              <rect x="9" y="4" width="6" height="5.5" rx="1.5" stroke="#FFD700" strokeWidth="1" strokeDasharray="2 1" fill="none" />
+              <rect x="9" y="4" width="6" height="5.5" rx="1.5" stroke="#14b8a6" strokeWidth="1" strokeDasharray="2 1" fill="none" />
               <EyesClosed />
             </g>
 
             {/* Body */}
             <g className="robot-body sleeping-body">
-              <rect x="7" y="10" width="10" height="8" rx="1" stroke="#FFD700" strokeWidth="1" strokeDasharray="3 2" fill="none" />
+              <rect x="7" y="10" width="10" height="8" rx="1" stroke="#14b8a6" strokeWidth="1" strokeDasharray="3 2" fill="none" />
             </g>
 
             {/* Relaxed arms */}
@@ -351,7 +351,7 @@ const AgentiveRobot = memo(({
           {/* Pulse glow for active states */}
           <filter id="pulseGlow" x="-100%" y="-100%" width="300%" height="300%">
             <feGaussianBlur stdDeviation="1" result="blur" />
-            <feFlood floodColor="#FFD700" floodOpacity="0.6" />
+            <feFlood floodColor="#14b8a6" floodOpacity="0.6" />
             <feComposite in2="blur" operator="in" />
             <feMerge>
               <feMergeNode />
@@ -362,8 +362,8 @@ const AgentiveRobot = memo(({
           {/* Radial gradient for eye glow */}
           <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#FFFFFF" stopOpacity="1" />
-            <stop offset="50%" stopColor="#FFD700" stopOpacity="1" />
-            <stop offset="100%" stopColor="#FFD700" stopOpacity="0" />
+            <stop offset="50%" stopColor="#14b8a6" stopOpacity="1" />
+            <stop offset="100%" stopColor="#14b8a6" stopOpacity="0" />
           </radialGradient>
         </defs>
 
@@ -374,7 +374,7 @@ const AgentiveRobot = memo(({
           <g className="robot-antenna" filter="url(#robotGlow)">
             <path
               d="M12 4 L12 2"
-              stroke="#FFD700"
+              stroke="#14b8a6"
               strokeWidth="0.8"
               strokeDasharray="1 1"
               strokeLinecap="round"
@@ -383,7 +383,7 @@ const AgentiveRobot = memo(({
               cx="12"
               cy="1.5"
               r="0.6"
-              fill="#FFD700"
+              fill="#14b8a6"
               className="antenna-tip"
             />
           </g>
@@ -395,7 +395,7 @@ const AgentiveRobot = memo(({
               x="9" y="4"
               width="6" height="5.5"
               rx="1.5"
-              stroke="#FFD700"
+              stroke="#14b8a6"
               strokeWidth="1"
               strokeDasharray="2 1"
               fill="none"
@@ -408,7 +408,7 @@ const AgentiveRobot = memo(({
             {(expression === 'happy' || pose === 'celebrating') && (
               <path
                 d="M11 8.2 Q12 8.8 13 8.2"
-                stroke="#FFD700"
+                stroke="#14b8a6"
                 strokeWidth="0.5"
                 strokeDasharray="0.5 0.5"
                 fill="none"
@@ -424,7 +424,7 @@ const AgentiveRobot = memo(({
               x="7" y="10"
               width="10" height="8"
               rx="1"
-              stroke="#FFD700"
+              stroke="#14b8a6"
               strokeWidth="1"
               strokeDasharray="3 2"
               fill="none"
@@ -433,9 +433,9 @@ const AgentiveRobot = memo(({
             {/* Chest details (optional) */}
             {showChestDetails && (
               <g className="robot-chest-details" opacity="0.4">
-                <line x1="9" y1="12" x2="11" y2="12" stroke="#FFD700" strokeWidth="0.4" strokeDasharray="1 1" />
-                <line x1="13" y1="12" x2="15" y2="12" stroke="#FFD700" strokeWidth="0.4" strokeDasharray="1 1" />
-                <circle cx="12" cy="14" r="1" stroke="#FFD700" strokeWidth="0.4" strokeDasharray="1 1" fill="none" />
+                <line x1="9" y1="12" x2="11" y2="12" stroke="#14b8a6" strokeWidth="0.4" strokeDasharray="1 1" />
+                <line x1="13" y1="12" x2="15" y2="12" stroke="#14b8a6" strokeWidth="0.4" strokeDasharray="1 1" />
+                <circle cx="12" cy="14" r="1" stroke="#14b8a6" strokeWidth="0.4" strokeDasharray="1 1" fill="none" />
               </g>
             )}
           </g>
@@ -449,14 +449,14 @@ const AgentiveRobot = memo(({
               {/* Left leg */}
               <path
                 d="M10 18 L10 21"
-                stroke="#FFD700"
+                stroke="#14b8a6"
                 strokeWidth="1"
                 strokeDasharray="3 1"
                 strokeLinecap="round"
               />
               <path
                 d="M9 21 L11 21"
-                stroke="#FFD700"
+                stroke="#14b8a6"
                 strokeWidth="0.8"
                 strokeDasharray="1 1"
               />
@@ -464,14 +464,14 @@ const AgentiveRobot = memo(({
               {/* Right leg */}
               <path
                 d="M14 18 L14 21"
-                stroke="#FFD700"
+                stroke="#14b8a6"
                 strokeWidth="1"
                 strokeDasharray="3 1"
                 strokeLinecap="round"
               />
               <path
                 d="M13 21 L15 21"
-                stroke="#FFD700"
+                stroke="#14b8a6"
                 strokeWidth="0.8"
                 strokeDasharray="1 1"
               />
