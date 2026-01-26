@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 /**
  * Mobile Team Section for Servebot
- * Hebrew RTL layout with horizontal scroll snap
- * Showcases the team behind the AI agent company
+ * Hebrew RTL layout with 2x2 mini cards grid
+ * Tap to expand for details
  */
 
 interface TeamMember {
@@ -44,11 +44,12 @@ const teamMembers: TeamMember[] = [
   },
 ];
 
-interface AvatarProps {
+interface MiniAvatarProps {
   member: TeamMember;
+  size?: number;
 }
 
-const Avatar = ({ member }: AvatarProps) => {
+const MiniAvatar = ({ member, size = 48 }: MiniAvatarProps) => {
   const [imageError, setImageError] = useState(false);
   const showInitials = !member.image || imageError;
 
@@ -56,19 +57,18 @@ const Avatar = ({ member }: AvatarProps) => {
     <div
       style={{
         position: 'relative',
-        width: '80px',
-        height: '80px',
-        marginBottom: 'var(--mobile-spacing-md)',
+        width: `${size}px`,
+        height: `${size}px`,
       }}
     >
       {/* Gold ring/border */}
       <div
         style={{
           position: 'absolute',
-          inset: '-3px',
+          inset: '-2px',
           borderRadius: '50%',
           background: 'linear-gradient(135deg, var(--mobile-gold-light) 0%, var(--mobile-gold-primary) 50%, var(--mobile-gold-dark) 100%)',
-          padding: '3px',
+          padding: '2px',
         }}
       >
         <div
@@ -85,8 +85,8 @@ const Avatar = ({ member }: AvatarProps) => {
       <div
         style={{
           position: 'relative',
-          width: '80px',
-          height: '80px',
+          width: `${size}px`,
+          height: `${size}px`,
           borderRadius: '50%',
           overflow: 'hidden',
           display: 'flex',
@@ -100,7 +100,7 @@ const Avatar = ({ member }: AvatarProps) => {
         {showInitials ? (
           <span
             style={{
-              fontSize: '28px',
+              fontSize: `${size * 0.4}px`,
               fontWeight: 700,
               color: 'var(--mobile-gold-primary)',
               letterSpacing: '-1px',
@@ -128,6 +128,7 @@ const Avatar = ({ member }: AvatarProps) => {
 const MobileTeam = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-50px' });
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
   return (
     <section
@@ -137,8 +138,6 @@ const MobileTeam = () => {
       dir="rtl"
       style={{
         background: 'var(--mobile-bg-secondary)',
-        paddingLeft: 0,
-        paddingRight: 0,
         overflow: 'hidden',
       }}
     >
@@ -148,60 +147,45 @@ const MobileTeam = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        style={{
-          paddingLeft: 'var(--mobile-spacing-md)',
-          paddingRight: 'var(--mobile-spacing-md)',
-        }}
       >
         <span className="mobile-section-badge">הצוות שלנו</span>
         <h2 className="mobile-section-title">
           המומחים מאחורי{' '}
           <span className="mobile-gradient-text">הקסם</span>
         </h2>
-        <p className="mobile-section-subtitle">
-          הכירו את האנשים שעובדים קשה כדי להביא לכם את הפתרונות הטובים ביותר
-        </p>
       </motion.div>
 
-      {/* Horizontal Scroll Container */}
+      {/* 2x2 Grid */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="mobile-snap-container"
         style={{
-          display: 'flex',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
           gap: 'var(--mobile-spacing-md)',
-          overflowX: 'auto',
-          overflowY: 'hidden',
-          paddingLeft: 'var(--mobile-spacing-md)',
-          paddingRight: 'var(--mobile-spacing-md)',
-          paddingBottom: 'var(--mobile-spacing-md)',
-          scrollSnapType: 'x mandatory',
-          WebkitOverflowScrolling: 'touch',
+          padding: '0 var(--mobile-spacing-md)',
         }}
       >
         {teamMembers.map((member, index) => (
           <motion.div
             key={index}
-            className="mobile-snap-item"
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{
-              duration: 0.5,
+              duration: 0.4,
               delay: 0.1 * (index + 1),
               ease: 'easeOut',
             }}
+            onClick={() => setSelectedMember(member)}
             style={{
-              flexShrink: 0,
-              width: '85vw',
-              maxWidth: '320px',
               background: 'var(--mobile-bg-card)',
               border: '1px solid var(--mobile-border)',
-              borderRadius: 'var(--radius-lg)',
-              padding: 'var(--mobile-spacing-lg)',
+              borderRadius: '16px',
+              padding: 'var(--mobile-spacing-md)',
               textAlign: 'center',
-              scrollSnapAlign: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
             }}
           >
             {/* Avatar */}
@@ -209,18 +193,19 @@ const MobileTeam = () => {
               style={{
                 display: 'flex',
                 justifyContent: 'center',
+                marginBottom: 'var(--mobile-spacing-sm)',
               }}
             >
-              <Avatar member={member} />
+              <MiniAvatar member={member} size={56} />
             </div>
 
             {/* Name */}
             <h3
               style={{
-                fontSize: '20px',
+                fontSize: '15px',
                 fontWeight: 700,
                 color: 'var(--mobile-text-primary)',
-                margin: '0 0 var(--mobile-spacing-xs)',
+                margin: '0 0 4px',
                 lineHeight: 1.3,
               }}
             >
@@ -228,105 +213,212 @@ const MobileTeam = () => {
             </h3>
 
             {/* Role */}
-            <div
+            <span
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 'var(--mobile-spacing-xs)',
-                marginBottom: 'var(--mobile-spacing-md)',
+                fontSize: '12px',
+                fontWeight: 600,
+                color: 'var(--mobile-gold-primary)',
               }}
             >
-              <span
-                style={{
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  color: 'var(--mobile-gold-primary)',
-                }}
-              >
-                {member.role}
-              </span>
-              <span
-                style={{
-                  fontSize: '12px',
-                  color: 'var(--mobile-text-muted)',
-                }}
-              >
-                ({member.roleEn})
-              </span>
-            </div>
-
-            {/* Description */}
-            <p
-              style={{
-                fontSize: '14px',
-                color: 'var(--mobile-text-secondary)',
-                margin: '0 0 var(--mobile-spacing-md)',
-                lineHeight: 1.7,
-                minHeight: '72px',
-              }}
-            >
-              {member.description}
-            </p>
-
-            {/* Expertise Tags */}
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 'var(--mobile-spacing-xs)',
-                justifyContent: 'center',
-              }}
-            >
-              {member.expertise.map((skill, skillIndex) => (
-                <span
-                  key={skillIndex}
-                  style={{
-                    padding: '6px 12px',
-                    background: 'rgba(245, 158, 11, 0.1)',
-                    border: '1px solid rgba(245, 158, 11, 0.2)',
-                    borderRadius: '100px',
-                    fontSize: '12px',
-                    fontWeight: 500,
-                    color: 'var(--mobile-gold-primary)',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
+              {member.role}
+            </span>
           </motion.div>
         ))}
+
+        {/* Empty 4th cell with subtle pattern */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.4, delay: 0.4, ease: 'easeOut' }}
+          style={{
+            background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(245, 158, 11, 0.02) 100%)',
+            border: '1px dashed rgba(245, 158, 11, 0.2)',
+            borderRadius: '16px',
+            padding: 'var(--mobile-spacing-md)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '140px',
+          }}
+        >
+          <span
+            style={{
+              fontSize: '24px',
+              marginBottom: '8px',
+            }}
+          >
+            🚀
+          </span>
+          <span
+            style={{
+              fontSize: '12px',
+              color: 'var(--mobile-text-muted)',
+              textAlign: 'center',
+            }}
+          >
+            הצוות גדל!
+          </span>
+        </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.5 }}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: 'var(--mobile-spacing-xs)',
-          marginTop: 'var(--mobile-spacing-md)',
-        }}
-      >
-        {teamMembers.map((_, index) => (
-          <div
-            key={index}
+      {/* Expanded Card Modal */}
+      <AnimatePresence>
+        {selectedMember && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setSelectedMember(null)}
             style={{
-              width: index === 0 ? '24px' : '8px',
-              height: '8px',
-              borderRadius: '4px',
-              background: index === 0
-                ? 'var(--mobile-gold-primary)'
-                : 'rgba(255, 255, 255, 0.2)',
-              transition: 'all 0.3s ease',
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(0, 0, 0, 0.8)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              zIndex: 1000,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 'var(--mobile-spacing-lg)',
             }}
-          />
-        ))}
-      </motion.div>
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                background: 'var(--mobile-bg-card)',
+                border: '1px solid var(--mobile-border)',
+                borderRadius: '20px',
+                padding: 'var(--mobile-spacing-xl)',
+                width: '100%',
+                maxWidth: '320px',
+                textAlign: 'center',
+                position: 'relative',
+              }}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedMember(null)}
+                style={{
+                  position: 'absolute',
+                  top: '12px',
+                  left: '12px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '32px',
+                  height: '32px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  color: 'var(--mobile-text-secondary)',
+                  fontSize: '18px',
+                }}
+              >
+                ×
+              </button>
+
+              {/* Avatar */}
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginBottom: 'var(--mobile-spacing-md)',
+                }}
+              >
+                <MiniAvatar member={selectedMember} size={72} />
+              </div>
+
+              {/* Name */}
+              <h3
+                style={{
+                  fontSize: '20px',
+                  fontWeight: 700,
+                  color: 'var(--mobile-text-primary)',
+                  margin: '0 0 4px',
+                }}
+              >
+                {selectedMember.name}
+              </h3>
+
+              {/* Role */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  marginBottom: 'var(--mobile-spacing-md)',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    color: 'var(--mobile-gold-primary)',
+                  }}
+                >
+                  {selectedMember.role}
+                </span>
+                <span
+                  style={{
+                    fontSize: '12px',
+                    color: 'var(--mobile-text-muted)',
+                  }}
+                >
+                  ({selectedMember.roleEn})
+                </span>
+              </div>
+
+              {/* Description */}
+              <p
+                style={{
+                  fontSize: '14px',
+                  color: 'var(--mobile-text-secondary)',
+                  margin: '0 0 var(--mobile-spacing-md)',
+                  lineHeight: 1.7,
+                }}
+              >
+                {selectedMember.description}
+              </p>
+
+              {/* Expertise Tags */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '8px',
+                  justifyContent: 'center',
+                }}
+              >
+                {selectedMember.expertise.map((skill, skillIndex) => (
+                  <span
+                    key={skillIndex}
+                    style={{
+                      padding: '6px 12px',
+                      background: 'rgba(245, 158, 11, 0.1)',
+                      border: '1px solid rgba(245, 158, 11, 0.2)',
+                      borderRadius: '100px',
+                      fontSize: '12px',
+                      fontWeight: 500,
+                      color: 'var(--mobile-gold-primary)',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
