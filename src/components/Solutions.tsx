@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 
 const solutions = [
   {
@@ -54,6 +54,7 @@ const Solutions = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -72,16 +73,7 @@ const Solutions = () => {
     },
   };
 
-  const handleScroll = () => {
-    if (carouselRef.current) {
-      const scrollLeft = carouselRef.current.scrollLeft;
-      const cardWidth = carouselRef.current.offsetWidth * 0.85; // 85% card width
-      const newIndex = Math.round(scrollLeft / cardWidth);
-      setActiveIndex(Math.min(newIndex, solutions.length - 1));
-    }
-  };
-
-  const scrollToCard = (index: number) => {
+  const scrollToCard = useCallback((index: number) => {
     if (carouselRef.current) {
       const cardWidth = carouselRef.current.offsetWidth * 0.85;
       carouselRef.current.scrollTo({
@@ -89,6 +81,35 @@ const Solutions = () => {
         behavior: 'smooth'
       });
     }
+  }, []);
+
+  // Auto-play carousel
+  useEffect(() => {
+    if (!isInView || isPaused) return;
+
+    const interval = setInterval(() => {
+      const nextIndex = (activeIndex + 1) % solutions.length;
+      setActiveIndex(nextIndex);
+      scrollToCard(nextIndex);
+    }, 3000); // Change card every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [isInView, activeIndex, isPaused, scrollToCard]);
+
+  const handleScroll = () => {
+    if (carouselRef.current) {
+      const scrollLeft = carouselRef.current.scrollLeft;
+      const cardWidth = carouselRef.current.offsetWidth * 0.85;
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      setActiveIndex(Math.min(newIndex, solutions.length - 1));
+    }
+  };
+
+  // Pause auto-play on touch
+  const handleTouchStart = () => setIsPaused(true);
+  const handleTouchEnd = () => {
+    // Resume after 5 seconds of no interaction
+    setTimeout(() => setIsPaused(false), 5000);
   };
 
   return (
@@ -142,12 +163,14 @@ const Solutions = () => {
           ))}
         </motion.div>
 
-        {/* Mobile Carousel */}
+        {/* Mobile Carousel - Auto-rotating */}
         <div className="solutions-carousel-wrapper solutions-mobile">
           <motion.div
             className="solutions-carousel"
             ref={carouselRef}
             onScroll={handleScroll}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6 }}
@@ -173,18 +196,6 @@ const Solutions = () => {
               </div>
             ))}
           </motion.div>
-
-          {/* Carousel Dots */}
-          <div className="carousel-dots">
-            {solutions.map((_, index) => (
-              <button
-                key={index}
-                className={`carousel-dot ${activeIndex === index ? 'active' : ''}`}
-                onClick={() => scrollToCard(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
         </div>
       </div>
 

@@ -4766,27 +4766,6 @@ html {
     scroll-snap-align: start;
     padding: 22px;
   }
-  /* Carousel Dots */
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    padding: 16px 0;
-  }
-  .carousel-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0;
-  }
-  .carousel-dot.active {
-    background: var(--accent-gold);
-    transform: scale(1.2);
-  }
   .solution-card {
     padding: 22px;
   }
