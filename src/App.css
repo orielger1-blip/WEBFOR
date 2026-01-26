@@ -782,6 +782,14 @@ section {
 
 
 /* ==================== SOLUTIONS SECTION ==================== */
+/* Desktop: show grid, hide carousel */
+.solutions-desktop {
+  display: grid;
+}
+.solutions-mobile {
+  display: none;
+}
+
 .solutions-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -4723,7 +4731,19 @@ html {
   }
 
   /* === SOLUTIONS SECTION === */
-  .solutions-grid {
+  /* Hide desktop grid on mobile */
+  .solutions-desktop {
+    display: none !important;
+  }
+  /* Show mobile carousel */
+  .solutions-mobile {
+    display: block !important;
+  }
+  .solutions-carousel-wrapper {
+    position: relative;
+    margin: 0 -20px;
+  }
+  .solutions-carousel {
     display: flex;
     flex-direction: row;
     gap: 16px;
@@ -4731,22 +4751,43 @@ html {
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    padding: 8px 0 20px;
-    margin: 0 -20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 8px 20px 20px;
     /* Hide scrollbar */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  .solutions-grid::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+  .solutions-carousel::-webkit-scrollbar {
+    display: none;
+  }
+  .solutions-carousel .carousel-card {
+    flex: 0 0 85%;
+    min-width: 85%;
+    max-width: 85%;
+    scroll-snap-align: start;
+    padding: 22px;
+  }
+  /* Carousel Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 0;
+  }
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+  .carousel-dot.active {
+    background: var(--accent-gold);
+    transform: scale(1.2);
   }
   .solution-card {
-    flex: 0 0 85vw;
-    min-width: 85vw;
-    max-width: 85vw;
-    scroll-snap-align: center;
     padding: 22px;
   }
   .solution-title {

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const solutions = [
   {
@@ -51,7 +51,9 @@ const solutions = [
 
 const Solutions = () => {
   const ref = useRef(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -68,6 +70,25 @@ const Solutions = () => {
       y: 0,
       transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] as const },
     },
+  };
+
+  const handleScroll = () => {
+    if (carouselRef.current) {
+      const scrollLeft = carouselRef.current.scrollLeft;
+      const cardWidth = carouselRef.current.offsetWidth * 0.85; // 85% card width
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      setActiveIndex(Math.min(newIndex, solutions.length - 1));
+    }
+  };
+
+  const scrollToCard = (index: number) => {
+    if (carouselRef.current) {
+      const cardWidth = carouselRef.current.offsetWidth * 0.85;
+      carouselRef.current.scrollTo({
+        left: index * cardWidth,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
@@ -91,8 +112,9 @@ const Solutions = () => {
           </p>
         </motion.div>
 
+        {/* Desktop Grid */}
         <motion.div
-          className="solutions-grid"
+          className="solutions-grid solutions-desktop"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
@@ -119,6 +141,51 @@ const Solutions = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Mobile Carousel */}
+        <div className="solutions-carousel-wrapper solutions-mobile">
+          <motion.div
+            className="solutions-carousel"
+            ref={carouselRef}
+            onScroll={handleScroll}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            {solutions.map((solution, index) => (
+              <div
+                key={index}
+                className="solution-card card carousel-card"
+              >
+                <div className="solution-icon">{solution.icon}</div>
+                <h3 className="solution-title">{solution.title}</h3>
+                <p className="solution-description">{solution.description}</p>
+                <ul className="solution-features">
+                  {solution.features.map((feature, i) => (
+                    <li key={i}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Carousel Dots */}
+          <div className="carousel-dots">
+            {solutions.map((_, index) => (
+              <button
+                key={index}
+                className={`carousel-dot ${activeIndex === index ? 'active' : ''}`}
+                onClick={() => scrollToCard(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
     </section>
