@@ -2955,11 +2955,11 @@ section::before {
 /* ==================== ACCESSIBILITY WIDGET ==================== */
 .accessibility-btn {
   position: fixed;
-  bottom: 30px;
-  left: 30px; /* Accessibility on left, WhatsApp on right */
-  /* 44x44px minimum touch target - actual size 50px */
-  width: 50px;
-  height: 50px;
+  bottom: max(30px, calc(30px + env(safe-area-inset-bottom, 0px)));
+  left: max(30px, calc(30px + env(safe-area-inset-left, 0px)));
+  /* Match WhatsApp button size: 60x60px */
+  width: 60px;
+  height: 60px;
   background: var(--accent-gradient);
   border: none;
   border-radius: 50%;
@@ -2974,8 +2974,8 @@ section::before {
 }
 
 .accessibility-btn svg {
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
 }
 
 .accessibility-backdrop {
@@ -5412,17 +5412,22 @@ html {
     display: none;
   }
   .accessibility-btn {
-    min-height: 48px;
-    min-width: 48px;
-    width: 48px;
-    height: 48px;
-    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    /* Match WhatsApp button size on mobile */
+    min-height: 52px;
+    min-width: 52px;
+    width: 52px;
+    height: 52px;
+    bottom: calc(100px + env(safe-area-inset-bottom, 0px));
     left: 16px;
     right: auto;
     z-index: 998;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     pointer-events: auto;
+  }
+  .accessibility-btn svg {
+    width: 28px;
+    height: 28px;
   }
   .accessibility-btn:active {
     transform: scale(0.95);
