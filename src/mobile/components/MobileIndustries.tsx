@@ -2,9 +2,8 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 /**
- * MobileIndustries - Ultra-compact emoji strip
- * Single row of industry icons with text below
- * ~60px total height, clean and minimal
+ * MobileIndustries - Horizontal scroll pills
+ * [💎 תכשיטים] [🏥 רפואה] [🏠 נדל"ן] →
  */
 
 const industries = [
@@ -28,64 +27,82 @@ const MobileIndustries = () => {
       className="mobile-industries"
       dir="rtl"
       style={{
-        padding: 'var(--mobile-spacing-lg) var(--mobile-spacing-md)',
+        padding: 'var(--mobile-spacing-md) 0',
         background: 'var(--mobile-bg-primary)',
         width: '100%',
         boxSizing: 'border-box',
-        textAlign: 'center',
       }}
     >
-      {/* Emoji Row - Single horizontal line */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.4 }}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '10px',
-          marginBottom: '10px',
-          flexWrap: 'nowrap',
-        }}
-      >
-        {industries.map((industry, index) => (
-          <motion.span
-            key={index}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{
-              duration: 0.3,
-              delay: 0.03 * index,
-              ease: 'easeOut',
-            }}
-            style={{
-              fontSize: '20px',
-              lineHeight: 1,
-              flexShrink: 0,
-            }}
-            title={industry.name}
-          >
-            {industry.icon}
-          </motion.span>
-        ))}
-      </motion.div>
-
-      {/* Text Label */}
+      {/* Title */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.4, delay: 0.3 }}
+        transition={{ duration: 0.3 }}
         style={{
-          fontSize: '13px',
-          fontWeight: 500,
+          fontSize: '12px',
+          fontWeight: 600,
           color: 'var(--mobile-text-muted)',
-          margin: 0,
-          letterSpacing: '0.3px',
+          textAlign: 'center',
+          margin: '0 0 var(--mobile-spacing-sm)',
+          letterSpacing: '0.5px',
         }}
       >
         מתמחים במגוון תעשיות
       </motion.p>
+
+      {/* Horizontal Scroll Pills */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.3, delay: 0.1 }}
+        style={{
+          display: 'flex',
+          gap: '8px',
+          overflowX: 'auto',
+          overflowY: 'hidden',
+          paddingLeft: 'var(--mobile-spacing-md)',
+          paddingRight: 'var(--mobile-spacing-md)',
+          paddingBottom: '8px',
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        }}
+        className="mobile-industries-scroll"
+      >
+        {industries.map((industry, index) => (
+          <div
+            key={index}
+            style={{
+              flexShrink: 0,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '8px 12px',
+              background: 'rgba(245, 158, 11, 0.08)',
+              border: '1px solid rgba(245, 158, 11, 0.15)',
+              borderRadius: '100px',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            <span style={{ fontSize: '14px' }}>{industry.icon}</span>
+            <span
+              style={{
+                fontSize: '13px',
+                fontWeight: 500,
+                color: 'var(--mobile-text-secondary)',
+              }}
+            >
+              {industry.name}
+            </span>
+          </div>
+        ))}
+      </motion.div>
+
+      <style>{`
+        .mobile-industries-scroll::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 };
