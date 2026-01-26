@@ -4686,26 +4686,26 @@ html {
 
   /* === PROBLEM SECTION === */
   .problem-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
   .problem-card {
-    padding: 32px 24px;
+    padding: 20px 16px;
   }
   .problem-title {
-    font-size: clamp(1.05rem, 3vw, 1.2rem);
+    font-size: 0.95rem;
   }
   .problem-description {
-    font-size: clamp(0.875rem, 2.5vw, 0.938rem);
-    line-height: 1.7;
+    font-size: 0.8rem;
+    line-height: 1.5;
   }
   .problem-icon {
-    width: 52px;
-    height: 52px;
-    margin-bottom: 16px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
     background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.08) 100%);
     border: 1px solid rgba(251, 191, 36, 0.25);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     box-shadow: 0 4px 16px rgba(251, 191, 36, 0.1);
   }
   .problem-icon svg {
@@ -6140,25 +6140,26 @@ html {
     padding: 20px 16px;
   }
   .problem-grid {
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
   .problem-card {
-    padding: 24px 16px;
+    padding: 16px 12px;
   }
   .problem-icon {
-    width: 56px;
-    height: 56px;
+    width: 36px;
+    height: 36px;
   }
   .problem-icon svg {
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
   }
   .problem-title {
-    font-size: 1.0625rem;
+    font-size: 0.85rem;
   }
   .problem-description {
-    font-size: 0.875rem;
-    line-height: 1.65;
+    font-size: 0.75rem;
+    line-height: 1.5;
   }
   .solutions-grid {
     gap: 14px;
