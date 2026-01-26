@@ -1,0 +1,246 @@
+/**
+ * Mobile-First CSS for Servebot
+ * Built from scratch for optimal mobile UX
+ * Target: iOS Safari, Chrome Android, Samsung Internet
+ */
+
+/* ==================== CSS VARIABLES ==================== */
+:root {
+  /* Colors */
+  --mobile-bg-primary: #0a0a0f;
+  --mobile-bg-secondary: #111118;
+  --mobile-bg-card: #16161f;
+  --mobile-gold-primary: #f59e0b;
+  --mobile-gold-light: #fbbf24;
+  --mobile-gold-dark: #d97706;
+  --mobile-text-primary: #ffffff;
+  --mobile-text-secondary: rgba(255, 255, 255, 0.7);
+  --mobile-text-muted: rgba(255, 255, 255, 0.5);
+  --mobile-border: rgba(255, 255, 255, 0.08);
+
+  /* Spacing */
+  --mobile-spacing-xs: 8px;
+  --mobile-spacing-sm: 12px;
+  --mobile-spacing-md: 16px;
+  --mobile-spacing-lg: 24px;
+  --mobile-spacing-xl: 32px;
+  --mobile-spacing-2xl: 48px;
+
+  /* Safe areas */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  /* Touch targets */
+  --touch-target: 44px;
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ==================== GLOBAL RESET ==================== */
+.mobile-app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+  background: var(--mobile-bg-primary);
+  color: var(--mobile-text-primary);
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+.mobile-app * {
+  box-sizing: border-box;
+}
+
+.mobile-main {
+  padding-top: calc(60px + var(--safe-top));
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+.mobile-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mobile-spacing-xs);
+  padding: 6px 14px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mobile-gold-primary);
+  margin-bottom: var(--mobile-spacing-md);
+}
+
+.mobile-section-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 var(--mobile-spacing-sm);
+}
+
+.mobile-section-subtitle {
+  font-size: 15px;
+  color: var(--mobile-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.mobile-gradient-text {
+  background: linear-gradient(135deg, var(--mobile-gold-light) 0%, var(--mobile-gold-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ==================== BUTTONS ==================== */
+.mobile-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mobile-spacing-xs);
+  min-height: var(--touch-target);
+  padding: 14px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-btn:active {
+  transform: scale(0.97);
+}
+
+.mobile-btn-primary {
+  background: linear-gradient(135deg, var(--mobile-gold-light) 0%, var(--mobile-gold-primary) 100%);
+  color: #000;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+}
+
+.mobile-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--mobile-border);
+  color: var(--mobile-text-primary);
+}
+
+.mobile-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==================== CARDS ==================== */
+.mobile-card {
+  background: var(--mobile-bg-card);
+  border: 1px solid var(--mobile-border);
+  border-radius: var(--radius-lg);
+  padding: var(--mobile-spacing-lg);
+}
+
+/* ==================== SECTION LAYOUT ==================== */
+.mobile-section {
+  padding: var(--mobile-spacing-2xl) var(--mobile-spacing-md);
+}
+
+.mobile-section-header {
+  text-align: center;
+  margin-bottom: var(--mobile-spacing-xl);
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes mobileFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobilePulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes mobileSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==================== UTILITIES ==================== */
+.mobile-hidden {
+  display: none !important;
+}
+
+.mobile-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Touch feedback */
+.mobile-touchable {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.mobile-touchable:active {
+  opacity: 0.7;
+}
+
+/* Safe area padding helpers */
+.mobile-safe-top {
+  padding-top: var(--safe-top);
+}
+
+.mobile-safe-bottom {
+  padding-bottom: var(--safe-bottom);
+}
+
+/* Scroll snap for horizontal carousels */
+.mobile-snap-container {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.mobile-snap-container::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-snap-item {
+  scroll-snap-align: center;
+}
