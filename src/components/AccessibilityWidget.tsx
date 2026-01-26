@@ -151,10 +151,11 @@ const AccessibilityWidget = () => {
         whileTap={{ scale: 0.95 }}
         style={{ pointerEvents: isVisible ? 'auto' : 'none' }}
       >
-        {/* Accessibility Icon - Person with arms out */}
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <circle cx="12" cy="4" r="2"/>
-          <path d="M21 9h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
+        {/* Accessibility Icon - Universal Access Symbol */}
+        <svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true">
+          <circle cx="256" cy="120" r="56"/>
+          <path d="M256 224c-49 0-89 40-89 89v127c0 18 14 32 32 32s32-14 32-32V313c0-9 7-16 16-16h18c9 0 16 7 16 16v127c0 18 14 32 32 32s32-14 32-32V313c0-49-40-89-89-89z"/>
+          <path d="M160 256h192c18 0 32-14 32-32s-14-32-32-32H160c-18 0-32 14-32 32s14 32 32 32z"/>
         </svg>
       </motion.button>
 
