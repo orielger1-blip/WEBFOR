@@ -326,7 +326,7 @@ function MobileFooter() {
             </svg>
           </a>
           <a
-            href="https://wa.me/972501234567"
+            href="https://wa.me/972525590062"
             target="_blank"
             rel="noopener noreferrer"
             className="mobile-footer-social-link whatsapp"

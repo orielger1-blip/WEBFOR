@@ -91,7 +91,7 @@ const MobileCTABar = () => {
         </svg>
       </a>
       <a
-        href="https://wa.me/972501234567"
+        href="https://wa.me/972525590062"
         className="mobile-cta-whatsapp"
         target="_blank"
         rel="noopener noreferrer"

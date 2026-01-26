@@ -66,9 +66,9 @@ const AccessibilityStatement = () => {
               אם נתקלתם בבעיית נגישות באתר, או שיש לכם הצעות לשיפור הנגישות, נשמח לשמוע מכם:
             </p>
             <ul>
-              <li><strong>טלפון:</strong> 050-123-4567</li>
-              <li><strong>אימייל:</strong> accessibility@agentive.co.il</li>
-              <li><strong>WhatsApp:</strong> 050-123-4567</li>
+              <li><strong>טלפון:</strong> 052-559-0062</li>
+              <li><strong>אימייל:</strong> i@alter1.com</li>
+              <li><strong>WhatsApp:</strong> 052-559-0062</li>
             </ul>
 
             <h3>פרטים נוספים</h3>

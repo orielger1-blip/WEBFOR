@@ -232,7 +232,7 @@ const MobileContact = () => {
       {/* Quick Contact Methods - Enlarged with details */}
       <div className="mobile-contact-quick">
         <a
-          href="https://wa.me/972501234567"
+          href="https://wa.me/972525590062"
           className="mobile-contact-method mobile-contact-whatsapp"
           target="_blank"
           rel="noopener noreferrer"
@@ -244,12 +244,12 @@ const MobileContact = () => {
           </div>
           <div className="mobile-contact-method-text">
             <span className="mobile-contact-method-label">WhatsApp</span>
-            <span className="mobile-contact-method-value" dir="ltr">050-123-4567</span>
+            <span className="mobile-contact-method-value" dir="ltr">052-559-0062</span>
           </div>
         </a>
 
         <a
-          href="mailto:hello@servebot.co.il"
+          href="mailto:i@alter1.com"
           className="mobile-contact-method mobile-contact-email"
         >
           <div className="mobile-contact-method-icon">
@@ -260,12 +260,12 @@ const MobileContact = () => {
           </div>
           <div className="mobile-contact-method-text">
             <span className="mobile-contact-method-label">אימייל</span>
-            <span className="mobile-contact-method-value" dir="ltr">hello@servebot.co.il</span>
+            <span className="mobile-contact-method-value" dir="ltr">i@alter1.com</span>
           </div>
         </a>
 
         <a
-          href="tel:+972501234567"
+          href="tel:+972525590062"
           className="mobile-contact-method mobile-contact-phone"
         >
           <div className="mobile-contact-method-icon">
@@ -275,7 +275,7 @@ const MobileContact = () => {
           </div>
           <div className="mobile-contact-method-text">
             <span className="mobile-contact-method-label">טלפון</span>
-            <span className="mobile-contact-method-value" dir="ltr">050-123-4567</span>
+            <span className="mobile-contact-method-value" dir="ltr">052-559-0062</span>
           </div>
         </a>
       </div>

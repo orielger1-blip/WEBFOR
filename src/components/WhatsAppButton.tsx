@@ -34,7 +34,7 @@ const WhatsAppButton = () => {
     };
   }, [lastScrollY]);
 
-  const phoneNumber = '972501234567'; // Replace with actual number
+  const phoneNumber = '972525590062';
   const message = 'היי, אשמח לשמוע עוד על הסוכנים החכמים שלכם';
 
   return (
