@@ -458,11 +458,7 @@ section {
   }
 }
 
-/* Android overscroll behavior - prevent pull-to-refresh and bounce effects */
-html, body {
-  overscroll-behavior-y: none;
-  overscroll-behavior-x: none;
-}
+/* Note: Removed overscroll-behavior - it was blocking normal scroll */
 
 /* Hero section with 100dvh fallback for older Android browsers */
 .hero {
@@ -471,10 +467,8 @@ html, body {
   min-height: -webkit-fill-available; /* WebKit fallback for Android Chrome */
 }
 
-/* Faster touch response for Android (150ms vs default 300ms delay) */
-* {
-  touch-action: manipulation;
-}
+/* Note: Removed global touch-action: manipulation - it was blocking scroll.
+   Touch-action is already set on interactive elements (buttons, links) above. */
 
 /* Fix Android keyboard pushing fixed elements up - hide CTA bar when keyboard open */
 @media (max-height: 500px) {
