@@ -4,6 +4,7 @@ import MobileProblem from './components/MobileProblem';
 import MobileSolutions from './components/MobileSolutions';
 import MobileProcess from './components/MobileProcess';
 import MobileResults from './components/MobileResults';
+import MobileIndustries from './components/MobileIndustries';
 import MobileTeam from './components/MobileTeam';
 import MobileFAQ from './components/MobileFAQ';
 import MobileContact from './components/MobileContact';
@@ -25,6 +26,7 @@ function MobileApp() {
         <MobileSolutions />
         <MobileProcess />
         <MobileResults />
+        <MobileIndustries />
         <MobileTeam />
         <MobileFAQ />
         <MobileContact />
