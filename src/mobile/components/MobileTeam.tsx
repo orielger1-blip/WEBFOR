@@ -137,8 +137,10 @@ const MobileTeam = () => {
       className="mobile-section"
       dir="rtl"
       style={{
-        background: 'var(--mobile-bg-secondary)',
+        background: 'var(--mobile-bg-primary)',
         overflow: 'hidden',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
       {/* Section Header */}
@@ -164,7 +166,6 @@ const MobileTeam = () => {
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
           gap: 'var(--mobile-spacing-md)',
-          padding: '0 var(--mobile-spacing-md)',
         }}
       >
         {teamMembers.map((member, index) => (
