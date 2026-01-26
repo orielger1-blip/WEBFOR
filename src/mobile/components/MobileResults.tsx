@@ -217,7 +217,9 @@ const MobileResults = () => {
       className="mobile-section"
       dir="rtl"
       style={{
-        background: 'var(--mobile-bg-secondary)',
+        background: 'var(--mobile-bg-primary)',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
       {/* Section Header */}

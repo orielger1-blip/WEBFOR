@@ -155,6 +155,8 @@
 /* ==================== SECTION LAYOUT ==================== */
 .mobile-section {
   padding: var(--mobile-spacing-2xl) var(--mobile-spacing-md);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .mobile-section-header {

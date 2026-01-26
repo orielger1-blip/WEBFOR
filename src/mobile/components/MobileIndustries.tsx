@@ -24,12 +24,14 @@ const MobileIndustries = () => {
   return (
     <section
       ref={sectionRef}
-      className="mobile-industries"
+      className="mobile-section mobile-industries"
       dir="rtl"
       style={{
-        padding: 'var(--mobile-spacing-lg) 0',
+        padding: 'var(--mobile-spacing-lg) var(--mobile-spacing-md)',
         background: 'var(--mobile-bg-primary)',
         overflow: 'hidden',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
       {/* Title */}
@@ -56,12 +58,14 @@ const MobileIndustries = () => {
         transition={{ duration: 0.4, delay: 0.1 }}
         style={{
           display: 'flex',
-          gap: '10px',
+          gap: 'var(--mobile-spacing-sm)',
           overflowX: 'auto',
           overflowY: 'hidden',
+          paddingBottom: 'var(--mobile-spacing-xs)',
+          marginLeft: 'calc(-1 * var(--mobile-spacing-md))',
+          marginRight: 'calc(-1 * var(--mobile-spacing-md))',
           paddingLeft: 'var(--mobile-spacing-md)',
           paddingRight: 'var(--mobile-spacing-md)',
-          paddingBottom: '4px',
           WebkitOverflowScrolling: 'touch',
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',

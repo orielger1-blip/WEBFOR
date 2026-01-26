@@ -77,6 +77,8 @@ function MobileFAQ() {
         .mobile-faq-section {
           padding: var(--mobile-spacing-2xl) var(--mobile-spacing-md);
           background: var(--mobile-bg-primary);
+          width: 100%;
+          box-sizing: border-box;
         }
 
         .mobile-faq-header {
