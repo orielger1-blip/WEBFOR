@@ -78,7 +78,7 @@ const Team = () => {
           {teamMembers.map((member, index) => (
             <motion.div
               key={member.name}
-              className="team-member-card"
+              className={`team-member-card ${index === 2 ? 'team-member-small' : ''}`}
               initial={{ opacity: 0, y: 60 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.2 + index * 0.15 }}
