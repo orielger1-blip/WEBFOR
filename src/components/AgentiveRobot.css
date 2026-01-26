@@ -441,8 +441,8 @@ html.high-contrast .agentive-robot rect,
 html.high-contrast .agentive-robot circle,
 html.high-contrast .agentive-robot line,
 html.high-contrast .agentive-robot ellipse {
-  stroke: #FFFF00 !important;
-  fill: #FFFF00 !important;
+  stroke: #5eead4 !important;
+  fill: #5eead4 !important;
   stroke-width: 1.5 !important;
 }
 
@@ -483,11 +483,11 @@ html.high-contrast .agentive-robot circle[fill="none"] {
 .agentive-robot circle,
 .agentive-robot line,
 .agentive-robot ellipse {
-  stroke: #FFD700;
+  stroke: #14b8a6;
 }
 
-.agentive-robot [fill="#FFD700"] {
-  fill: #FFD700;
+.agentive-robot [fill="#14b8a6"] {
+  fill: #14b8a6;
 }
 
 /* Light mode override (if needed) */
@@ -500,7 +500,7 @@ html.high-contrast .agentive-robot circle[fill="none"] {
     stroke: #B8860B;
   }
 
-  .agentive-robot.light-mode [fill="#FFD700"] {
+  .agentive-robot.light-mode [fill="#14b8a6"] {
     fill: #B8860B;
   }
 
@@ -535,7 +535,7 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   stroke: #ef4444;
 }
 
-.agentive-robot-wrapper.error .agentive-robot [fill="#FFD700"] {
+.agentive-robot-wrapper.error .agentive-robot [fill="#14b8a6"] {
   fill: #ef4444;
 }
 
@@ -551,7 +551,7 @@ html.high-contrast .agentive-robot circle[fill="none"] {
   stroke: #14b8a6;
 }
 
-.agentive-robot-wrapper.success .agentive-robot [fill="#FFD700"] {
+.agentive-robot-wrapper.success .agentive-robot [fill="#14b8a6"] {
   fill: #5eead4;
 }
 

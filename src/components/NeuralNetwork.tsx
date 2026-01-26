@@ -10,11 +10,11 @@ import * as THREE from 'three';
 // ============================================================================
 
 const CONFIG = {
-  // Golden colors - bright and luminous
-  COLOR_GOLD_PRIMARY: '#FFD700',      // Pure gold
-  COLOR_GOLD_BRIGHT: '#FFC125',       // Bright gold for main lines
-  COLOR_GOLD_ACCENT: '#FFAA00',       // Accent gold
-  COLOR_GOLD_GLOW: '#FFE555',         // Glow color
+  // Teal colors - bright and luminous
+  COLOR_GOLD_PRIMARY: '#14b8a6',      // Primary teal
+  COLOR_GOLD_BRIGHT: '#5eead4',       // Bright teal for main lines
+  COLOR_GOLD_ACCENT: '#0f766e',       // Accent teal
+  COLOR_GOLD_GLOW: '#99f6e4',         // Glow color
   COLOR_BACKGROUND: '#000000',        // Pure black
 
   BRAIN_SCALE: 1.5,

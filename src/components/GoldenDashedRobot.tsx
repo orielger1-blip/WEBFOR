@@ -25,7 +25,7 @@ const GoldenDashedRobot = ({
           x="7" y="10"
           width="10" height="8"
           rx="1"
-          stroke="#FFD700"
+          stroke="#14b8a6"
           strokeWidth="1"
           strokeDasharray="3 2"
         />
@@ -33,19 +33,19 @@ const GoldenDashedRobot = ({
         {/* Head */}
         <path
           d="M9 10V7C9 5.89543 9.89543 5 11 5H13C14.1046 5 15 5.89543 15 7V10"
-          stroke="#FFD700"
+          stroke="#14b8a6"
           strokeWidth="1"
           strokeDasharray="2 1"
         />
 
         {/* Glowing eyes */}
-        <circle cx="11" cy="7.5" r="0.5" fill="#FFD700" className="robot-eye" />
-        <circle cx="13" cy="7.5" r="0.5" fill="#FFD700" className="robot-eye" />
+        <circle cx="11" cy="7.5" r="0.5" fill="#14b8a6" className="robot-eye" />
+        <circle cx="13" cy="7.5" r="0.5" fill="#14b8a6" className="robot-eye" />
 
         {/* Waving arm */}
         <path
           d="M17 12L20 10"
-          stroke="#FFD700"
+          stroke="#14b8a6"
           strokeWidth="1"
           strokeDasharray="2 1"
           className="robot-waving-arm"
@@ -54,7 +54,7 @@ const GoldenDashedRobot = ({
         {/* Legs */}
         <path
           d="M10 18V21M14 18V21"
-          stroke="#FFD700"
+          stroke="#14b8a6"
           strokeWidth="1"
           strokeDasharray="3 1"
         />

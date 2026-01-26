@@ -10,10 +10,10 @@ import * as THREE from 'three';
 // ============================================================================
 
 const CONFIG = {
-  // Colors - Premium gold palette
-  GOLD_PRIMARY: new THREE.Color('#FFD700'),
-  GOLD_BRIGHT: new THREE.Color('#FFE55C'),
-  GOLD_DEEP: new THREE.Color('#CC9900'),
+  // Colors - Premium teal palette
+  GOLD_PRIMARY: new THREE.Color('#14b8a6'),
+  GOLD_BRIGHT: new THREE.Color('#5eead4'),
+  GOLD_DEEP: new THREE.Color('#0f766e'),
   BACKGROUND: '#000000',
 
   // Brain geometry

@@ -84,7 +84,7 @@ const ChatPreviewCard = () => {
                   fill="url(#starGold)" />
             <defs>
               <linearGradient id="starGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#fef3c7" />
+                <stop offset="0%" stopColor="#ccfbf1" />
                 <stop offset="100%" stopColor="#14b8a6" />
               </linearGradient>
             </defs>

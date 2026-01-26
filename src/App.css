@@ -3406,7 +3406,7 @@ html.high-contrast {
   --text-secondary: #ffffff;
   --text-muted: #cccccc;
   --border-subtle: #ffffff;
-  --accent-gold: #ffff00;
+  --accent-gold: #5eead4;
 }
 
 html.high-contrast .card,
@@ -3430,7 +3430,7 @@ html.high-contrast button {
 
 html.high-contrast a:focus,
 html.high-contrast button:focus {
-  outline: 3px solid #ffff00;
+  outline: 3px solid #5eead4;
   outline-offset: 2px;
 }
 
@@ -4095,8 +4095,8 @@ html.high-contrast .agentive-robot rect,
 html.high-contrast .agentive-robot circle,
 html.high-contrast .agentive-robot line,
 html.high-contrast .agentive-robot ellipse {
-  stroke: #FFFF00 !important;
-  fill: #FFFF00 !important;
+  stroke: #5eead4 !important;
+  fill: #5eead4 !important;
   stroke-width: 1.5 !important;
 }
 
