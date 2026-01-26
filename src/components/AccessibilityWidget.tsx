@@ -140,7 +140,7 @@ const AccessibilityWidget = () => {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="תפריט נגישות"
         aria-expanded={isOpen}
-        initial={{ scale: 0, opacity: 0 }}
+        initial={{ scale: 1, opacity: 1 }}
         animate={{
           scale: isVisible ? 1 : 0.8,
           opacity: isVisible ? 1 : 0,
@@ -151,10 +151,10 @@ const AccessibilityWidget = () => {
         whileTap={{ scale: 0.95 }}
         style={{ pointerEvents: isVisible ? 'auto' : 'none' }}
       >
-        {/* Universal Accessibility Symbol */}
+        {/* Accessibility Icon - Person with arms out */}
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <circle cx="12" cy="4" r="2"/>
-          <path d="M19 13v-2c-1.54.02-3.09-.75-4.07-1.83l-1.29-1.43c-.17-.19-.38-.34-.61-.45-.01 0-.01-.01-.02-.01H13c-.35-.2-.75-.3-1.19-.26C10.76 7.11 10 8.04 10 9.09V15c0 1.1.9 2 2 2h5v5h2v-5.5c0-1.1-.9-2-2-2h-3v-3.45c1.29 1.07 3.25 1.94 5 1.95zm-6.17 5c-.41 1.16-1.52 2-2.83 2-1.66 0-3-1.34-3-3 0-1.31.84-2.41 2-2.83V12.1c-2.28.46-4 2.48-4 4.9 0 2.76 2.24 5 5 5 2.42 0 4.44-1.72 4.9-4h-2.07z"/>
+          <path d="M21 9h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
         </svg>
       </motion.button>
 
