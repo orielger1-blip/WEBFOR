@@ -1,3 +1,5 @@
+import { useDeviceDetect } from './hooks/useDeviceDetect';
+import MobileApp from './mobile/MobileApp';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Problem from './components/Problem';
@@ -15,6 +17,14 @@ import WhatsAppButton from './components/WhatsAppButton';
 import './App.css';
 
 function App() {
+  const { isMobile, isTablet } = useDeviceDetect();
+
+  // Show mobile version for mobile and tablet devices
+  if (isMobile || isTablet) {
+    return <MobileApp />;
+  }
+
+  // Desktop version
   return (
     <div className="App">
       <a href="#main-content" className="skip-link">דלג לתוכן הראשי</a>

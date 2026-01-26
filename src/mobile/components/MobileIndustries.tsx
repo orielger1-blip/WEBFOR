@@ -35,7 +35,7 @@ const MobileIndustries = () => {
         textAlign: 'center',
       }}
     >
-      {/* Emoji Row */}
+      {/* Emoji Row - Single horizontal line */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -44,9 +44,9 @@ const MobileIndustries = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '12px',
+          gap: '10px',
           marginBottom: '10px',
-          flexWrap: 'wrap',
+          flexWrap: 'nowrap',
         }}
       >
         {industries.map((industry, index) => (
@@ -60,8 +60,9 @@ const MobileIndustries = () => {
               ease: 'easeOut',
             }}
             style={{
-              fontSize: '22px',
+              fontSize: '20px',
               lineHeight: 1,
+              flexShrink: 0,
             }}
             title={industry.name}
           >
