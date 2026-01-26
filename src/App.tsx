@@ -8,7 +8,6 @@ import Team from './components/Team';
 import Industries from './components/Industries';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
-import AccessibilityStatement from './components/AccessibilityStatement';
 import Footer from './components/Footer';
 import AccessibilityWidget from './components/AccessibilityWidget';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -29,7 +28,6 @@ function App() {
         <Industries />
         <FAQ />
         <Contact />
-        <AccessibilityStatement />
       </main>
       <Footer />
       <WhatsAppButton />

@@ -45,6 +45,12 @@ const Team = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const handleCardClick = (index: number) => {
+    // Only toggle on mobile (handled by CSS media query showing/hiding elements)
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
 
   return (
     <section id="team" className="team-section" ref={ref} dir="rtl">
@@ -78,12 +84,13 @@ const Team = () => {
           {teamMembers.map((member, index) => (
             <motion.div
               key={member.name}
-              className={`team-member-card ${index === 2 ? 'team-member-small' : ''}`}
+              className={`team-member-card ${index === 2 ? 'team-member-small' : ''} ${expandedIndex === index ? 'expanded' : ''}`}
               initial={{ opacity: 0, y: 60 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.2 + index * 0.15 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => handleCardClick(index)}
             >
               {/* Card Glow Effect */}
               <div className="team-member-glow"></div>

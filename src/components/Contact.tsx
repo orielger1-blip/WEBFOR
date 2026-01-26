@@ -19,12 +19,27 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission (replace with actual API call)
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      await fetch(
+        'https://script.google.com/macros/s/AKfycbxNBubmL-VtwcPvwskO0fQwSYIAw1UHjq9r7TsxSq4SUIlqpZG0Rp_bRxBNfiltJtcgkA/exec',
+        {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
-    console.log('Form submitted:', formData);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      // With no-cors mode, we can't read the response, but submission works
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('אירעה שגיאה בשליחת הטופס. אנא נסו שוב.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
