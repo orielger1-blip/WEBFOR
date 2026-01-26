@@ -2,8 +2,9 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 /**
- * MobileIndustries - Ultra-compact horizontal scroll pills
- * Shows industries Servebot specializes in
+ * MobileIndustries - Ultra-compact emoji strip
+ * Single row of industry icons with text below
+ * ~60px total height, clean and minimal
  */
 
 const industries = [
@@ -19,100 +20,71 @@ const industries = [
 
 const MobileIndustries = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-30px' });
+  const isInView = useInView(sectionRef, { once: true, margin: '-20px' });
 
   return (
     <section
       ref={sectionRef}
-      className="mobile-section mobile-industries"
+      className="mobile-industries"
       dir="rtl"
       style={{
         padding: 'var(--mobile-spacing-lg) var(--mobile-spacing-md)',
         background: 'var(--mobile-bg-primary)',
-        overflow: 'hidden',
         width: '100%',
         boxSizing: 'border-box',
+        textAlign: 'center',
       }}
     >
-      {/* Title */}
+      {/* Emoji Row */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.4 }}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '12px',
+          marginBottom: '10px',
+          flexWrap: 'wrap',
+        }}
+      >
+        {industries.map((industry, index) => (
+          <motion.span
+            key={index}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{
+              duration: 0.3,
+              delay: 0.03 * index,
+              ease: 'easeOut',
+            }}
+            style={{
+              fontSize: '22px',
+              lineHeight: 1,
+            }}
+            title={industry.name}
+          >
+            {industry.icon}
+          </motion.span>
+        ))}
+      </motion.div>
+
+      {/* Text Label */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.4, delay: 0.3 }}
         style={{
           fontSize: '13px',
-          fontWeight: 600,
+          fontWeight: 500,
           color: 'var(--mobile-text-muted)',
-          textAlign: 'center',
-          margin: '0 0 var(--mobile-spacing-sm)',
-          letterSpacing: '0.5px',
+          margin: 0,
+          letterSpacing: '0.3px',
         }}
       >
         מתמחים במגוון תעשיות
       </motion.p>
-
-      {/* Scrollable Pills */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        style={{
-          display: 'flex',
-          gap: 'var(--mobile-spacing-sm)',
-          overflowX: 'auto',
-          overflowY: 'hidden',
-          paddingBottom: 'var(--mobile-spacing-xs)',
-          marginLeft: 'calc(-1 * var(--mobile-spacing-md))',
-          marginRight: 'calc(-1 * var(--mobile-spacing-md))',
-          paddingLeft: 'var(--mobile-spacing-md)',
-          paddingRight: 'var(--mobile-spacing-md)',
-          WebkitOverflowScrolling: 'touch',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-        }}
-        className="mobile-industries-scroll"
-      >
-        {industries.map((industry, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: 20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{
-              duration: 0.3,
-              delay: 0.05 * index,
-            }}
-            style={{
-              flexShrink: 0,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '8px 14px',
-              background: 'rgba(245, 158, 11, 0.08)',
-              border: '1px solid rgba(245, 158, 11, 0.15)',
-              borderRadius: '100px',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            <span style={{ fontSize: '14px' }}>{industry.icon}</span>
-            <span
-              style={{
-                fontSize: '13px',
-                fontWeight: 500,
-                color: 'var(--mobile-text-secondary)',
-              }}
-            >
-              {industry.name}
-            </span>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Hide scrollbar */}
-      <style>{`
-        .mobile-industries-scroll::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   );
 };
